@@ -25,6 +25,18 @@
 
 1.打开 NIMAPIDemo 配置签名：
 
+DevEcho-Studio -> File -> Project Structure
+![sign_config_1.png](Image/sign_config_1.png)
+Project Structure -> Project -> Signing Configs
+![sign_config_2.png](Image/sign_config_2.png)
+Signing Configs -> check "Automatically generate signature" -> click "Sing in" 登录授权的华为开发者账号
+![sign_config_3.png](Image/sign_config_3.png)
+在弹出的浏览器页面点击“允许”，许可颁布应用调试证书
+![sign_config_4.png](Image/sign_config_4.png)
+显示此页面时，即代表配置完成
+![sign_config_5.png](Image/sign_config_5.png)
+选择名称为“NIMAPIDemo”的应用和名为“”模拟器后，点击 ▶ 即可在模拟器运行 HarmonyOS NIMSDK API Demo ！
+![sign_config_6.png](Image/sign_config_6.png)
 
 
 2.连接真机，编译运行:
