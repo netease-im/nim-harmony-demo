@@ -59,10 +59,10 @@ export struct LoginComponent {
         }
       }) {
         Column() {
-          Column() {
-            Text(this.connectStatus).fontColor(Color.Gray).width('100%').backgroundColor(Color.Yellow)
-            Text(this.loginStatus).fontColor(Color.Gray).width('100%').backgroundColor(Color.Yellow)
-          }.width('100%')
+          // Column() {
+          //   Text(this.connectStatus).fontColor(Color.Gray).width('100%').backgroundColor(Color.Yellow)
+          //   Text(this.loginStatus).fontColor(Color.Gray).width('100%').backgroundColor(Color.Yellow)
+          // }.width('100%')
 
           TextInput({ text: this.userName, placeholder: $r('app.string.username') })
             .width(CommonConstants.TEXT_INPUT_WIDTH_PERCENT)

@@ -6,8 +6,7 @@
     "mainElement": "EntryAbility",
     "deviceTypes": [
       "phone",
-      "tablet",
-      "2in1"
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
@@ -16,10 +15,10 @@
       {
         "name": "EntryAbility",
         "srcEntry": "./ets/entryability/EntryAbility.ets",
-        "description": "$string:EntryAbility_desc",
+        "description": "$string:ability_desc",
         "icon": "$media:icon",
-        "label": "$string:EntryAbility_label",
-        "startWindowIcon": "$media:startIcon",
+        "label": "$string:ability_label",
+        "startWindowIcon": "$media:icon",
         "startWindowBackground": "$color:start_window_background",
         "exported": true,
         "skills": [
@@ -32,6 +31,25 @@
             ]
           }
         ]
+      }
+    ],
+    "requestPermissions": [
+      {
+        "name": "ohos.permission.READ_MEDIA",
+        "reason": "$string:permission_internet_reason",
+        "usedScene": {
+          "when": "always"
+        }
+      },
+    ],
+    "metadata": [ // 配置如下信息
+      {
+        "name": "client_id",
+        "value": "109921881"  //配置为步骤1中获取的Client ID
+      },
+      {
+        "name": "app_id",
+        "value": "5765880207853307481"  //配置为步骤1中获取的APP ID
       }
     ]
   }

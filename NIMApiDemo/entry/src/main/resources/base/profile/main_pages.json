@@ -9,7 +9,7 @@
     "pages/LoginServicePage",
     "pages/InitializePage",
     "pages/SyncServicePage",
-    "pages/CustomNotificationServicePage",
+    "pages/messagePages/notification/CustomNotificationServicePage",
     "pages/PushServicePage",
     "pages/NosServicePage",
     "pages/messagePages/MessagePage",

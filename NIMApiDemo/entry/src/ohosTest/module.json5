@@ -1,13 +1,12 @@
 {
   "module": {
-    "name": "entry_test",
+    "name": "NIMApiDemo_test",
     "type": "feature",
     "description": "$string:module_test_desc",
     "mainElement": "TestAbility",
     "deviceTypes": [
       "phone",
-      "tablet",
-      "2in1"
+      "tablet"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,

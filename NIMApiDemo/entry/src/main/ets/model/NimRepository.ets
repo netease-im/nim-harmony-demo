@@ -24,7 +24,6 @@ export class NimRepository {
 
     // let initializeOptions: NIMInitializeOptions = {
     //   appkey: "fe416640c8e8a72734219e1847ad2547",
-    //   // appkey: "45c6af3c98409b18a84451215d0bdd6e",
     //   debugLevel: "debug",
     //   // ...其他属性
     // };
@@ -37,7 +36,6 @@ export class NimRepository {
     // }
 
     let initializeOptions: NIMInitializeOptions = {
-      // appkey: "fe416640c8e8a72734219e1847ad2547",
       appkey: "45c6af3c98409b18a84451215d0bdd6e",
       debugLevel: "debug",
       // ...其他属性

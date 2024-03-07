@@ -109,6 +109,7 @@ const LINK_DATA: LinkDataModel[] = [
   // new LinkDataModel(9, 'translate', 1, 'translate','translateVoiceToText'),
   new LinkDataModel(10, 'send message', 1, 'send', 'sendMessage'),
   new LinkDataModel(11, '本地存储', 1, 'persist', 'persistMessage'),
+  new LinkDataModel(12, '自定义通知', 1, 'notification', 'CustomNotificationService'),
 ]
 
 const CONVERSATION_LINK_DATA: LinkDataModel[] = [

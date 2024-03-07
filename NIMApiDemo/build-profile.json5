@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/songwenhai/.ohos/config/default_NIMApiDemo_26vUcBMutJBTRG7Ybpt_3h-lDihf_NvQ69dKrXgu0j4=.cer",
+          "storePassword": "0000001BD92E9F3217D73B8D7958CAE63DD9AED2896DF20CAE48050D8E426742DF0E311049F1BAF9634F3B",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001B53DDF85D603C735BDC71D1801154DE36F13517D8D2BCFD8A8823D9AEAFD25FD01A80208E123F37",
+          "profile": "/Users/songwenhai/.ohos/config/default_NIMApiDemo_26vUcBMutJBTRG7Ybpt_3h-lDihf_NvQ69dKrXgu0j4=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/songwenhai/.ohos/config/default_NIMApiDemo_26vUcBMutJBTRG7Ybpt_3h-lDihf_NvQ69dKrXgu0j4=.p12"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",

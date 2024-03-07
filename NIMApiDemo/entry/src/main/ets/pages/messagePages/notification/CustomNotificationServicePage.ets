@@ -1,6 +1,8 @@
-import { CommonConstants } from '../common/constants/CommonConstants';
-import { UserModel } from '../viewmodel/UserModel';
-import { V2NIMBroadcastNotification, V2NIMCustomNotification, V2NIMSendCustomNotificationParams } from 'base';
+import { CommonConstants } from '../../../common/constants/CommonConstants';
+import { UserModel } from '../../../viewmodel/UserModel';
+import { V2NIMBroadcastNotification,
+  V2NIMConversationType,
+  V2NIMCustomNotification, V2NIMSendCustomNotificationParams } from 'base';
 import promptAction from '@ohos.promptAction';
 
 /**
@@ -10,7 +12,8 @@ import promptAction from '@ohos.promptAction';
 @Component
 struct CustomNotificationServicePage {
   private userModel: UserModel | undefined;
-  @State userName: string = '';
+  @State receiverId: string = '';
+  @State conversationType: V2NIMConversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P
   @State content: string = '';
   // TextInput多行显示存在Bug，暂时使用单行字符串
   @State sendParams: string = '{"notificationConfig":{"offlineEnabled":false,"unreadEnabled":false},"pushConfig":{"pushEnabled":false,"pushNickEnabled":false,"pushContent":"","pushPayload":"","forcePush":false,"forcePushContent":"","forcePushAccounts":[]},"antispamConfig":{"antispamEnabled":false,"antispamCustomNotification":""},"routeConfig":{"routeEnabled":false,"routeEnvironment":""}}';
@@ -53,7 +56,7 @@ struct CustomNotificationServicePage {
     Navigation() {
       Scroll() {
         Column() {
-          TextInput({ text: this.userName, placeholder: '发送对象' })
+          TextInput({ text: this.receiverId, placeholder: '接收者账号' })
             .width(CommonConstants.TEXT_INPUT_WIDTH_PERCENT)
             .height($r('app.float.text_input_height'))
             .placeholderColor($r('app.color.text_input_place_holder'))
@@ -67,8 +70,49 @@ struct CustomNotificationServicePage {
               radius: $r('app.float.input_border_radius')
             })
             .onChange((value: string) => {
-              this.userName = value;
+              this.receiverId = value;
             })
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'p2p', group: 'conversationTypeGroup' }).checked(true)
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P
+                }
+              })
+            Text('p2p')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'team', group: 'conversationTypeGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_TEAM
+                }
+              })
+            Text('team')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'superTeam', group: 'conversationTypeGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_SUPER_TEAM
+                }
+              })
+            Text('superTeam')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
           TextInput({ text: this.content, placeholder: '发送内容' })
             .width(CommonConstants.TEXT_INPUT_WIDTH_PERCENT)
             .height($r('app.float.text_input_height'))
@@ -151,7 +195,7 @@ struct CustomNotificationServicePage {
       .getNimSdk()
       .notificationService!
       .sendCustomNotification(
-        this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(this.userName),
+        this.getConversationId(this.receiverId, this.conversationType),
         this.content,
         sendParams
       )
@@ -181,5 +225,22 @@ struct CustomNotificationServicePage {
         broadcastNotifications.map(broadcastNotification => this.log = this.log + '\n' + JSON.stringify(broadcastNotification));
         this.log = this.log + '\n'
       })
+  }
+
+  getConversationId(receiverId: string, conversationType: V2NIMConversationType): string {
+    let conversationId = receiverId
+    switch (conversationType) {
+      case V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P:
+        conversationId = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(conversationId)
+        break
+      case V2NIMConversationType.V2NIM_CONVERSATION_TYPE_TEAM:
+        conversationId = this.getUserModel().getNimSdk().conversationIdUtil.teamConversationId(conversationId)
+        break
+      case V2NIMConversationType.V2NIM_CONVERSATION_TYPE_SUPER_TEAM:
+        conversationId = this.getUserModel().getNimSdk().conversationIdUtil.superTeamConversationId(conversationId)
+        break
+    }
+
+    return conversationId
   }
 }
