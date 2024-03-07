@@ -5,6 +5,7 @@
 2. SDK 接入流程
 3. Demo 使用
    
+
 通过以上步骤，您可以基本了解鸿蒙NIMSDK 的接入与使用。
 
 ## 环境要求
@@ -176,11 +177,11 @@ Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 
    ![dependencies](Image/sdk_dependencies.png)
 
-3. 安装第三方包，点击 Run 'ohpm install'
+3. 点击 Run 'ohpm install'，安装本地 har 包依赖
 
    ![run_ohmp_install](Image/sdk_run_ohmp_install.png)
 
-4. 同步项目工程，点击 Sync Now
+4. 点击 Sync Now，同步项目工程
 
    ![sync_now](Image/sdk_sync_now.png)
 
