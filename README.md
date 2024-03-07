@@ -62,20 +62,20 @@ demo 运行进入登陆界面进行登陆：
 
 ### Demo 功能模块
 #### 登陆界面
-<img src="./Image/login.png" width = "200" height = "400" alt="图片名称" align=center />
+![login.png](Image/login.png)
 
 ### 登陆后，显示对应API 使用界面
 #### 会话接口
-<img src="./Image/conversation.png" width = "200" height = "400" alt="图片名称" align=center />
+![conversation.png](Image/conversation.png)
 
 #### 消息接口
-<img src="./Image/message.png" width = "200" height = "400" alt="图片名称" align=center />
+![message.png](Image/message.png)
 
 #### 群接口
-<img src="./Image/team.png" width = "200" height = "400" alt="图片名称" align=center />
+![team.png](Image/team.png)
 
 #### 用户&好友接口
-<img src="./Image/user.png" width = "200" height = "400" alt="图片名称" align=center />
+![user.png](Image/user.png)
 
 以上界面对应的功能接口，都有单独的功能页面进行实现，在接入sdk 时，可以找的对应的接口，进行参考使用。
 
