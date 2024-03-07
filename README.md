@@ -4,7 +4,7 @@
 
 ## 环境要求
 
-- DevEco Studio NEXT Developer Preview1及以上。
+- DevEco Studio NEXT Developer Preview1 及以上。
 - HarmonyOS SDK API 11 及以上。
 
 ## 操作步骤
