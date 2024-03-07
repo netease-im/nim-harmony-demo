@@ -1,12 +1,19 @@
 # 快速入门
 
-本文介绍在鸿蒙平台下如何快速集成云信 NIMSDK 到项目中。
+本文介绍在鸿蒙平台下如何快速集成云信 NIMSDK 到项目中:
+1. 环境要求&真机调试
+2. SDK 接入流程
+3. Demo 使用
+   
+通过以上步骤，您可以基本了解鸿蒙NIMSDK 的接入与使用。
 
 ## 环境要求
-
-- DevEco Studio NEXT Developer Preview1 及以上。
+### 编译器
+- DevEco Studio NEXT Developer Preview1（4.1.3.500） 及以上。
 - HarmonyOS SDK API 11 及以上。
-
+### 设备
+- 鸿蒙
+  
 ## 操作步骤
 
 ### 步骤1: 创建应用
@@ -22,6 +29,17 @@
 
 2.连接真机，编译运行:
 
+## SDK 接入流程
+
+1.拷贝 sdk.har 到项目文件夹中，例如： entry/src/main/libs
+
+2.DEMO 工程下 oh-package.json5 配置 sdk.har 如下图所示：
+
+
+3.安装第三方包，点击 Run 'ohpm install'
+
+
+4.调用SDK接口，完成入会流程
 
 ## DEMO 使用
 
@@ -48,18 +66,6 @@ demo 运行进入登陆界面进行登陆：
 <img src="./Image/user.png" width = "200" height = "400" alt="图片名称" align=center />
 
 以上界面对应的功能接口，都有单独的功能页面进行实现，在接入sdk 时，可以找的对应的接口，进行参考使用。
-
-## SDK 接入流程
-
-1.拷贝 sdk.har 到项目文件夹中，例如： entry/src/main/libs
-
-2.DEMO 工程下 oh-package.json5 配置 sdk.har 如下图所示：
-
-
-3.安装第三方包，点击 Run 'ohpm install'
-
-
-4.调用SDK接口，完成入会流程
 
 
 ## 问题反馈
