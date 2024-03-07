@@ -6,7 +6,23 @@
   "author": "",
   "license": "",
   "dependencies": {
-
+    "nim": "file:./libs/nim.har",
+    "base": "file:./libs/base.har",
+    "database": "file:./libs/database.har",
+    "friend": "file:./libs/friend.har",
+    "logger": "file:./libs/logger.har",
+    "notification": "file:./libs/notification.har",
+    "message": "file:./libs/message.har",
+    "user": "file:./libs/user.har",
+    "push": "file:./libs/push.har",
+    "team": "file:./libs/team.har",
+    "http": "file:./libs/http.har",
+    "sync": "file:./libs/sync.har",
+    "setting": "file:./libs/setting.har",
+    "login": "file:./libs/login.har",
+    "conversation": "file:./libs/conversation.har",
+    "vendor": "file:./libs/vendor.har",
+    "WebSocket": "file:./libs/WebSocket.har"
   }
 }
 
