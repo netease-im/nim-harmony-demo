@@ -51,9 +51,7 @@ Signing Configs -> check "Automatically generate signature" -> click "Sing in" �
 
 <a name="build-for-use"></a>
 ### 步骤3：真机运行
-  如果使用模拟器，可以直接运行，如果需要真机调试，详细参考文档
-
-  [详情参考](/真机调试.md)
+  如果使用模拟器，可以直接运行，如果需要真机调试，[详情参考](/真机调试.md)
 
 
 ## 三. DEMO 使用
