@@ -82,3 +82,7 @@ demo 运行进入登陆界面进行登陆：
 ## 问题反馈
 
 如果您在使用过程中，有任何疑问都可以直接在本工程上提交 issue，或者在云信官网进行咨询。
+
+## 参考
+[云信官网](https://netease.im/)
+[鸿蒙开发官网](https://developer.harmonyos.com/)
