@@ -49,7 +49,6 @@ Signing Configs -> check "Automatically generate signature" -> click "Sing in" �
 ![sign_config_6.png](Image/sign_config_6.png)
 
 
-<a name="build-for-use"></a>
 ### 步骤3：真机运行
   如果使用模拟器，可以直接运行，如果需要真机调试，[详情参考](/真机调试.md)
 
@@ -83,8 +82,7 @@ Signing Configs -> check "Automatically generate signature" -> click "Sing in" �
 
 ## 三. DEMO 使用
 
-
-demo 提供 IM 个业务模块 API 的调用事例，便于开发者快速了解 api 的使用方式，下载 demo 代码后，可以直接在模拟器上运行，参考：[真机运行](#build-for-use)
+demo 提供 IM 个业务模块 API 的调用事例，便于开发者快速了解 api 的使用方式，下载 demo 代码后，可以直接运行
 
 demo 运行进入登陆界面进行登陆：
 体验 demo 可以将 用户名：cjl 秘密： 123456 输入进行登陆：
