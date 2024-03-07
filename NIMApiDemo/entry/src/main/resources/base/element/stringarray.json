@@ -1,0 +1,35 @@
+{
+  "strarray": [
+    {
+      "name": "sex_array",
+      "value": [
+        {
+          "value": "male"
+        },
+        {
+          "value": "female"
+        }
+      ]
+    },
+    {
+      "name": "hobbies_data",
+      "value": [
+        {
+          "value": "Soccer"
+        },
+        {
+          "value": "Badminton"
+        },
+        {
+          "value": "Travelling"
+        },
+        {
+          "value": "Playing games"
+        },
+        {
+          "value": "Reading books"
+        }
+      ]
+    }
+  ]
+}

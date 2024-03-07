@@ -1,0 +1,380 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "This module template implements Login functions."
+    },
+    {
+      "name": "ability_desc",
+      "value": "This ability loads LoginPage."
+    },
+    {
+      "name": "ability_label",
+      "value": "NIMDemo"
+    },
+    {
+      "name": "title",
+      "value": "Title"
+    },
+    {
+      "name": "username",
+      "value": "Phone number/Email address/Username"
+    },
+    {
+      "name": "password",
+      "value": "Password"
+    },
+    {
+      "name": "login",
+      "value": "Login"
+    },
+    {
+      "name": "register",
+      "value": "Register"
+    },
+    {
+      "name": "jump_mine_page_text",
+      "value": "Click to go to my page"
+    },
+    {
+      "name": "register_success_text",
+      "value": "Register success"
+    },
+    {
+      "name": "problem_encountered",
+      "value": "Problem encountered"
+    },
+    {
+      "name": "privacy_statement",
+      "value": "Privacy statement"
+    },
+    {
+      "name": "mine_page_title",
+      "value": "My"
+    },
+    {
+      "name": "user_nickname",
+      "value": "Han Meimei"
+    },
+    {
+      "name": "component_list_item_text",
+      "value": "Title%d"
+    },
+    {
+      "name": "service_hotline",
+      "value": "Service hotline"
+    },
+    {
+      "name": "email",
+      "value": "Official email address"
+    },
+    {
+      "name": "hotline_number",
+      "value": "12xxx"
+    },
+    {
+      "name": "email_address",
+      "value": "xxx@yyy.com"
+    },
+    {
+      "name": "contact_customer_service",
+      "value": "Contact customer service"
+    },
+    {
+      "name": "EntryAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "EntryAbility_label",
+      "value": "ArkTSComponents"
+    },
+    {
+      "name": "SendMessageMethod",
+      "value": "SendMessage:"
+    },
+    {
+      "name": "RevokeMessage",
+      "value": "revokeMessage:"
+    },
+    {
+      "name": "send_message_description",
+      "value": "send im message description"
+    },
+    {
+      "name": "conversation_id",
+      "value": "conversation_id"
+    },
+    {
+      "name": "collection_type",
+      "value": "collection_type"
+    },
+    {
+      "name": "collection_data",
+      "value": "collection_data"
+    },
+    {
+      "name": "register_account",
+      "value": "Registering an Account"
+    },
+    {
+      "name": "forgot_password",
+      "value": "Forgot Password"
+    },
+    {
+      "name": "message_login",
+      "value": "SMS verification code login"
+    },
+    {
+      "name": "other_login_method",
+      "value": "Other login methods"
+    },
+    {
+      "name": "vertical_line",
+      "value": "  |  "
+    },
+    {
+      "name": "input_empty_tips",
+      "value": "The input cannot be empty."
+    },
+    {
+      "name": "login_success",
+      "value": "The login is successful."
+    },
+    {
+      "name": "my_love",
+      "value": "My favorite"
+    },
+    {
+      "name": "history_record",
+      "value": "History"
+    },
+    {
+      "name": "message",
+      "value": "Message"
+    },
+    {
+      "name": "shopping_cart",
+      "value": "Shopping cart"
+    },
+    {
+      "name": "my_goal",
+      "value": "My goal"
+    },
+    {
+      "name": "group",
+      "value": "Group"
+    },
+    {
+      "name": "favorites",
+      "value": "Favorites"
+    },
+    {
+      "name": "recycle_bin",
+      "value": "Recycle Bin"
+    },
+    {
+      "name": "rankings",
+      "value": "Rankings"
+    },
+    {
+      "name": "new_product_debut",
+      "value": "New product debut"
+    },
+    {
+      "name": "big_name_flash",
+      "value": "Big name flash"
+    },
+    {
+      "name": "find_good",
+      "value": "Find good things"
+    },
+    {
+      "name": "xiamen_station",
+      "value": "Xiamen Station, we'll see you."
+    },
+    {
+      "name": "more_big_names",
+      "value": "More Big Names"
+    },
+    {
+      "name": "push_notifications",
+      "value": "Push Notifications"
+    },
+    {
+      "name": "data_management",
+      "value": "Data Management"
+    },
+    {
+      "name": "menu_settings",
+      "value": "Menu Settings"
+    },
+    {
+      "name": "about",
+      "value": "About"
+    },
+    {
+      "name": "clear_cache",
+      "value": "Clear Cache"
+    },
+    {
+      "name": "mainPage_tabTitles_home",
+      "value": "Home"
+    },
+    {
+      "name": "mainPage_tabTitles_mine",
+      "value": "Mine"
+    },
+    {
+      "name": "mainPage_top",
+      "value": "Rankings"
+    },
+    {
+      "name": "mainPage_text_top",
+      "value": "Xiamen Station, we'll see you."
+    },
+    {
+      "name": "mainPage_new",
+      "value": "New product debut"
+    },
+    {
+      "name": "mainPage_text_new",
+      "value": "Xiamen Station, we'll see you."
+    },
+    {
+      "name": "mainPage_brand",
+      "value": "Big name flash"
+    },
+    {
+      "name": "mainPage_text_brand",
+      "value": "More Big Names"
+    },
+    {
+      "name": "mainPage_found",
+      "value": "Find good things"
+    },
+    {
+      "name": "mainPage_text_found",
+      "value": "Xiamen Station, we'll see you."
+    },
+    {
+      "name": "setting_account_name",
+      "value": "Mr. Lee"
+    },
+    {
+      "name": "setting_account_email",
+      "value": "2000000@shenhua.cc"
+    },
+    {
+      "name": "setting_list_news",
+      "value": "Push Notifications"
+    },
+    {
+      "name": "setting_list_data",
+      "value": "Data Management"
+    },
+    {
+      "name": "setting_list_menu",
+      "value": "Menu Settings"
+    },
+    {
+      "name": "setting_list_about",
+      "value": "Clear Cache"
+    },
+    {
+      "name": "setting_list_storage",
+      "value": "清除缓存"
+    },
+    {
+      "name": "setting_list_privacy",
+      "value": "Privacy Agreement"
+    },
+    {
+      "name": "setting_button",
+      "value": "Logout"
+    },
+    {
+      "name": "home_list",
+      "value": "List"
+    },
+    {
+      "name": "setting_toggle",
+      "value": "switch"
+    },
+    {
+      "name": "text_input_hint",
+      "value": "Nickname"
+    },
+    {
+      "name": "text_input_signature",
+      "value": "Personalized signature"
+    },
+    {
+      "name": "title_birthdate",
+      "value": "Date of birth"
+    },
+    {
+      "name": "title_sex",
+      "value": "Sex"
+    },
+    {
+      "name": "default_sex",
+      "value": "Male"
+    },
+    {
+      "name": "title_hobbies",
+      "value": "Hobbies (multiple choices)"
+    },
+    {
+      "name": "alert_dialog_message",
+      "value": "The current data is not saved. Are you sure you want to leave?"
+    },
+    {
+      "name": "cancel_button",
+      "value": "Cancel"
+    },
+    {
+      "name": "definite_button",
+      "value": "Definite"
+    },
+    {
+      "name": "text_personal_title",
+      "value": "Personal information"
+    },
+    {
+      "name": "text_title_hobbies",
+      "value": "Hobbies"
+    },
+    {
+      "name": "tab_home",
+      "value": "首页"
+    },
+    {
+      "name": "tab_conversation",
+      "value": "会话"
+    },
+    {
+      "name": "tab_message",
+      "value": "消息"
+    },
+    {
+      "name": "tab_team",
+      "value": "群"
+    },
+    {
+      "name": "tab_mine",
+      "value": "我的"
+    },
+    {
+      "name": "hei_ti_medium",
+      "value": "HarmonyHeiTi-Medium"
+    },
+    {
+      "name": "hei_ti",
+      "value": "HarmonyHeiTi"
+    },
+    {
+      "name": "loading",
+      "value": "loading..."
+    }
+  ]
+}

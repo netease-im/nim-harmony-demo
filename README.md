@@ -1,1 +1,72 @@
-# nim-harmony-demo
+# 快速入门
+
+本文介绍在鸿蒙平台下如何快速集成 NIMSDK到项目中。
+
+## 环境要求
+
+- DevEco Studio NEXT Developer Preview1及以上。
+- HarmonyOS SDK API 11 及以上。
+
+## 操作步骤
+
+### 步骤1: 创建应用
+创建应用，详情官方文档：[点这里](https://netease.im/)
+
+
+
+### 步骤2： 编译运行
+
+1.打开 NIMAPIDemo 配置签名：
+
+
+
+2.连接真机，编译运行:
+
+
+## DEMO 使用
+
+demo 提供 IM 个业务模块的API调用方式，便于开发者快速了解 api 的使用方式
+demo 代码可以在直接在模拟器上运行，真机运行参考： 【编译运行】
+demo 运行起来后，进入登陆界面进行登陆：
+体验demo 可以将 用户名：cjl 秘密： 123456 输入进行登陆：
+### 登陆界面
+<img src="./Image/login.png" width = "100" height = "200" alt="图片名称" align=center />
+
+### 登陆后，显示对应API 使用界面
+#### 会话接口
+<img src="./Image/conversation.png" width = "100" height = "200" alt="图片名称" align=center />
+
+#### 消息接口
+<img src="./Image/message.png" width = "100" height = "200" alt="图片名称" align=center />
+
+#### 群接口
+<img src="./Image/team.png" width = "100" height = "200" alt="图片名称" align=center />
+
+#### 用户&好友接口
+<img src="./Image/user.png" width = "100" height = "200" alt="图片名称" align=center />
+
+以上界面对应的功能接口，都有单独的功能页面进行实现，在接入sdk 时，可以找的对应的接口，进行参考使用。
+
+## SDK 接入流程
+
+1.拷贝 sdk.har 到项目文件夹中，例如： entry/src/main/libs
+
+2.DEMO 工程下 oh-package.json5 配置 sdk.har 如下图所示：
+
+
+3.安装第三方包，点击 Run 'ohpm install'
+
+
+4.调用SDK接口，完成入会流程
+
+
+
+## SDK 架构
+
+## 运行DEMO
+
+1.下载 rtc_demo hap包 [rtc_demo.zip](output%2Frtc_demo.zip)
+
+2.将华为设备ID交与云信技术支持，将您的设备ID添加到云信后台白名单中
+
+3.执行安装命令来安装hap包
