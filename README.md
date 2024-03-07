@@ -64,7 +64,6 @@ demo 运行进入登陆界面进行登陆：
 #### 登陆界面
 ![login.png](Image/login.png)
 
-### 登陆后，显示对应API 使用界面
 #### 会话接口
 ![conversation.png](Image/conversation.png)
 
