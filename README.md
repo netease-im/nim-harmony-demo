@@ -168,15 +168,32 @@ Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 > 更详细步骤详见 [华为-调试与发布 HarmonyOS 应用](https://developer.huawei.com/consumer/cn/doc/app/agc-help-harmonyos-releaseapp-0000001126380068)
 
 ## SDK 接入流程
-1.拷贝 sdk.har 到项目文件夹中，例如： entry/src/main/libs
+1. 拷贝 sdk har 包到项目文件夹中，例如： entry/libs
 
-2.DEMO 工程下 oh-package.json5 配置 sdk.har 如下图所示：
+   ![libs](Image/sdk_libs.png)
 
+2. DEMO 工程下 oh-package.json5 配置 har 包依赖
 
-3.安装第三方包，点击 Run 'ohpm install'
+   ![dependencies](Image/sdk_dependencies.png)
 
+3. 安装第三方包，点击 Run 'ohpm install'
 
-4.调用SDK接口，完成入会流程
+   ![run_ohmp_install](Image/sdk_run_ohmp_install.png)
+
+4. 同步项目工程，点击 Sync Now
+
+   ![sync_now](Image/sdk_sync_now.png)
+
+5. 源代码引入SDK，创建SDK实例
+
+   ![import](Image/sdk_import.png)
+
+   ![instance](Image/sdk_instance.png)
+
+6. 通过SDK实例获取各业务service，通过业务service进行功能开发
+
+   ![service](Image/sdk_service.png)
+
 
 <a name="use-demo"></a>
 ## DEMO 使用
