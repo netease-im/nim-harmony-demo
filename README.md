@@ -65,7 +65,7 @@ Signing Configs -> check "Automatically generate signature" -> click "Sing in" �
 #### Generate Key(.p12) + Generate CSR(.csr)
 主要分为两步，Generate Key(.p12) + Generate CSR(.csr)，IDE 提供了一个入口生成两个文件。
 
-- 使用 IDE DevEco Studio -> Build -> Generate Keyand CSR 按需填入
+- 使用 IDE DevEco Studio -> Build -> Generate Key and CSR 按需填入
 Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 - Key Store Password：设置密钥库密码，必须由大写字母、小写字母、数字和特殊符号中的两种以上字符的组合，长度至少为8位。请记住该密码，后续签名配置需要使用。
 - Alias：密钥的别名信息，用于标识密钥名称。请记住该别名，后续签名配置需要使用。也是 Key alias
