@@ -1,14 +1,15 @@
 # 快速入门
 
 本文介绍在鸿蒙平台下如何快速集成云信 NIMSDK 到项目中:
-1. 环境要求&真机调试
-2. SDK 接入流程
-3. Demo 使用
+
+一. 环境要求&真机调试
+二. SDK 接入流程
+三. Demo 使用
    
 
 通过以上步骤，您可以基本了解鸿蒙NIMSDK 的接入与使用。
 
-## 环境要求
+## 一.环境要求
 ### 编译器
 - DevEco Studio NEXT Developer Preview1（4.1.3.500） 及以上。
 - HarmonyOS SDK API 11 及以上。
@@ -168,7 +169,7 @@ Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 
 > 更详细步骤详见 [华为-调试与发布 HarmonyOS 应用](https://developer.huawei.com/consumer/cn/doc/app/agc-help-harmonyos-releaseapp-0000001126380068)
 
-## SDK 接入流程
+## 二. SDK 接入流程
 1. 拷贝 sdk har 包到项目文件夹中，例如： entry/libs
 
    ![libs](Image/sdk_libs.png)
@@ -197,7 +198,7 @@ Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 
 
 <a name="use-demo"></a>
-## DEMO 使用
+## 三. DEMO 使用
 
 
 demo 提供 IM 个业务模块 API 的调用事例，便于开发者快速了解 api 的使用方式，下载 demo 代码后，可以直接在模拟器上运行，参考：[真机运行](#build-for-use)
