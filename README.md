@@ -53,6 +53,33 @@ Signing Configs -> check "Automatically generate signature" -> click "Sing in" �
 ### 步骤3：真机运行
   如果使用模拟器，可以直接运行，如果需要真机调试，[详情参考](/真机调试.md)
 
+## 二. SDK 接入流程
+1. 拷贝 sdk har 包到项目文件夹中，例如： entry/libs
+
+   ![libs](Image/sdk_libs.png)
+
+2. DEMO 工程下 oh-package.json5 配置 har 包依赖
+
+   ![dependencies](Image/sdk_dependencies.png)
+
+3. 点击 Run 'ohpm install'，安装本地 har 包依赖
+
+   ![run_ohmp_install](Image/sdk_run_ohmp_install.png)
+
+4. 点击 Sync Now，同步项目工程
+
+   ![sync_now](Image/sdk_sync_now.png)
+
+5. 源代码引入SDK，创建SDK实例
+
+   ![import](Image/sdk_import.png)
+
+   ![instance](Image/sdk_instance.png)
+
+6. 通过SDK实例获取各业务service，通过业务service进行功能开发
+
+   ![service](Image/sdk_service.png)
+
 
 ## 三. DEMO 使用
 
