@@ -25,7 +25,7 @@
 - 操作系统 HarnomyOS NEXT 2.1.2.5 (Canary1) 以上
 
 > 于“设置”->“关于手机”页面查看
-  
+
 ### 1.3 操作步骤
 
 #### 步骤 1.3.1 ：创建应用
@@ -58,12 +58,13 @@
 
 拷贝 sdk har 包产物至项目文件夹中，例如：entry/libs。产物成果可由 [NIMApiDemo/entry/libs](./NIMApiDemo/entry/libs) 获取
 
-   ![libs](Image/sdk_libs.png)
+![libs](Image/sdk_libs.png)
 
 ### 2.2 配置 har 包本地依赖
 
 DEMO 工程下 oh-package.json5 配置 har 包依赖。即将 har 包路径配置在 entry/oh-package.json5 的 "dependencies" 字段下：
-```
+
+```json
 {
   "name": "entry",
   "version": "1.0.0",
@@ -93,36 +94,38 @@ DEMO 工程下 oh-package.json5 配置 har 包依赖。即将 har 包路径配�
 }
 ```
 
-   ![dependencies](Image/sdk_dependencies.png)
+![dependencies](Image/sdk_dependencies.png)
 
 ### 2.3 安装本地 har 包依赖
 
 鼠标移动至红色波浪线位置停滞片刻，将会弹出提示框。点击 Run 'ohpm install'，即刻安装本地 har 包依赖
 
-   ![run_ohmp_install](Image/sdk_run_ohmp_install.png)
+![run_ohmp_install](Image/sdk_run_ohmp_install.png)
 
 ### 2.4 同步项目工程
 
 点击 Sync Now，同步项目工程
 
-   ![sync_now](Image/sdk_sync_now.png)
+![sync_now](Image/sdk_sync_now.png)
 
 ### 2.5 创建 SDK 实例 SampleCode
 
 引入 SDK SampleCode，创建SDK实例。使用 import 引入 NIMInterface，NIMInitializeOptions，NIMServiceOptions，NIMSdk
 
-```
+```javascript
 import { NIMInterface, NIMInitializeOptions, NIMServiceOptions } from 'base'
 import { NIMSdk } from 'nim'
 ```
-   ![import](Image/sdk_import.png)
-   
-   初始化
-   ![instance](Image/sdk_instance.png)
+
+![import](Image/sdk_import.png)
+
+初始化
+
+![instance](Image/sdk_instance.png)
 
 ### 2.6 通过SDK实例获取各业务service，通过业务service进行功能开发
 
-   ![service](Image/sdk_service.png)
+![service](Image/sdk_service.png)
 
 
 ## 三、DEMO 使用
@@ -132,28 +135,34 @@ demo 运行进入登陆界面进行登陆：
 体验 demo 可以将 用户名：cjl 秘密： 123456 输入进行登陆：
 
 ### 3.1 登陆界面
-see loginService
+> see loginService
+
 ![login.png](Image/login.png)
 
 ### 3.2 会话接口
-see conversationService
+> see conversationService
+
 ![conversation.png](Image/conversation.png)
 
 ### 3.3 消息接口
-see messageService
+> see messageService
+
 ![message.png](Image/message.png)
 
 ### 3.4 群接口
-see teamService
+> see teamService
+
 ![team.png](Image/team.png)
 
 ### 3.5 用户&好友接口
-see userService, friendService
+> see userService, friendService
+
 ![user.png](Image/user.png)
 
 ### 3.6 离线推送
-see pushService
-![push.png](Image/push.png)
+> see pushService
+
+![push.png](Image/push.jpeg)
 
 以上界面对应的功能接口，都有单独的功能页面进行实现，在接入sdk 时，可以找的对应的接口，进行参考使用。
 
