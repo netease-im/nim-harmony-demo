@@ -2,14 +2,15 @@
 
 本文介绍在鸿蒙平台下如何快速集成云信 NIMSDK 到项目中:
 
-1. 环境要求
-2. SDK 接入流程
-3. Demo 使用
-   
+一、环境要求
+二、SDK 接入流程
+三、Demo 使用
+四、问题反馈
+五、参考
 
 通过以上步骤，您可以基本了解鸿蒙NIMSDK 的接入与使用。
 
-## 1 环境要求
+## 一、环境要求
 ### 1.1 编译环境
 - DevEco Studio NEXT Developer Preview1（4.1.3.500） 及以上。
 - HarmonyOS SDK API 11 及以上。
@@ -23,11 +24,11 @@
   
 ### 1.3 操作步骤
 
-#### 步骤1 ：创建应用
+#### 步骤 1.3.1 ：创建应用
 
 创建应用，详情官方文档：[点这里](https://netease.im/)
 
-#### 步骤 2：编译运行
+#### 步骤 1.3.2：编译运行
 
 打开 NIMAPIDemo 配置签名：当前 NIMAPIDemo 已经配置好 Huawei Phone 模拟器与部分网易内部 HarmonyOS NEXT 真机的安装证书与 Profile，支持所有模拟器安装应用。若期望将证书移动到私有华为开发者账号体系下，需要按照一下步骤自动生成。更详细步骤详见 [华为-创建 HarmonyOS 应用](https://developer.huawei.com/consumer/cn/doc/app/agc-help-createapp-0000001146718717)
 
@@ -45,10 +46,10 @@
 ![sign_config_6.png](Image/sign_config_6.png)
 
 
-#### 步骤 3：真机运行（可选）
+#### 步骤 1.3。3：真机运行（可选）
   如果使用模拟器，可以直接运行，如果需要真机调试，[详情参考](./On-deviceDebugging.md)
 
-## 2 SDK 接入流程
+## 二、SDK 接入流程
 ### 2.1. 拷贝 SDK har 
 
 拷贝 sdk har 包产物至项目文件夹中，例如：entry/libs。产物成果可由 [NIMApiDemo/entry/libs](./NIMApiDemo/entry/libs) 获取
@@ -120,45 +121,44 @@ import { NIMSdk } from 'nim'
    ![service](Image/sdk_service.png)
 
 
-## 3 DEMO 使用
+## 三、DEMO 使用
 
 demo 提供 IM 个业务模块 API 的调用事例，便于开发者快速了解 api 的使用方式，下载 demo 代码后，可以直接运行
 demo 运行进入登陆界面进行登陆：
 体验 demo 可以将 用户名：cjl 秘密： 123456 输入进行登陆：
 
-### Demo 功能模块
-#### 登陆界面
+### 3.1 登陆界面
 see loginService
 ![login.png](Image/login.png)
 
-#### 会话接口
+### 3.2 会话接口
 see conversationService
 ![conversation.png](Image/conversation.png)
 
-#### 消息接口
+### 3.3 消息接口
 see messageService
 ![message.png](Image/message.png)
 
-#### 群接口
+### 3.4 群接口
 see teamService
 ![team.png](Image/team.png)
 
-#### 用户&好友接口
+### 3.5 用户&好友接口
 see userService, friendService
 ![user.png](Image/user.png)
 
-#### 离线推送
+### 3.6 离线推送
 see pushService
 ![push.png](Image/push.png)
 
 以上界面对应的功能接口，都有单独的功能页面进行实现，在接入sdk 时，可以找的对应的接口，进行参考使用。
 
 
-## 4 问题反馈
+## 四、问题反馈
 
 如果您在使用过程中，有任何疑问都可以直接在本工程上提交 issue，或者在云信官网进行咨询。
 
-## 5 参考
+## 五、参考
 [云信官网](https://netease.im/)
 
 [鸿蒙开发官网](https://developer.harmonyos.com/)
