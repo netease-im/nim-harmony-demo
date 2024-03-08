@@ -94,6 +94,7 @@ DEMO 工程下 oh-package.json5 配置 har 包依赖。即将 har 包路径配�
 }
 ```
 
+
 ![dependencies](Image/sdk_dependencies.png)
 
 ### 2.3 安装本地 har 包依赖
