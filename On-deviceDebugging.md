@@ -1,18 +1,30 @@
 
-## 真机调试
+# 真机调试
+
 > PS：真机能否安装依赖 build-profile.json5 中的证书与 Profile 文件配置，
-### 基本概念
-#### 密钥(.p12)
+
+## 基本概念
+
+需要知道密钥 (.p12)、证书请求文件 (.csr)、数字证书 (.cer)、Profile 文件 (.p7b) 的基本概念
+
+### 密钥 (.p12)
 包含非对称加密中使用的公钥和私钥，存储在密钥库文件中，格式为.p12，公钥和私钥对用于数字签名和验证。
-#### 证书请求文件(.csr)
+
+### 证书请求文件 (.csr)
 格式为.csr，全称为Certificate Signing Request，包含密钥对中的公钥和公共名称、组织名称、组织单位等信息，用于向AppGallery Connect申请数字证书。
-#### 数字证书(.cer)
+
+### 数字证书 (.cer)
 格式为.cer，由华为AppGallery Connect颁发。
-#### Profile文件(.p7b)
+
+### Profile 文件 (.p7b)
 格式为.p7b，包含HarmonyOS应用/服务的包名、数字证书信息、描述应用/服务允许申请的证书权限列表，以及允许应用/服务调试的设备列表（如果应用/服务类型为Release类型，则设备列表为空）等内容，每个应用/服务包中均必须包含一个Profile文件。
 
+
+## 获取证书
+给出密钥 (.p12)、证书请求文件 (.csr)、数字证书 (.cer)、Profile 文件 (.p7b)的生成方式
+
 ### Generate Key(.p12) + Generate CSR(.csr)
-主要分为两步，Generate Key(.p12) + Generate CSR(.csr)，IDE 提供了一个入口生成两个文件。
+主要分为两步，Generate Key(.p12) & Generate CSR(.csr)，IDE 提供了一个入口生成两个文件。
 
 - 使用 IDE DevEco Studio -> Build -> Generate Key and CSR 按需填入
 Key Store File：设置密钥库文件存储路径，并填写p12文件名。
@@ -50,6 +62,12 @@ Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 
 ![apply_profile_6.png](Image/apply_profile_6.png)
 
+## 工程配置
+
+当前 NIMApiDemo 使用的证书文件位于 [证书保存目录](./secrets)，支持所有模拟器与部分网易内部真机调试使用。如需配置至私有开发账户下，请继续后续的配置流程。
+
+> [证书保存目录](./secrets) 仅提供 .p12, .cer, .p7b
+
 ### 配置签名信息
 
 “准备签名文件”的步骤拿到 4 个重要签名文件，分别作用：
@@ -61,7 +79,8 @@ Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 
 使用制作的私钥（.p12）文件、在AppGallery Connect中申请的证书（.cer）文件和Profile（.p7b）文件，在DevEco Studio配置工程的签名信息，构建携带发布签名信息的APP。
 
-用 DevEco Studio 打开自己的鸿蒙工程，在 File > Project Structure > Project > Signing Configs > default界面中，取消“Automatically generate signature”勾选项，然后配置工程的签名信息。需要注意的是，除了传入 .p12, .cer, .p7b 以外，需要填入创建 .p12 时的 Key alias 和 Key password，具体规则如下：
+用 DevEco Studio 打开自己的鸿蒙工程，在 File > Project Structure > Project > Signing Configs > default界面中，取消 “Automatically generate signature” 勾选项，然后配置工程的签名信息。需要注意的是，除了传入 .p12, .cer, .p7b 以外，需要填入创建 .p12 时的 Key alias 和 Key password，具体规则如下：
+
 > 注意此时要取消“Automatically generate signature”勾选项
 
 ![apply_profile_7.png](Image/apply_profile_7.png)
@@ -88,9 +107,9 @@ Key Store File：设置密钥库文件存储路径，并填写p12文件名。
 
 见文档，[“配置Client ID”章节](https://developer.harmonyos.com/cn/docs/documentation/doc-guides-V2/configure-0000001709533666-V2#section93453261371)
 
-* 登录AppGallery Connect网站，选择“我的项目”，在项目列表中找到您的项目，下拉页面，获取Client ID。
+* 登录 AppGallery Connect 网站，选择“我的项目”，在项目列表中找到您的项目，下拉页面，获取 Client ID。
 ![apply_profile_8.png](Image/apply_profile_8.png)
-* 在工程中entry模块的module.json5文件中，新增metadata并配置client_id，如下所示：
+* 在工程中 entry 模块的 module.json5 文件中，新增 metadata 并配置 client_id，如下所示：
 ```
 "module": {
   "name": "entry",

@@ -5,13 +5,13 @@
         "name": "default",
         "type": "HarmonyOS",
         "material": {
-          "certpath": "/Users/songwenhai/.ohos/config/default_NIMApiDemo_26vUcBMutJBTRG7Ybpt_3h-lDihf_NvQ69dKrXgu0j4=.cer",
-          "storePassword": "0000001BD92E9F3217D73B8D7958CAE63DD9AED2896DF20CAE48050D8E426742DF0E311049F1BAF9634F3B",
-          "keyAlias": "debugKey",
-          "keyPassword": "0000001B53DDF85D603C735BDC71D1801154DE36F13517D8D2BCFD8A8823D9AEAFD25FD01A80208E123F37",
-          "profile": "/Users/songwenhai/.ohos/config/default_NIMApiDemo_26vUcBMutJBTRG7Ybpt_3h-lDihf_NvQ69dKrXgu0j4=.p7b",
+          "storePassword": "0000001892FF3E65BCF0094FC45C9DEB7E7C32C8F6AA396B52D314E4B7CEFD870A7ACF717BDCE395",
+          "certpath": "../secrets/im_netease_nim_demo_debug.cer",
+          "keyAlias": "neteaseim",
+          "keyPassword": "00000018E42321D2310ADFBBFCC1F8BC83B47F9DDF4A5DE1960A7AFA3F56310D8125092A99253A54",
+          "profile": "../secrets/im_netease_nim_demo_debugDebug.p7b",
           "signAlg": "SHA256withECDSA",
-          "storeFile": "/Users/songwenhai/.ohos/config/default_NIMApiDemo_26vUcBMutJBTRG7Ybpt_3h-lDihf_NvQ69dKrXgu0j4=.p12"
+          "storeFile": "../secrets/neteaseim.p12"
         }
       }
     ],
