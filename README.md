@@ -1,3 +1,10 @@
+<style>
+img{
+    width: 60%;
+    padding-left: 20%;
+}
+</style>
+
 # 快速入门
 
 本文介绍在鸿蒙平台下如何快速集成云信 NIMSDK 到项目中:
