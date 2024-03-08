@@ -2,28 +2,26 @@
 
 本文介绍在鸿蒙平台下如何快速集成云信 NIMSDK 到项目中:
 
-一. 环境要求
-
-二. SDK 接入流程
-
-三. Demo 使用
+1. 环境要求
+2. SDK 接入流程
+3. Demo 使用
    
 
 通过以上步骤，您可以基本了解鸿蒙NIMSDK 的接入与使用。
 
-## 一. 环境要求
-### 编译环境
+## 1 环境要求
+### 1.1 编译环境
 - DevEco Studio NEXT Developer Preview1（4.1.3.500） 及以上。
 - HarmonyOS SDK API 11 及以上。
 
-### 设备要求
+### 1.2 设备要求
 
 - 真机华为 Mate 系列
 - 操作系统 HarnomyOS NEXT 2.1.2.5 (Canary1) 以上
 
 > 于“设置”->“关于手机”页面查看
   
-## 操作步骤
+## 1.3 操作步骤
 
 ### 步骤1：创建应用
 
@@ -31,89 +29,86 @@
 
 ### 步骤2：编译运行
 
-1.打开 NIMAPIDemo 配置签名：
+#### 打开 NIMAPIDemo 配置签名：当前 NIMAPIDemo 已经配置好 Huawei Phone 模拟器与部分网易内部 HarmonyOS NEXT 真机的安装证书与 Profile，支持所有模拟器安装应用。若期望将证书移动到私有华为开发者账号体系下，需要按照一下步骤自动生成。更详细步骤详见 [华为-创建 HarmonyOS 应用](https://developer.huawei.com/consumer/cn/doc/app/agc-help-createapp-0000001146718717)
 
-    当前 NIMAPIDemo 已经配置好 Huawei Phone 模拟器与部分网易内部 HarmonyOS NEXT 真机的安装证书与 Profile，支持所有模拟器安装应用。若期望将证书移动到私有华为开发者账号体系下，需要按照一下步骤自动生成。更详细步骤详见 [华为-创建 HarmonyOS 应用](https://developer.huawei.com/consumer/cn/doc/app/agc-help-createapp-0000001146718717)
-
-DevEcho-Studio -> File -> Project Structure
+##### DevEcho-Studio -> File -> Project Structure
 ![sign_config_1.png](Image/sign_config_1.png)
-Project Structure -> Project -> Signing Configs
+##### Project Structure -> Project -> Signing Configs
 ![sign_config_2.png](Image/sign_config_2.png)
-Signing Configs -> check "Automatically generate signature" -> click "Sing in" 登录授权的华为开发者账号
+##### Signing Configs -> check "Automatically generate signature" -> click "Sing in" 登录授权的华为开发者账号
 ![sign_config_3.png](Image/sign_config_3.png)
-在弹出的浏览器页面点击“允许”，许可颁布应用调试证书
+##### 在弹出的浏览器页面点击“允许”，许可颁布应用调试证书
 ![sign_config_4.png](Image/sign_config_4.png)
-显示此页面时，即代表配置完成
+##### 显示此页面时，即代表配置完成
 ![sign_config_5.png](Image/sign_config_5.png)
-选择名称为“NIMAPIDemo”的应用和名为“”模拟器后，点击 ▶ 即可在模拟器运行 HarmonyOS NIMSDK API Demo ！
+##### 选择名称为“NIMAPIDemo”的应用和名为“”模拟器后，点击 ▶ 即可在模拟器运行 HarmonyOS NIMSDK API Demo ！
 ![sign_config_6.png](Image/sign_config_6.png)
 
 
 ### 步骤3：真机运行
   如果使用模拟器，可以直接运行，如果需要真机调试，[详情参考](/真机调试.md)
 
-## 二. SDK 接入流程
-1. 拷贝 sdk har 包到项目文件夹中，例如： entry/libs
+## 2 SDK 接入流程
+### 2.1. 拷贝 sdk har 包到项目文件夹中，例如： entry/libs
 
    ![libs](Image/sdk_libs.png)
 
-2. DEMO 工程下 oh-package.json5 配置 har 包依赖
+### 2.2 DEMO 工程下 oh-package.json5 配置 har 包依赖
 
    ![dependencies](Image/sdk_dependencies.png)
 
-3. 点击 Run 'ohpm install'，安装本地 har 包依赖
+### 2.3 点击 Run 'ohpm install'，安装本地 har 包依赖
 
    ![run_ohmp_install](Image/sdk_run_ohmp_install.png)
 
-4. 点击 Sync Now，同步项目工程
+### 2.4 点击 Sync Now，同步项目工程
 
    ![sync_now](Image/sdk_sync_now.png)
 
-5. 源代码引入SDK，创建SDK实例
+### 2.5 源代码引入SDK，创建SDK实例
 
    ![import](Image/sdk_import.png)
 
    ![instance](Image/sdk_instance.png)
 
-6. 通过SDK实例获取各业务service，通过业务service进行功能开发
+### 2.6 通过SDK实例获取各业务service，通过业务service进行功能开发
 
    ![service](Image/sdk_service.png)
 
 
-## 三. DEMO 使用
+## 3 DEMO 使用
 
 demo 提供 IM 个业务模块 API 的调用事例，便于开发者快速了解 api 的使用方式，下载 demo 代码后，可以直接运行
-
 demo 运行进入登陆界面进行登陆：
 体验 demo 可以将 用户名：cjl 秘密： 123456 输入进行登陆：
 
 ### Demo 功能模块
-#### 登陆界面
+### 登陆界面
 ![login.png](Image/login.png)
 
-#### 会话接口
+### 会话接口
 ![conversation.png](Image/conversation.png)
 
-#### 消息接口
+### 消息接口
 ![message.png](Image/message.png)
 
-#### 群接口
+### 群接口
 ![team.png](Image/team.png)
 
-#### 用户&好友接口
+### 用户&好友接口
 ![user.png](Image/user.png)
 
-#### 离线推送
+### 离线推送
 ![push.png](Image/push.png)
 
 以上界面对应的功能接口，都有单独的功能页面进行实现，在接入sdk 时，可以找的对应的接口，进行参考使用。
 
 
-## 问题反馈
+## 4 问题反馈
 
 如果您在使用过程中，有任何疑问都可以直接在本工程上提交 issue，或者在云信官网进行咨询。
 
-## 参考
+## 5 参考
 [云信官网](https://netease.im/)
 
 [鸿蒙开发官网](https://developer.harmonyos.com/)
