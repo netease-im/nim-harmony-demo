@@ -1,10 +1,3 @@
-<style>
-img{
-    width: 60%;
-    padding-left: 20%;
-}
-</style>
-
 # 快速入门
 
 本文介绍在鸿蒙平台下如何快速集成云信 NIMSDK 到项目中:
@@ -44,7 +37,7 @@ img{
 打开 NIMAPIDemo 配置签名：当前 NIMAPIDemo 已经配置好 Huawei Phone 模拟器与部分网易内部 HarmonyOS NEXT 真机的安装证书与 Profile，支持所有模拟器安装应用。若期望将证书移动到私有华为开发者账号体系下，需要按照一下步骤自动生成。更详细步骤详见 [华为-创建 HarmonyOS 应用](https://developer.huawei.com/consumer/cn/doc/app/agc-help-createapp-0000001146718717)
 
 ##### DevEcho-Studio -> File -> Project Structure
-![sign_config_1.png](Image/sign_config_1.png)
+<img src="sign_config_1.png" width = "80%" />
 ##### Project Structure -> Project -> Signing Configs
 ![sign_config_2.png](Image/sign_config_2.png)
 ##### Signing Configs -> check "Automatically generate signature" -> click "Sing in" 登录授权的华为开发者账号
