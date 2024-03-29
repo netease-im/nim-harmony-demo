@@ -58,7 +58,10 @@
 ![libs](Image/架构图.png)
 
 IMSDK 提供如下产品功能： 登陆、会话、消息、群、用户、好友、存储服务、推送、自定义通知、设置、聊天室、圈组功能。
-对应上述功能提供业务组件har包： connversation、conversationgroup、message、team、user、friend、setting、notifation、storage、qchat、chatroom。目前qchat 和chatroom 功能还在开发中，不提供。
+
+对应上述功能提供业务组件har包：connversation、conversationgroup、message、team、user、friend、setting、notifation、storage、qchat、chatroom。
+
+目前 qchat 和 chatroom 功能还在开发中，不提供。
 
 ### 2.1. 拷贝 SDK har 
 
