@@ -82,52 +82,49 @@ DEMO 工程下 oh-package.json5 配置 har 包依赖。即将 har 包路径配�
   "author": "",
   "license": "",
   "dependencies": {
-    "nim": "file:./libs/nim.har",
-    "base": "file:./libs/base.har",
-    "database": "file:./libs/database.har",
-    "friend": "file:./libs/friend.har",
-    "logger": "file:./libs/logger.har",
-    "notification": "file:./libs/notification.har",
-    "message": "file:./libs/message.har",
-    "user": "file:./libs/user.har",
-    "push": "file:./libs/push.har",
-    "team": "file:./libs/team.har",
-    "http": "file:./libs/http.har",
-    "sync": "file:./libs/sync.har",
-    "setting": "file:./libs/setting.har",
-    "login": "file:./libs/login.har",
-    "conversation": "file:./libs/conversation.har",
-    "vendor": "file:./libs/vendor.har",
-    "WebSocket": "file:./libs/WebSocket.har"
+    "@nimsdk/nim": "file:./libs/nim.har",
+    "@nimsdk/base": "file:./libs/base.har",
+    "@nimsdk/database": "file:./libs/database.har",
+    "@nimsdk/friend": "file:./libs/friend.har",
+    "@nimsdk/logger": "file:./libs/logger.har",
+    "@nimsdk/notification": "file:./libs/notification.har",
+    "@nimsdk/message": "file:./libs/message.har",
+    "@nimsdk/user": "file:./libs/user.har",
+    "@nimsdk/push": "file:./libs/push.har",
+    "@nimsdk/team": "file:./libs/team.har",
+    "@nimsdk/http": "file:./libs/http.har",
+    "@nimsdk/sync": "file:./libs/sync.har",
+    "@nimsdk/setting": "file:./libs/setting.har",
+    "@nimsdk/storage": "file:./libs/storage.har",
+    "@nimsdk/login": "file:./libs/login.har",
+    "@nimsdk/conversation": "file:./libs/conversation.har",
+    "@nimsdk/conversationgroup": "file:./libs/conversationgroup.har",
+    "@nimsdk/vendor": "file:./libs/vendor.har",
+    "@nimsdk/WebSocket": "file:./libs/WebSocket.har"
   }
 }
 ```
-
-
-![dependencies](Image/sdk_dependencies.png)
 
 ### 2.3 安装本地 har 包依赖
 
 鼠标移动至红色波浪线位置停滞片刻，将会弹出提示框。点击 Run 'ohpm install'，即刻安装本地 har 包依赖
 
-![run_ohmp_install](Image/sdk_run_ohmp_install.png)
+![run_ohmp_install](Image/sdk_run_ohmp_install.jpg)
 
 ### 2.4 同步项目工程
 
 点击 Sync Now，同步项目工程
 
-![sync_now](Image/sdk_sync_now.png)
+![sync_now](Image/sdk_sync_now.jpg)
 
 ### 2.5 创建 SDK 实例 SampleCode
 
 引入 SDK SampleCode，创建SDK实例。使用 import 引入 NIMInterface，NIMInitializeOptions，NIMServiceOptions，NIMSdk
 
 ```javascript
-import { NIMInterface, NIMInitializeOptions, NIMServiceOptions } from 'base'
-import { NIMSdk } from 'nim'
+import { NIMInterface, NIMInitializeOptions, NIMServiceOptions } from '@nimsdk/base'
+import { NIMSdk } from '@nimsdk/nim'
 ```
-
-![import](Image/sdk_import.png)
 
 初始化
 
