@@ -43,14 +43,11 @@
 ##### Signing Configs -> check "Automatically generate signature" -> click "Sing in" 登录授权的华为开发者账号
 ![sign_config_3.png](Image/sign_config_3.png)
 ##### 在弹出的浏览器页面点击“允许”，许可颁布应用调试证书
-![sign_config_4.png](Image/sign_config_4.png)
-##### 显示此页面时，即代表配置完成
-![sign_config_5.png](Image/sign_config_5.png)
 ##### 选择名称为“NIMAPIDemo”的应用和名为“”模拟器后，点击 ▶ 即可在模拟器运行 HarmonyOS NIMSDK API Demo ！
 ![sign_config_6.png](Image/sign_config_6.png)
 
 
-#### 步骤 1.3。3：真机运行（可选）
+#### 步骤 1.3.3：真机运行（可选）
   如果使用模拟器，可以直接运行，如果需要真机调试，[详情参考](./On-deviceDebugging.md)
 
 ## 二、SDK 接入流程
