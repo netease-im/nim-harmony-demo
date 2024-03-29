@@ -1,4 +1,3 @@
-import { NIMSdk } from 'nim/Index';
 import { CommonConstants } from '../common/constants/CommonConstants';
 import { UserModel } from '../viewmodel/UserModel';
 import prompt from '@ohos.promptAction';

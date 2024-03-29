@@ -1,5 +1,5 @@
 import prompt from '@ohos.promptAction';
-import { V2NIMError, V2NIMMessage, V2NIMMessageRevokeParams, V2NIMSendMessageResult } from 'base/Index';
+import { V2NIMError, V2NIMMessage, V2NIMMessageRevokeParams, V2NIMSendMessageResult } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';

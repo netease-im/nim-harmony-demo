@@ -1,4 +1,4 @@
-import { V2NIMError, V2NIMMessage, V2NIMMessageRevokeParams } from 'base/Index';
+import { V2NIMError, V2NIMMessage, V2NIMMessageRevokeParams } from '@nimsdk/base';
 import { CommonConstants,
   shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';

@@ -1,6 +1,6 @@
 import {
   V2NIMError, V2NIMUserUpdateParams,
-} from 'base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -33,15 +33,15 @@ function blueTextStyle() {
 @Entry
 @Component
 struct RemoveUserFromBlockListPage {
-  @State name: string = ''
-  @State avatar: string = ''
-  @State sign: string = ''
-  @State email: string = ''
-  @State birthday: string = ''
-  @State mobile: string = ''
-  @State gender: number = 0
-  @State serverExtension: string = ''
-  @State isShowProgress: boolean = false;
+  private  name?: string
+  private avatar?: string
+  private sign?: string
+  private email?: string
+  private birthday?: string
+  private mobile?: string
+  private gender?: number
+  private serverExtension?: string
+  private isShowProgress?: boolean
 
   private timeOutId: number = -1;
   private userModel: UserModel | undefined;

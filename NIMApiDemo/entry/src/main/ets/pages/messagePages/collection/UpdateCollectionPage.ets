@@ -1,6 +1,6 @@
 import { V2NIMAddCollectionParams,
   V2NIMCollection,
-  V2NIMError } from 'base/Index';
+  V2NIMError } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 import prompt from '@ohos.promptAction';

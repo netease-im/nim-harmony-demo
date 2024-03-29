@@ -1,6 +1,7 @@
 import common from '@ohos.app.ability.common'
-import { NIMInterface, NIMInitializeOptions, NIMServiceOptions } from 'base'
-import { NIMSdk } from 'nim'
+import { NIMInitializeOptions, NIMServiceOptions } from '@nimsdk/base'
+import { NIMSdk } from '@nimsdk/nim'
+import { NIMInterface } from '@nimsdk/base'
 
 export class NimRepository {
   private _context: common.Context

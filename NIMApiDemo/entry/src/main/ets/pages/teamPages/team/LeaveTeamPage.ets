@@ -11,7 +11,7 @@ import {
   V2NIMTeamUpdateExtensionMode,
   V2NIMTeamUpdateInfoMode,
   V2NIMUpdateTeamInfoParams
-} from 'base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';

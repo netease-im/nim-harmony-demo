@@ -1,5 +1,5 @@
-import { V2NIMError, V2NIMMessage,
-  V2NIMMessageQuickComment} from 'base/Index';
+import { NIMEStrAnyObj, V2NIMError, V2NIMMessage,
+  V2NIMMessageQuickComment} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -100,13 +100,12 @@ struct GetQuickCommentListPage {
     try {
       console.info(`-----------getCommentList----------- \n`)
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
-      const listMap:Map<string, V2NIMMessageQuickComment[]> = await
-      messageService.getQuickCommentList(this.sendMessages)
-      let result = "";
-      listMap.forEach((value, key) => {
-        result += `${key} : ${JSON.stringify(value)}\n`;
-      });
-      shownDialog(true, result)
+      const listMap:NIMEStrAnyObj = await messageService.getQuickCommentList(this.sendMessages)
+      // let result = "";
+      // listMap.forEach((value, key) => {
+      //   result += `${key} : ${JSON.stringify(value)}\n`;
+      // });
+      shownDialog(true, JSON.stringify(listMap))
     } catch (error) {
       console.log('----------- getCommentList 失败 -----------', error)
       shownDialog(false, processV2ErrorForPrint(error))

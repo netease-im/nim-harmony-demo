@@ -1,4 +1,4 @@
-import { V2NIMMessage } from 'base/Index';
+import { V2NIMMessage } from '@nimsdk/base';
 import { CommonConstants, processV2ErrorForPrint, shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 

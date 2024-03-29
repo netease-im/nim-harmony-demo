@@ -9,7 +9,7 @@ import {
   V2NIMTeamType,
   V2NIMTeamUpdateExtensionMode,
   V2NIMTeamUpdateInfoMode
-} from 'base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -44,7 +44,7 @@ function blueTextStyle() {
 struct CreateTeamPage {
   @State name: string = ''
   @State teamType: V2NIMTeamType = V2NIMTeamType.V2NIM_TEAM_TYPE_NORMAL
-  @State memberLimit: number = 0
+  @State memberLimit: number | undefined = undefined
   @State intro: string = ''
   @State announcement: string = ''
   @State avatar: string = ''

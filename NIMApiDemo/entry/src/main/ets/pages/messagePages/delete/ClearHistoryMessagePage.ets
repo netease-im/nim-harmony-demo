@@ -1,5 +1,5 @@
 import {
-  V2NIMClearHistoryMessageOption, V2NIMMessage } from 'base/Index';
+  V2NIMClearHistoryMessageOption, V2NIMMessage } from '@nimsdk/base';
 import { CommonConstants, processV2ErrorForPrint, shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 

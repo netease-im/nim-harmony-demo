@@ -3,7 +3,7 @@ import {
   V2NIMCollectionOption,
   V2NIMError,
   V2NIMQueryDirection,
-} from 'base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 

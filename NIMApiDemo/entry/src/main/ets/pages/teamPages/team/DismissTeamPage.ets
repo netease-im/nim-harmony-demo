@@ -9,7 +9,7 @@ import {
   V2NIMTeamType,
   V2NIMTeamUpdateExtensionMode,
   V2NIMTeamUpdateInfoMode
-} from 'base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';

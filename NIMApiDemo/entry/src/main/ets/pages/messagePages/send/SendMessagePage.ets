@@ -5,8 +5,9 @@ import {
   V2NIMConversationType, V2NIMError, V2NIMMessage,
   V2NIMMessagePushConfig,
   V2NIMP2PMessageMuteMode,
-  V2NIMSendMessageResult } from 'base/Index';
-import { castArray } from 'vendor/Index';
+  V2NIMSendMessageParams,
+  V2NIMSendMessageResult } from '@nimsdk/base';
+import { castArray } from '@nimsdk/vendor';
 import { CommonConstants,
   shownDialog } from '../../../common/constants/CommonConstants';
 import { PictureFiles } from '../../../message/view/PictureFiles';
@@ -110,14 +111,14 @@ struct SendMessagePage {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
       const fileDir = getContext(this).getApplicationContext().filesDir
-      let filePath = fileDir + '/TextDir/image.png';
+      let filePath = fileDir + '/nimsdk/image.png';
       let file = await fileIo.open(filePath, fileIo.OpenMode
         .READ_WRITE|fileIo.OpenMode.CREATE);
       let buffer = getContext(this).resourceManager.getMediaContentSync($r('app.media.img').id);
       // Write the read ArrayBuffer to the new media file.
       let writeLen = await fileIo.write(file.fd, buffer.buffer);
       console.info('write success,len=' + writeLen);
-      let message: V2NIMMessage = messageCreator.createImageMessage(filePath,
+      let message: V2NIMMessage = await messageCreator.createImageMessage(filePath,
         'nim')
       const onUploadProgress = (percentage: number)  => {
         console.info(`onUploadProgress: ${JSON.stringify(percentage)}`)
@@ -126,7 +127,11 @@ struct SendMessagePage {
         }
       }
 
-      let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
+      const params :V2NIMSendMessageParams  = {
+      //   配置参数
+      }
+      let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId, params,
+      onUploadProgress)
       shownDialog(true, JSON.stringify(messageResult, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
@@ -140,7 +145,7 @@ struct SendMessagePage {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
       const fileDir = getContext(this).getApplicationContext().filesDir
-      let filePath = fileDir + '/TextDir/video.mp4';
+      let filePath = fileDir + '/nimsdk/video.mp4';
       let file = await fileIo.open(filePath, fileIo.OpenMode
         .READ_WRITE|fileIo.OpenMode.CREATE);
       let buffer = getContext(this).resourceManager.getMediaContentSync($r
@@ -148,7 +153,7 @@ struct SendMessagePage {
       // Write the read ArrayBuffer to the new media file.
       let writeLen = await fileIo.write(file.fd, buffer.buffer);
       console.info('write success,len=' + writeLen);
-      let message: V2NIMMessage = messageCreator.createVideoMessage(filePath,
+      let message: V2NIMMessage = await messageCreator.createVideoMessage(filePath,
         'nim')
       let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
       shownDialog(true, JSON.stringify(messageResult, null, 2))
@@ -164,7 +169,7 @@ struct SendMessagePage {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
       const fileDir = getContext(this).getApplicationContext().filesDir
-      let filePath = fileDir + '/TextDir/audio.aac';
+      let filePath = fileDir + '/nimsdk/audio.aac';
       let file = await fileIo.open(filePath, fileIo.OpenMode
         .READ_WRITE|fileIo.OpenMode.CREATE);
       let buffer = getContext(this).resourceManager.getMediaContentSync($r
@@ -172,7 +177,7 @@ struct SendMessagePage {
       // Write the read ArrayBuffer to the new media file.
       let writeLen = await fileIo.write(file.fd, buffer.buffer);
       console.info('write success,len=' + writeLen);
-      let message: V2NIMMessage = messageCreator.createAudioMessage(filePath,
+      let message: V2NIMMessage = await messageCreator.createAudioMessage(filePath,
         'nim')
       let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
       shownDialog(true, JSON.stringify(messageResult, null, 2))

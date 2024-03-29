@@ -1,7 +1,7 @@
 import router from '@ohos.router';
 import common from '@ohos.app.ability.common';
 import { CommonConstants } from '../common/constants/CommonConstants';
-import { V2NIMConnectStatus, V2NIMError, V2NIMLoginOption, V2NIMLoginStatus } from 'base';
+import { V2NIMConnectStatus, V2NIMError, V2NIMLoginOption, V2NIMLoginStatus } from '@nimsdk/base';
 import cryptoFramework from '@ohos.security.cryptoFramework';
 import { UserModel } from '../viewmodel/UserModel';
 

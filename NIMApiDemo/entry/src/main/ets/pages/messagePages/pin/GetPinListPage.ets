@@ -1,6 +1,6 @@
 import { V2NIMError,
   V2NIMMessagePin,
-  V2NIMSendMessageResult } from 'base/Index';
+  V2NIMSendMessageResult } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';

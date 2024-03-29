@@ -1,4 +1,4 @@
-import { values } from 'vendor/Index'
+import { values } from '@nimsdk/vendor'
 import { photoPickerGetUri } from '../model/PictureSelect'
 
 @Component

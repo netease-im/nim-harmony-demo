@@ -9,8 +9,8 @@ import {
   V2NIMConversationOperationResult,
   V2NIMConversationUpdate,
   V2NIMConversationFilter
-} from 'base/Index';
-import { forEach } from 'vendor/Index';
+} from '@nimsdk/base';
+import { forEach } from '@nimsdk/vendor';
 import { CommonConstants } from '../common/constants/CommonConstants';
 import { TitleWithBack } from '../view/TitleWithBack';
 import { UserModel } from '../viewmodel/UserModel';

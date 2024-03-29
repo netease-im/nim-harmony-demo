@@ -1,4 +1,4 @@
-import { V2NIMConversationOption, V2NIMConversationType, V2NIMError, } from 'base/Index';
+import { V2NIMConversationOption, V2NIMConversationType, V2NIMError, } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 import { HashSet } from '@kit.ArkTS';

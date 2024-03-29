@@ -10,7 +10,7 @@ import {
   V2NIMTeamUpdateExtensionMode,
   V2NIMTeamUpdateInfoMode,
   V2NIMUpdateTeamInfoParams
-} from 'base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -46,17 +46,17 @@ struct UpdateTeamInfoPage {
   @State teamId: string = ''
   @State name: string = ''
   @State teamType: V2NIMTeamType = V2NIMTeamType.V2NIM_TEAM_TYPE_NORMAL
-  @State memberLimit: number = 0
-  @State intro: string = ''
-  @State announcement: string = ''
-  @State avatar: string = ''
-  @State serverExtension: string = ''
-  @State joinMode: V2NIMTeamJoinMode = V2NIMTeamJoinMode.V2NIM_TEAM_JOIN_MODE_FREE
-  @State agreeMode: V2NIMTeamAgreeMode = V2NIMTeamAgreeMode.V2NIM_TEAM_AGREE_MODE_AUTH
-  @State inviteMode: V2NIMTeamInviteMode = V2NIMTeamInviteMode.V2NIM_TEAM_INVITE_MODE_MANAGER
-  @State updateInfoMode: V2NIMTeamUpdateInfoMode = V2NIMTeamUpdateInfoMode.V2NIM_TEAM_UPDATE_INFO_MODE_MANAGER
-  @State updateExtensionMode: V2NIMTeamUpdateExtensionMode = V2NIMTeamUpdateExtensionMode.V2NIM_TEAM_UPDATE_EXTENSION_MODE_MANAGER
-  @State chatBannedMode: V2NIMTeamChatBannedMode = V2NIMTeamChatBannedMode.V2NIM_TEAM_CHAT_BANNED_MODE_UNBAN
+  @State memberLimit: number | undefined = undefined
+  @State intro: string | undefined = undefined
+  @State announcement: string | undefined = undefined
+  @State avatar: string | undefined = undefined
+  @State serverExtension: string | undefined = undefined
+  @State joinMode: V2NIMTeamJoinMode | undefined = undefined
+  @State agreeMode: V2NIMTeamAgreeMode | undefined = undefined
+  @State inviteMode: V2NIMTeamInviteMode | undefined = undefined
+  @State updateInfoMode: V2NIMTeamUpdateInfoMode | undefined = undefined
+  @State updateExtensionMode: V2NIMTeamUpdateExtensionMode | undefined = undefined
+  @State chatBannedMode: V2NIMTeamChatBannedMode | undefined = undefined
   @State isShowProgress: boolean = false;
 
   private timeOutId: number = -1;
@@ -143,7 +143,7 @@ struct UpdateTeamInfoPage {
                 top: $r('app.float.login_more_margin_top')
               })
 
-            TextInput({ text: this.name, placeholder: '输入 群组Id' })
+            TextInput({ text: this.teamId, placeholder: '输入 群组Id' })
               .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
               .type(InputType.Normal)
               .inputStyle()

@@ -2,7 +2,7 @@ import { CommonConstants } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 import { V2NIMBroadcastNotification,
   V2NIMConversationType,
-  V2NIMCustomNotification, V2NIMSendCustomNotificationParams } from 'base';
+  V2NIMCustomNotification, V2NIMSendCustomNotificationParams } from '@nimsdk/base';
 import promptAction from '@ohos.promptAction';
 
 /**

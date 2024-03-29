@@ -1,7 +1,7 @@
 /**
  * Common Constants for all features.
  */
-import { V2NIMError } from 'base/Index';
+import { V2NIMError } from '@nimsdk/base';
 
 export class CommonConstants {
   static readonly FONT_WEIGHT_500: number = 500;

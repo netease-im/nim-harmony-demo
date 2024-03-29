@@ -7,7 +7,7 @@ import ClassifyItem from '../../message/view/ClassityItem';
 import ClassifyViewModel from '../../message/viewmodel/ClassifyViewModel';
 import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
-import { V2NIMTeam, V2NIMTeamJoinActionInfo, V2NIMTeamMember } from 'base/Index';
+import { V2NIMTeam, V2NIMTeamJoinActionInfo, V2NIMTeamMember } from '@nimsdk/base';
 
 @Entry
 @Component

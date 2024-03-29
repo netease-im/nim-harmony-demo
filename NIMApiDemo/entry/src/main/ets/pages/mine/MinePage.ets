@@ -8,7 +8,7 @@ import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
 import { V2NIMFriend, V2NIMFriendAddApplication,
   V2NIMFriendAddRejection,
-  V2NIMFriendDeletionType, V2NIMUser } from 'base/Index';
+  V2NIMFriendDeletionType, V2NIMUser } from '@nimsdk/base';
 
 @Entry
 @Component

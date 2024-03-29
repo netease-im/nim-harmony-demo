@@ -14,11 +14,10 @@
  */
 
 import common from '@ohos.app.ability.common';
-// import { NIMInitializeOptions, NIMSdk } from 'nim';
-import { NIMInterface, NIMInitializeOptions } from 'base';
+import { NIMInterface, NIMInitializeOptions } from '@nimsdk/base';
 import { NimRepository } from '../model/NimRepository';
 import preferences from '@ohos.data.preferences';
-import { NIMServiceOptions } from 'base/Index';
+import { NIMServiceOptions } from '@nimsdk/base';
 
 const TAG = '[UserModeL]';
 const USER_MODEL = 'userModel';

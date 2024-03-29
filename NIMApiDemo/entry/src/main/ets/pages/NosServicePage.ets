@@ -1,4 +1,4 @@
-import { UploadFileOptions, UploadFileProgress, UploadFileResult } from 'base/Index';
+import { UploadFileOptions, UploadFileProgress, UploadFileResult } from '@nimsdk/base';
 import { CommonConstants } from '../common/constants/CommonConstants';
 import { TitleWithBack } from '../view/TitleWithBack';
 import fs from '@ohos.file.fs';

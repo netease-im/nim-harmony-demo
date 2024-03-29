@@ -1,4 +1,4 @@
-import { V2NIMError, V2NIMTeamMemberRole, V2NIMTeamType, } from 'base/Index';
+import { V2NIMError, V2NIMTeamMemberRole, V2NIMTeamType, } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 

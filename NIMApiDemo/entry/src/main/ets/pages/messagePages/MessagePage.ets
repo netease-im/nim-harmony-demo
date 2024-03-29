@@ -14,7 +14,7 @@ import {
   V2NIMMessagePinNotification,
   V2NIMMessageQuickCommentNotification,
   V2NIMMessageRevokeNotification,
-  V2NIMP2PMessageReadReceipt, V2NIMTeamMessageReadReceipt } from 'base/Index';
+  V2NIMP2PMessageReadReceipt, V2NIMTeamMessageReadReceipt } from '@nimsdk/base';
 
 @Entry
 @Component

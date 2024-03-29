@@ -5,7 +5,7 @@ import {
   V2NIMTeamMemberQueryOption,
   V2NIMTeamMemberRoleQueryType,
   V2NIMTeamType,
-} from 'base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 
