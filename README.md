@@ -54,6 +54,8 @@
   如果使用模拟器，可以直接运行，如果需要真机调试，[详情参考](./On-deviceDebugging.md)
 
 ## 二、SDK 接入流程
+### 架构图
+![libs](Image/架构图.png)
 ### 2.1. 拷贝 SDK har 
 
 拷贝 sdk har 包产物至项目文件夹中，例如：entry/libs。产物成果可由 [NIMApiDemo/entry/libs](./NIMApiDemo/entry/libs) 获取
