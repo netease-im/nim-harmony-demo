@@ -56,6 +56,10 @@
 ## 二、SDK 接入流程
 ### 架构图
 ![libs](Image/架构图.png)
+
+IMSDK 提供如下产品功能： 登陆、会话、消息、群、用户、好友、存储服务、推送、自定义通知、设置、聊天室、圈组功能。
+对应上述功能提供业务组件har包： connversation、conversationgroup、message、team、user、friend、setting、notifation、storage、qchat、chatroom。目前qchat 和chatroom 功能还在开发中，不提供。
+
 ### 2.1. 拷贝 SDK har 
 
 拷贝 sdk har 包产物至项目文件夹中，例如：entry/libs。产物成果可由 [NIMApiDemo/entry/libs](./NIMApiDemo/entry/libs) 获取
