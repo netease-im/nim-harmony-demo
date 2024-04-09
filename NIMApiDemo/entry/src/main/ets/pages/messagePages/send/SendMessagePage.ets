@@ -1,5 +1,8 @@
 
 import { fileIo } from '@kit.CoreFileKit';
+
+import fs from '@ohos.file.fs';
+
 import {
   NIMEStrAnyObj,
   V2NIMConversationType, V2NIMError, V2NIMMessage,
@@ -110,8 +113,12 @@ struct SendMessagePage {
       let conversationId: string = this.getConversationId()
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
-      const fileDir = getContext(this).getApplicationContext().filesDir
-      let filePath = fileDir + '/nimsdk/image.png';
+      const catchDir = getContext(this).getApplicationContext().cacheDir
+      let fileDir = catchDir + '/nim';
+      if (!fs.accessSync(fileDir)) {
+        fs.mkdirSync(fileDir);
+      }
+      const filePath = fileDir + '/image.png'
       let file = await fileIo.open(filePath, fileIo.OpenMode
         .READ_WRITE|fileIo.OpenMode.CREATE);
       let buffer = getContext(this).resourceManager.getMediaContentSync($r('app.media.img').id);
@@ -144,8 +151,12 @@ struct SendMessagePage {
       const conversationId: string = this.getConversationId()
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
-      const fileDir = getContext(this).getApplicationContext().filesDir
-      let filePath = fileDir + '/nimsdk/video.mp4';
+      const catchDir = getContext(this).getApplicationContext().cacheDir
+      let fileDir = catchDir + '/nim';
+      if (!fs.accessSync(fileDir)) {
+        fs.mkdirSync(fileDir);
+      }
+      const filePath = fileDir + '/video.mp4'
       let file = await fileIo.open(filePath, fileIo.OpenMode
         .READ_WRITE|fileIo.OpenMode.CREATE);
       let buffer = getContext(this).resourceManager.getMediaContentSync($r
@@ -168,8 +179,12 @@ struct SendMessagePage {
       let conversationId: string = this.getConversationId()
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
-      const fileDir = getContext(this).getApplicationContext().filesDir
-      let filePath = fileDir + '/nimsdk/audio.aac';
+      const catchDir = getContext(this).getApplicationContext().cacheDir
+      let fileDir = catchDir + '/nim';
+      if (!fs.accessSync(fileDir)) {
+        fs.mkdirSync(fileDir);
+      }
+      const filePath = fileDir + '/audio.aac'
       let file = await fileIo.open(filePath, fileIo.OpenMode
         .READ_WRITE|fileIo.OpenMode.CREATE);
       let buffer = getContext(this).resourceManager.getMediaContentSync($r
