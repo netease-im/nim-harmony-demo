@@ -29,6 +29,10 @@
       "value": "登录"
     },
     {
+      "name": "logout",
+      "value": "登出"
+    },
+    {
       "name": "register",
       "value": "注册"
     },

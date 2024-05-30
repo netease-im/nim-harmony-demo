@@ -46,11 +46,7 @@ struct ClearUnreadCountByIdsPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async clearUnreadCountByIds(): Promise<void> {
     console.info(`----------清除未读数 By Ids--------- \n`)

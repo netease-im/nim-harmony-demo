@@ -29,6 +29,10 @@
       "value": "Login"
     },
     {
+      "name": "logout",
+      "value": "Logout"
+    },
+    {
       "name": "register",
       "value": "Register"
     },

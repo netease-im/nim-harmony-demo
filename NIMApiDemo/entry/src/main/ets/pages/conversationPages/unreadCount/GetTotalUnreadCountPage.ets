@@ -45,11 +45,7 @@ struct GetTotalUnreadCountPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async getTotalUnreadCount(): Promise<void> {
     console.info(`----------查询所有未读数--------- \n`)

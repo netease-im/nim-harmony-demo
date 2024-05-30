@@ -49,11 +49,7 @@ struct GetUnreadCountByFilterPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async getUnreadCountByFilter(): Promise<void> {
     console.info(`----------查询所有未读数 By Filter--------- \n`)

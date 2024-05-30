@@ -56,11 +56,7 @@ struct GetCollectionListPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async getCollectionListByOption(): Promise<void> {
     console.info(`----------getCollectionListByOption-------- \n`)

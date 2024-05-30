@@ -76,6 +76,23 @@ class ClassifyViewModel {
     });
     return linkDataList;
   }
+
+  getSignallingLinkData(): Array<ClassifyModel> {
+    let linkDataList: Array<ClassifyModel> = [];
+    let superId: number = 0;
+    LINK_Signalling_DATA.forEach((item: LinkDataModel) => {
+      if (superId !== item.superId) {
+        // add the course classify model.
+        let classifyItem: ClassifyModel = new ClassifyModel(item.superId, item.superName, []);
+        linkDataList.push(classifyItem);
+      }
+      // add the course model.
+      let courseItem: FunctionalModel = new FunctionalModel(superId, item.id, item.module, item.methodName);
+      linkDataList[linkDataList.length-1].courseList.push(courseItem);
+      superId = item.superId;
+    });
+    return linkDataList;
+  }
 }
 
 let classifyViewModel = new ClassifyViewModel();
@@ -96,6 +113,7 @@ const LINK_DATA: LinkDataModel[] = [
   new LinkDataModel(5, 'get 消息', 2, 'get', 'getMessagesListByRefers'),
   new LinkDataModel(5, 'get 消息', 3, 'get', 'getMessagesListByIds'),
   new LinkDataModel(5, 'get 消息', 4,'get',  'searchCloudMessages'),
+  new LinkDataModel(5, 'get 消息', 5, 'get', 'getThreadMessageList'),
   new LinkDataModel(6, 'delete 消息', 1, 'delete','deleteMessage'),
   new LinkDataModel(6, 'delete 消息', 2, 'delete','deleteMessages'),
   new LinkDataModel(6, 'delete 消息', 3, 'delete','clearHistoryMessage'),
@@ -177,4 +195,34 @@ const LINK_MINE_DATA: LinkDataModel[] = [
   new LinkDataModel(2, 'Friend', 8, 'friend', 'setFriendInfo'),
   new LinkDataModel(2, 'Friend', 9, 'friend', 'getAddApplicationList'),
   new LinkDataModel(3, 'Push', 1, 'push', 'pushService'),
+  new LinkDataModel(4, 'Setting', 1, 'setting', 'getConversationMuteStatus'),
+  new LinkDataModel(4, 'Setting', 2, 'setting', 'setTeamMessageMuteMode'),
+  new LinkDataModel(4, 'Setting', 3, 'setting', 'getTeamMessageMuteMode'),
+  new LinkDataModel(4, 'Setting', 4, 'setting', 'setP2PMessageMuteMode'),
+  new LinkDataModel(4, 'Setting', 5, 'setting', 'getP2PMessageMuteMode'),
+  new LinkDataModel(4, 'Setting', 6, 'setting', 'getP2PMessageMuteList'),
+  new LinkDataModel(4, 'Setting', 7, 'setting', 'setPushMobileOnDesktopOnline'),
+  new LinkDataModel(4, 'Setting', 8, 'setting', 'setDndConfig'),
+  new LinkDataModel(4, 'Setting', 9, 'setting', 'getDndConfig'),
+]
+
+const LINK_Signalling_DATA: LinkDataModel[] = [
+
+  new LinkDataModel(1, 'Room', 1, 'signalling', 'createRoom'),
+  new LinkDataModel(1, 'Room', 2, 'signalling', 'closeRoom'),
+  new LinkDataModel(1, 'Room', 3, 'signalling', 'joinRoom'),
+  new LinkDataModel(1, 'Room', 4, 'signalling', 'leaveRoom'),
+  new LinkDataModel(1, 'Room', 5, 'signalling', 'delayRoom'),
+  new LinkDataModel(1, 'Room', 6, 'signalling', 'call'),
+  new LinkDataModel(1, 'Room', 7, 'signalling', 'callSetup'),
+  new LinkDataModel(2, '自定义', 1, 'signalling', 'sendControl'),
+  new LinkDataModel(3, '查询', 1, 'signalling', 'getChannelInfo'),
+  new LinkDataModel(4, '邀请', 1, 'signalling', 'invite'),
+  new LinkDataModel(4, '邀请', 2, 'signalling', 'acceptInvite'),
+  new LinkDataModel(4, '邀请', 3, 'signalling', 'cancelInvite'),
+  new LinkDataModel(4, '邀请', 4, 'signalling', 'rejectInvite'),
+
+
+
+
 ]

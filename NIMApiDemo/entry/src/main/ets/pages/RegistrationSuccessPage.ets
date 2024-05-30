@@ -33,9 +33,9 @@ struct RegistrationSuccessPage {
             .fontSize($r('app.float.jump_text_font_size'))
             .fontColor($r('app.color.jump_text_font'))
             .onClick(() => {
-              router.replaceUrl({
-                url: CommonConstants.MINE_PAGE_URL
-              });
+              // router.replaceUrl({
+              //   url: CommonConstants.MINE_PAGE_URL
+              // });
             })
         }
         .width(CommonConstants.REGISTRATION_PAGE_WIDTH_PERCENT)
@@ -65,6 +65,6 @@ struct RegistrationSuccessPage {
         .fontWeight(CommonConstants.TITLE_FONT_WEIGHT)
     }
     .width(CommonConstants.FULL_WIDTH_PERCENT)
-    .height($r('app.float.title_height'))
+    .height(56)
   }
 }

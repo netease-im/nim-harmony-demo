@@ -1,6 +1,4 @@
-import {
-  V2NIMError, V2NIMFriendAddMode, V2NIMFriendAddParams,
-} from '@nimsdk/base';
+import { V2NIMError } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -61,11 +59,7 @@ struct CheckFriendPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
 
   async checkFriend(): Promise<void> {

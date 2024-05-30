@@ -46,11 +46,7 @@ struct CreateConversationPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async createConversation(): Promise<void> {
     console.info(`----------创建会话--------- \n`)

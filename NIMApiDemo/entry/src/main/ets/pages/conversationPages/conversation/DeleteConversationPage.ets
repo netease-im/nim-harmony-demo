@@ -47,11 +47,7 @@ struct DeleteConversationPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async deleteConversation(): Promise<void> {
     console.info(`----------删除会话--------- \n`)

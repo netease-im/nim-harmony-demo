@@ -1,7 +1,6 @@
 import {
   V2NIMConversation,
   V2NIMConversationResult,
-  V2NIMError,
   V2NIMErrorImpl,
   V2NIMConversationType,
   V2NIMConversationOption,
@@ -10,7 +9,6 @@ import {
   V2NIMConversationUpdate,
   V2NIMConversationFilter
 } from '@nimsdk/base';
-import { forEach } from '@nimsdk/vendor';
 import { CommonConstants } from '../common/constants/CommonConstants';
 import { TitleWithBack } from '../view/TitleWithBack';
 import { UserModel } from '../viewmodel/UserModel';
@@ -72,11 +70,7 @@ struct ConversationPageItemComponent {
   @State loggerText: string = 'Conversation logger:';
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
 
   build() {

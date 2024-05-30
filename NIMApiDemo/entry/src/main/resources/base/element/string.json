@@ -29,6 +29,10 @@
       "value": "Login"
     },
     {
+      "name": "logout",
+      "value": "Logout"
+    },
+    {
       "name": "register",
       "value": "Register"
     },
@@ -359,6 +363,10 @@
     {
       "name": "tab_team",
       "value": "群"
+    },
+    {
+      "name": "tab_signaling",
+      "value": "信令"
     },
     {
       "name": "tab_mine",

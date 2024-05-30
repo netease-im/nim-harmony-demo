@@ -5,8 +5,10 @@
     "description": "$string:module_desc",
     "mainElement": "EntryAbility",
     "deviceTypes": [
-      "phone",
-      "tablet"
+      "default",
+//      "phone",
+//      "tablet",
+//      "2in1"
     ],
     "deliveryWithInstall": true,
     "installationFree": false,
@@ -45,11 +47,11 @@
     "metadata": [ // 配置如下信息
       {
         "name": "client_id",
-        "value": "109921881"  //配置为步骤1中获取的Client ID
+        "value": "110423569"  // 配置为步骤1中获取的Client ID
       },
       {
         "name": "app_id",
-        "value": "5765880207853307481"  //配置为步骤1中获取的APP ID
+        "value": "5765880207853809169"  // 配置为步骤1中获取的APP ID
       }
     ]
   }

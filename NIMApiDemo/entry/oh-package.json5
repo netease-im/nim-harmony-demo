@@ -1,26 +1,22 @@
 {
   "name": "entry",
-  "version": "1.0.0",
+  "version": "1.0.0-beta",
   "description": "Please describe the basic information.",
   "main": "",
   "author": "",
   "license": "",
   "dependencies": {
-    "@nimsdk/nim": "file:./libs/nim.har",
-    "@nimsdk/base": "file:./libs/base.har",
-    "@nimsdk/core": "file:./libs/core.har",
-    "@nimsdk/friend": "file:./libs/friend.har",
-    "@nimsdk/notification": "file:./libs/notification.har",
-    "@nimsdk/message": "file:./libs/message.har",
-    "@nimsdk/user": "file:./libs/user.har",
-    "@nimsdk/team": "file:./libs/team.har",
-    "@nimsdk/sync": "file:./libs/sync.har",
-    "@nimsdk/setting": "file:./libs/setting.har",
-    "@nimsdk/login": "file:./libs/login.har",
     "@nimsdk/conversation": "file:./libs/conversation.har",
     "@nimsdk/conversationgroup": "file:./libs/conversationgroup.har",
-    "@nimsdk/vendor": "file:./libs/vendor.har",
-    "@nimsdk/WebSocket": "file:./libs/WebSocket.har"
+    "@nimsdk/team": "file:./libs/team.har",
+    "@nimsdk/message": "file:./libs/message.har",
+    "@nimsdk/user": "file:./libs/user.har",
+    "@nimsdk/friend": "file:./libs/friend.har",
+    "@nimsdk/notification": "file:./libs/notification.har",
+    "@nimsdk/setting": "file:./libs/setting.har",
+    "@nimsdk/signalling": "file:./libs/signalling.har",
+    // 基础模块
+    "@nimsdk/nim": "file:./libs/nim.har",
+    "@nimsdk/base": "file:./libs/base.har",
   }
 }
-

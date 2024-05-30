@@ -5,6 +5,7 @@ import ServiceListPage from './ServiceListPage'
 import MinePage from '../pages/mine/MinePage'
 import { NavList, TabId } from '../model/NavItemModel'
 import TeamPage from './teamPages/TeamPage'
+import SignallingPage from './signallingPages/SignallingPage'
 
 @Styles function allSize() {
   .width(CommonConstants.THOUSANDTH_1000)
@@ -47,6 +48,12 @@ struct MainPage {
           .borderColor($r('app.color.primaryBgColor'))
       }
       .tabBar(this.TabBuilder(TabId.TEAM))
+      TabContent() {
+        SignallingPage()
+          .borderWidth({ bottom: 1 })
+          .borderColor($r('app.color.primaryBgColor'))
+      }
+      .tabBar(this.TabBuilder(TabId.SIGNALING))
 
       TabContent() {
         MinePage()
@@ -79,4 +86,3 @@ struct MainPage {
     }.justifyContent(FlexAlign.Center).allSize()
   }
 }
-

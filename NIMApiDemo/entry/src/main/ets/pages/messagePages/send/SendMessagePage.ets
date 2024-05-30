@@ -6,6 +6,7 @@ import fs from '@ohos.file.fs';
 import {
   NIMEStrAnyObj,
   V2NIMConversationType, V2NIMError, V2NIMMessage,
+  V2NIMMessageFileAttachment,
   V2NIMMessagePushConfig,
   V2NIMP2PMessageMuteMode,
   V2NIMSendMessageParams,
@@ -63,11 +64,7 @@ struct SendMessagePage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
 
   async sendTextMessage(): Promise<void> {
@@ -106,6 +103,99 @@ struct SendMessagePage {
     }
   }
 
+  async sendCallMessage(): Promise<void> {
+    try {
+      console.info(`-----------sendCallMessage----------- \n`)
+      let conversationId: string = this.getConversationId()
+      let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
+      const messageCreator = this.getUserModel().getNimSdk().messageCreator
+      let message: V2NIMMessage = messageCreator.createCallMessage(1, "2", 3, [
+        {accountId: "accid_1", duration: 1},
+        {accountId: "accid_2", duration: 2},
+        {accountId: "accid_3", duration: 3},
+        {accountId: "accid_4", duration: 4}
+      ], this.text)
+
+      // add push payload
+      if (!message.pushConfig) {
+        message.pushConfig = {} as V2NIMMessagePushConfig
+      }
+      message.pushConfig.pushPayload = this.pushPayload
+      // {
+      //   "harmonyField": {
+      //     "pushOptions": {
+      //       "testMessage": true
+      //     },
+      //     "payload": {
+      //       "notification": {
+      //         "badge": {
+      //           "addNum": 1
+      //         }
+      //       }
+      //     }
+      //   }
+      // }`
+      const jsonObject: NIMEStrAnyObj = JSON.parse(message.pushConfig.pushPayload);
+      let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
+      shownDialog(true, JSON.stringify(messageResult, null, 2))
+    } catch (error) {
+      shownDialog(false, processV2ErrorForPrint(error))
+    }
+  }
+
+
+  async sendLocationMessage(): Promise<void> {
+    try {
+      console.info(`-----------sendLocationMessage----------- \n`)
+      let conversationId: string = this.getConversationId()
+      let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
+      const messageCreator = this.getUserModel().getNimSdk().messageCreator
+      let message: V2NIMMessage = messageCreator.createLocationMessage(11.22, 33.44, "HangZhouNetease")
+
+      // add push payload
+      if (!message.pushConfig) {
+        message.pushConfig = {} as V2NIMMessagePushConfig
+      }
+      message.pushConfig.pushPayload = this.pushPayload
+      // {
+      //   "harmonyField": {
+      //     "pushOptions": {
+      //       "testMessage": true
+      //     },
+      //     "payload": {
+      //       "notification": {
+      //         "badge": {
+      //           "addNum": 1
+      //         }
+      //       }
+      //     }
+      //   }
+      // }`
+      const jsonObject: NIMEStrAnyObj = JSON.parse(message.pushConfig.pushPayload);
+      let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
+      shownDialog(true, JSON.stringify(messageResult, null, 2))
+    } catch (error) {
+      shownDialog(false, processV2ErrorForPrint(error))
+    }
+  }
+
+  async downloadFile(url: string, mediaType: string): Promise<void> {
+    const catchDir = getContext(this).getApplicationContext().cacheDir
+    let fileDir = catchDir + '/nim';
+    if (!fs.accessSync(fileDir)) {
+      fs.mkdirSync(fileDir);
+    }
+
+    const randomNum = getRandomNumber(0, 100);
+
+    const filePath = fileDir + `/${randomNum}.${mediaType}`
+    let storageService = this.getUserModel().getNimSdk().storageService! // Demo启用message模块，messageService不为空
+    const path = await storageService.downloadFile(url, filePath, (percent)=> {
+      console.log(`downloadFile percent: ${percent}`)
+    })
+
+    shownDialog(true, JSON.stringify(path, null, 2))
+  }
 
   async sendImageMessage(): Promise<void> {
     try {
@@ -135,10 +225,12 @@ struct SendMessagePage {
       }
 
       const params :V2NIMSendMessageParams  = {
-      //   配置参数
+        //   配置参数
       }
       let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId, params,
-      onUploadProgress)
+        onUploadProgress)
+      const attachment: V2NIMMessageFileAttachment = messageResult.message.attachment as V2NIMMessageFileAttachment
+      this.downloadFile(attachment.url as string, 'png')
       shownDialog(true, JSON.stringify(messageResult, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
@@ -168,6 +260,8 @@ struct SendMessagePage {
         'nim')
       let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
       shownDialog(true, JSON.stringify(messageResult, null, 2))
+      const attachment: V2NIMMessageFileAttachment = messageResult.message.attachment as V2NIMMessageFileAttachment
+      this.downloadFile(attachment.url as string, 'mp4')
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }
@@ -175,7 +269,7 @@ struct SendMessagePage {
 
   async sendAudioMessage(): Promise<void> {
     try {
-      console.info(`-----------sendAudioMessage----------- \n`)
+      console.info(`-----------sendCallMessage----------- \n`)
       let conversationId: string = this.getConversationId()
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
@@ -196,6 +290,8 @@ struct SendMessagePage {
         'nim')
       let messageResult:V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
       shownDialog(true, JSON.stringify(messageResult, null, 2))
+      const attachment: V2NIMMessageFileAttachment = messageResult.message.attachment as V2NIMMessageFileAttachment
+      this.downloadFile(attachment.url as string, 'mp3')
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }
@@ -365,6 +461,33 @@ struct SendMessagePage {
               .onClick(() => {
                 this.sendAudioMessage()
               })
+            Button(('send call'), { type: ButtonType.Capsule })
+              .width(CommonConstants.BUTTON_WIDTH)
+              .height($r('app.float.login_button_height'))
+              .fontSize($r('app.float.normal_text_size'))
+              .fontWeight(FontWeight.Medium)
+              .backgroundColor($r('app.color.login_button_color'))
+              .margin({
+                top: $r('app.float.button_margin_top'),
+                bottom: $r('app.float.login_button_margin_bottom')
+              })
+              .onClick(() => {
+                this.sendCallMessage()
+              })
+            Button(('send location'), { type: ButtonType.Capsule })
+              .width(CommonConstants.BUTTON_WIDTH)
+              .height($r('app.float.login_button_height'))
+              .fontSize($r('app.float.normal_text_size'))
+              .fontWeight(FontWeight.Medium)
+              .backgroundColor($r('app.color.login_button_color'))
+              .margin({
+                top: $r('app.float.button_margin_top'),
+                bottom: $r('app.float.login_button_margin_bottom')
+              })
+              .onClick(() => {
+                this.sendLocationMessage()
+              })
+
 
             Blank()
           }
@@ -396,4 +519,8 @@ function processV2ErrorForPrint(err: V2NIMError): string {
   } else {
     return `Caught an exception: ${err}`
   }
+}
+
+function getRandomNumber(min: number, max: number): number {
+  return Math.random() * (max - min) + min;
 }

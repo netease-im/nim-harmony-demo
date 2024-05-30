@@ -11,7 +11,6 @@ import { UserModel } from '../viewmodel/UserModel';
 @Component
 export struct LoginComponent {
   @StorageProp('isMinHeight') isMinHeight: boolean = false;
-  private userModel: UserModel | undefined;
   @State connectStatus: string = 'connectStatus:init';
   @State loginStatus: string = 'loginStatus:init';
 
@@ -133,6 +132,32 @@ export struct LoginComponent {
 
       GridCol({
         span: {
+          sm: CommonConstants.BUTTON_SPAN_SM,
+          md: this.isMinHeight ? CommonConstants.BUTTON_SPAN_MD_SMALL : CommonConstants.BUTTON_SPAN_MD_BIG,
+          lg: CommonConstants.BUTTON_SPAN_LG
+        },
+        offset: {
+          sm: CommonConstants.BUTTON_OFFSET_SM,
+          md: CommonConstants.BUTTON_OFFSET_MD,
+          lg: CommonConstants.BUTTON_OFFSET_LG
+        }
+      }) {
+        Button($r('app.string.logout'))
+          .width(CommonConstants.BUTTON_WIDTH_PERCENT)
+          .height($r('app.float.login_btn_height'))
+          .borderRadius($r('app.float.login_btn_border_radius'))
+          .fontSize($r('app.float.text_input_font_size'))
+          .margin({ top: $r('app.float.register_btn_margin_top') })
+          .fontWeight(CommonConstants.LOGIN_TEXT_FONT_WEIGHT)
+          .fontColor(Color.White)
+          .backgroundColor($r('app.color.login_btn_enabled'))
+          .onClick(() => {
+            this.logout()
+          })
+      }
+
+      GridCol({
+        span: {
           sm: CommonConstants.SPAN_SM,
           md: CommonConstants.SPAN_MD,
           lg: CommonConstants.SPAN_LG
@@ -242,11 +267,7 @@ export struct LoginComponent {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
 
   async loadLastLoginAccount() {
@@ -381,6 +402,55 @@ export struct LoginComponent {
           break;
       }
     })
+  }
+
+
+  async logout() {
+    try {
+      const accid = this.getUserModel().getNimSdk().loginService.getLoginUser()
+      await this.getUserModel().getNimSdk().loginService.logout()
+      console.log('----------- 登出成功 -----------')
+      AlertDialog.show(
+        {
+          title: '登出成功',
+          message: accid,
+          autoCancel: true,
+          alignment: DialogAlignment.Bottom,
+          offset: { dx: 0, dy: -20 },
+          gridCount: 3,
+          confirm: {
+            value: 'OK',
+            action: () => {
+              console.info('Button-clicking callback')
+            }
+          },
+          cancel: () => {
+            console.info('Closed callbacks')
+          }
+        }
+      )
+    } catch (error) {
+      console.log('----------- 登出失败 -----------', error)
+      AlertDialog.show(
+        {
+          title: '登出失败',
+          message: processV2ErrorForPrint(error),
+          autoCancel: true,
+          alignment: DialogAlignment.Bottom,
+          offset: { dx: 0, dy: -20 },
+          gridCount: 3,
+          confirm: {
+            value: 'OK',
+            action: () => {
+              console.info('Button-clicking callback')
+            }
+          },
+          cancel: () => {
+            console.info('Closed callbacks')
+          }
+        }
+      )
+    }
   }
 }
 

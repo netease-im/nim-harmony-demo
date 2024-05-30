@@ -1,5 +1,6 @@
 import router from '@ohos.router';
 import { CommonConstants } from '../common/constants/CommonConstants';
+import { UserModel, USER_MODEL_LIST } from '../viewmodel/UserModel';
 
 /**
  * Component of privacy statement and help.
@@ -46,6 +47,60 @@ export struct InitializeComponent {
         .margin({
           bottom: $r('app.float.statement_area_margin_bottom')
         })
+      }
+
+      GridCol({
+        span: {
+          sm: CommonConstants.PRIVACY_SPAN_SM,
+          md: CommonConstants.PRIVACY_SPAN_MD,
+          lg: CommonConstants.PRIVACY_SPAN_LG
+        },
+        offset: {
+          sm: CommonConstants.PRIVACY_OFFSET_SM,
+          md: CommonConstants.PRIVACY_OFFSET_MD,
+          lg: CommonConstants.PRIVACY_OFFSET_LG
+        }
+      }) {
+        Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+          Radio({ value: 'REL', group: 'initGroup' }).checked(true)
+            .onChange((isChecked: boolean) => {
+              if (isChecked) {
+                UserModel.USER_MODEL = USER_MODEL_LIST.REL
+              }
+            })
+          Text('REL')
+            .fontSize($r('app.float.normal_text_size'))
+            .fontColor($r('app.color.login_more_text_color'))
+            .lineHeight(20)
+            .fontWeight(500)
+        }
+      }
+
+      GridCol({
+        span: {
+          sm: CommonConstants.PRIVACY_SPAN_SM,
+          md: CommonConstants.PRIVACY_SPAN_MD,
+          lg: CommonConstants.PRIVACY_SPAN_LG
+        },
+        offset: {
+          sm: CommonConstants.PRIVACY_OFFSET_SM,
+          md: CommonConstants.PRIVACY_OFFSET_MD,
+          lg: CommonConstants.PRIVACY_OFFSET_LG
+        }
+      }) {
+        Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+          Radio({ value: 'TEST', group: 'initGroup' })
+            .onChange((isChecked: boolean) => {
+              if (isChecked) {
+                UserModel.USER_MODEL = USER_MODEL_LIST.TEST
+              }
+            })
+          Text('TEST')
+            .fontSize($r('app.float.normal_text_size'))
+            .fontColor($r('app.color.login_more_text_color'))
+            .lineHeight(20)
+            .fontWeight(500)
+        }
       }
     }
     .margin({

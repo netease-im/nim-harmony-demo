@@ -298,7 +298,7 @@ export class CommonConstants {
   /**
    * Input length of the account.
    */
-  static readonly INPUT_ACCOUNT_LENGTH = 11;
+  static readonly INPUT_ACCOUNT_LENGTH = 100;
 
   /**
    *  Input length of the password.

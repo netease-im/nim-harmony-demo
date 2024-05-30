@@ -1,7 +1,6 @@
 import { V2NIMError,
   V2NIMMessage,
-  V2NIMMessageListOption
-} from '@nimsdk/base';
+  V2NIMMessageListOption, V2NIMQueryDirection } from '@nimsdk/base';
 import { CommonConstants,
   shownDialog } from '../../../common/constants/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -37,6 +36,9 @@ struct GetMessagesListPage {
   @State conversationId: string = '';
   @State text: string = '';
   @State isOnlyRemoveLocal: boolean = false;
+  @State limit: number = 10;
+  @State queryDirection: V2NIMQueryDirection = V2NIMQueryDirection.V2NIM_QUERY_DIRECTION_DESC;
+  @State reverse: boolean = false;
 
   private timeOutId: number = -1;
   private userModel: UserModel | undefined;
@@ -53,11 +55,7 @@ struct GetMessagesListPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
 
   async sendMessage(): Promise<void> {
@@ -80,9 +78,14 @@ struct GetMessagesListPage {
   async getMessage(): Promise<void> {
     try {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
-
+      const conversationId = this.getUserModel().getNimSdk().loginService
+        .getLoginUser() + '|1|' + this.conversationId
+      this.getConversationId = conversationId
       const option: V2NIMMessageListOption = {
-        conversationId: this.getConversationId
+        conversationId: this.getConversationId,
+        limit: this.limit,
+        direction: this.queryDirection,
+        reverse: this.reverse
       }
       const messageList: V2NIMMessage[] = await messageService.getMessageList(option)
       shownDialog(true, JSON.stringify(messageList, null, 2))
@@ -150,6 +153,84 @@ struct GetMessagesListPage {
             .onChange((value: string) => {
               this.isOnlyRemoveLocal = parseInt(value) > 0 ? true : false;
             })
+          Line().lineStyle()
+
+          TextInput({ text: this.limit.toString(), placeholder: `limit` })
+            .type(InputType.Number)
+            .inputStyle()
+            .onChange((value: string) => {
+              this.limit = parseInt(value)
+            })
+          Line().lineStyle()
+
+          Text('Direction')
+            .fontSize($r('app.float.normal_text_size'))
+            .fontColor($r('app.color.login_more_text_color'))
+            .textAlign(TextAlign.Start)
+            .width('100%')
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'desc', group: 'directionGroup' }).checked(true)
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.queryDirection = V2NIMQueryDirection.V2NIM_QUERY_DIRECTION_DESC
+                }
+              })
+            Text('Desc')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'asc', group: 'directionGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.queryDirection = V2NIMQueryDirection.V2NIM_QUERY_DIRECTION_ASC
+                }
+              })
+            Text('Asc')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+          Line().lineStyle()
+
+
+          Text('Reverse')
+            .fontSize($r('app.float.normal_text_size'))
+            .fontColor($r('app.color.login_more_text_color'))
+            .textAlign(TextAlign.Start)
+            .width('100%')
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'true', group: 'reverseGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.reverse = true
+                }
+              })
+            Text('true')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'false', group: 'reverseGroup' }).checked(true)
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.reverse = false
+                }
+              })
+            Text('false')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
           Line().lineStyle()
 
           Button(('send'), { type: ButtonType.Capsule })

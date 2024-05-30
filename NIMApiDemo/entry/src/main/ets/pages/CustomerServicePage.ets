@@ -68,6 +68,6 @@ struct CustomerServicePage {
         .fontWeight(CommonConstants.TITLE_FONT_WEIGHT)
     }
     .width(CommonConstants.FULL_WIDTH_PERCENT)
-    .height($r('app.float.title_height'))
+    .height(56)
   }
 }

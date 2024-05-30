@@ -47,11 +47,7 @@ struct DeleteConversationListByIdsPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async deleteConversationListByIds(): Promise<void> {
     console.info(`----------删除会话列表 by Ids--------- \n`)

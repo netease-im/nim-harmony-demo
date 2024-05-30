@@ -45,11 +45,7 @@ struct ClearTotalUnreadCountPage {
   }
 
   getUserModel(): UserModel {
-    if (!this.userModel) {
-      this.userModel = UserModel.getInstance(getContext(this).getApplicationContext());
-    }
-
-    return this.userModel
+    return UserModel.getInstance(getContext(this).getApplicationContext());
   }
   async clearTotalUnreadCount(): Promise<void> {
     console.info(`----------清空所有未读数--------- \n`)

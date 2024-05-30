@@ -19,15 +19,18 @@ import { NimRepository } from '../model/NimRepository';
 import preferences from '@ohos.data.preferences';
 import { NIMServiceOptions } from '@nimsdk/base';
 
-const TAG = '[UserModeL]';
-const USER_MODEL = 'userModel';
-
+export enum USER_MODEL_LIST {
+  REL = 'userModel',
+  TEST = 'userModel-test'
+}
 export class UserModel {
+  public static USER_MODEL: USER_MODEL_LIST = USER_MODEL_LIST.REL
+
   private nimRepository: NimRepository
   private loginCachePreferences: preferences.Preferences
 
-  constructor(context: common.Context) {
-    this.nimRepository = new NimRepository(context)
+  constructor(context: common.Context, test?: boolean) {
+    this.nimRepository = new NimRepository(context, test)
     this.nimRepository.nim.loginService.on('onKickedOffline', detail => {
       console.log("onKickedOffline:" + JSON.stringify(detail))
       this.saveLastLoginAccount("")
@@ -41,10 +44,17 @@ export class UserModel {
    * @returns discover model instance.
    */
   public static getInstance(context: common.Context): UserModel {
-    if (!AppStorage.get<UserModel>(USER_MODEL)) {
-      AppStorage.setOrCreate(USER_MODEL, new UserModel(context));
+    if (!AppStorage.get<UserModel>(UserModel.USER_MODEL)) {
+      switch (UserModel.USER_MODEL) {
+        case USER_MODEL_LIST.TEST:
+          AppStorage.setOrCreate(UserModel.USER_MODEL, new UserModel(context, true));
+          break
+        default:
+          AppStorage.setOrCreate(UserModel.USER_MODEL, new UserModel(context));
+          break
+      }
     }
-    return AppStorage.get<UserModel>(USER_MODEL) as UserModel;
+    return AppStorage.get<UserModel>(UserModel.USER_MODEL) as UserModel;
   }
 
   public initNim(initializeOptions: NIMInitializeOptions, serviceOptions?: NIMServiceOptions) {

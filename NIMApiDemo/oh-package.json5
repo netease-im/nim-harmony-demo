@@ -1,4 +1,5 @@
 {
+  "modelVersion": "5.0.0",
   "name": "nimapidemo",
   "version": "1.0.0",
   "description": "Please describe the basic information.",
@@ -6,6 +7,8 @@
   "author": "",
   "license": "",
   "dependencies": {
+    "@nimsdk/vendor": ">= 0.7.0",
+    "@nimsdk/websocket": " >= 0.7.0"
   },
   "devDependencies": {
     "@ohos/hypium": "1.0.16",
