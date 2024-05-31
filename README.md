@@ -16,8 +16,9 @@
 
 ## 一、环境要求
 ### 1.1 编译环境
-- DevEco Studio NEXT Developer Preview1（4.1.3.500） 及以上。
+- DevEco Studio NEXT Developer Beta1（5.0.3.300） 及以上。
 - HarmonyOS SDK API 11 及以上。
+- 运行环境 HarnomyOS NEXT 2.1.2.5 (Canary1) 以上
 
 ### 1.2 设备要求
 
@@ -54,80 +55,137 @@
 ### 架构图
 ![libs](Image/架构图.png)
 
-IMSDK 提供如下产品功能： 登陆、会话、消息、群、用户、好友、存储服务、推送、自定义通知、设置、聊天室、圈组功能。
+IMSDK 提供如下产品功能：登录、会话、消息、群组、用户、好友、存储服务、推送、自定义通知、设置、信令、聊天室、圈组等功能。
 
-对应上述功能提供业务组件har包：connversation、conversationgroup、message、team、user、friend、setting、notifation、storage、qchat、chatroom。
+对应上述功能提供业务组件 har 包包括 connversation、conversationgroup、message、team、user、friend、setting、notifation、signalling、chatroom、 qchat（开发中，暂不提供）。
 
-目前 qchat 和 chatroom 功能还在开发中，不提供。
 
 ### 2.1. 拷贝 SDK har 
 
-拷贝 sdk har 包产物至项目文件夹中，例如：entry/libs。产物成果可由 [NIMApiDemo/entry/libs](./NIMApiDemo/entry/libs) 获取
-
-![libs](Image/sdk_libs.png)
+将 SDK 文件拷贝到 Harmony 工程，例如放至 `entry` 模块下的 `libs` 目录。
 
 ### 2.2 配置 har 包本地依赖
 
-DEMO 工程下 oh-package.json5 配置 har 包依赖。即将 har 包路径配置在 entry/oh-package.json5 的 "dependencies" 字段下：
+修改模块目录的 `oh-package.json5` 文件，在 `dependencies` 节点增加依赖声明。
+    ```jsoin
+    {
+        "name": "entry",
+        "version": "1.0.0",
+        "description": "Please describe the basic information.",
+        "main": "",
+        "author": "",
+        "license": "",
+        
+        ...
+        
+        "dependencies": {
+            <!-- 业务模版har包， 可以按需添加 -->
+            "@nimsdk/conversation": "file:../../libs/conversation.har",
+            "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
+            "@nimsdk/message": "file:../../libs/message.har",
+            "@nimsdk/team": "file:../../libs/team.har",
+            "@nimsdk/user": "file:../../libs/user.har",
+            "@nimsdk/friend": "file:../../libs/friend.har",
+            "@nimsdk/signalling": "file:../../libs/signalling.har",
+            "@nimsdk/setting": "file:../../libs/setting.har",
+            "@nimsdk/notification": "file:../../libs/notification.har",
+            <!-- Harmony IMSDK 基础业务模块，必须添加 -->
+            "@nimsdk/nim": "file:./libs/nim.har",
+            "@nimsdk/base": "file:./libs/base.har",
+            "@nimsdk/vendor": ">= 0.7.0",
+            "@nimsdk/websocket": " >= 0.7.0"
+        }
+     ...
+     
+   }
+    ```
 
-```json
-{
-  "name": "entry",
-  "version": "1.0.0",
-  "description": "Please describe the basic information.",
-  "main": "",
-  "author": "",
-  "license": "",
-  "dependencies": {
-    "@nimsdk/nim": "file:./libs/nim.har",
-    "@nimsdk/base": "file:./libs/base.har",
-    "@nimsdk/core": "file:./libs/core.har",
-    "@nimsdk/friend": "file:./libs/friend.har",
-    "@nimsdk/notification": "file:./libs/notification.har",
-    "@nimsdk/message": "file:./libs/message.har",
-    "@nimsdk/user": "file:./libs/user.har",
-    "@nimsdk/push": "file:./libs/push.har",
-    "@nimsdk/team": "file:./libs/team.har",
-    "@nimsdk/sync": "file:./libs/sync.har",
-    "@nimsdk/setting": "file:./libs/setting.har",
-    "@nimsdk/login": "file:./libs/login.har",
-    "@nimsdk/conversation": "file:./libs/conversation.har",
-    "@nimsdk/conversationgroup": "file:./libs/conversationgroup.har",
-    "@nimsdk/vendor": "file:./libs/vendor.har",
-    "@nimsdk/WebSocket": "file:./libs/WebSocket.har"
+### 2.3 初始化
+#### 2.3.1 注册服务
+
+调用 `NIMSdk.registerCustomServices` 方法注册使用的服务。
+
+- 参数说明
+
+  ```
+  static registerCustomServices(serviceType: V2NIMProvidedServiceType, creator: V2ServiceCreator)
+  ```
+  参数                | 类型                       | 说明               |
+  ------------------- | -------------------------- | ------------------ |
+  `serviceType`      | `V2NIMProvidedServiceType` | 服务类型         |
+  `creator`          | `V2ServiceCreator`         | 服务构造器       |
+
+- 示例代码
+
+  ```typescript
+  // 根据业务，选择所需服务进行注册
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_TEAM, (core, serviceName, serviceConfig) => new V2NIMTeamServiceImpl(core, serviceName, serviceConfig))
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CLIENT_ANTISPAM_UTIL, (core, serviceName, serviceConfig) => new V2NIMClientAntispamUtil(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_NOTIFICATION, (core, serviceName, serviceConfig) => new V2NIMNotificationServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION, (core, serviceName, serviceConfig) => new V2NIMConversationServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION_GROUP, (core, serviceName, serviceConfig) => new V2NIMConversationGroupServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_MESSAGE, (core, serviceName, serviceConfig) => new V2NIMMessageServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_USER, (core, serviceName, serviceConfig) => new V2NIMUserServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_FRIEND, (core, serviceName, serviceConfig) => new V2NIMFriendServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_SETTING, (core, serviceName, serviceConfig) => new V2NIMSettingServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_SIGNALLING, (core, serviceName, serviceConfig) => new V2NIMSignallingServiceImpl(core, serviceName, serviceConfig))
+  ```
+
+#### 2.3.2 初始化
+
+调用 `newInstance` 方法创建实例并实现初始化。
+
+- 参数说明
+
+  ```
+  static newInstance(context: common.Context, initializeOptions: NIMInitializeOptions, serviceOptions: NIMServiceOptions = {}): NIMInterface
+  ```
+
+  参数                | 类型                       | 说明               |
+  ------------------- | -------------------------- | ------------------ |
+  `context`           | common.Context             | 应用上下文         |
+  `initializeOptions` | `NIMInitializeOptions` | SDK 的配置信息     |
+  `serviceOptions`    | `NIMServiceOptions`    | 业务服务的配置信息 |
+
+  `NIMInitializeOptions` 的配置参数
+
+  参数         | 类型   | 必填                | 说明                                                         |
+  ------------------ | ------ | ------------------- | ------------------------------------------------------------ |
+  `appkey`        | string | 是                  | 应用的 App Key，在云信控制台[创建应用](https://doc.yunxin.163.com/console/guide/TIzMDE4NTA?platform=console)后获取。 |
+  `xhrConnectTimeout`   | number | 否，默认为 30000 ms | 建立连接时的 xhr 请求的超时时间                              |
+  `socketConnectTimeout` | number | 否，默认为 30000 ms | 建立 websocket 连接的超时时间                                |
+
+  `NIMServiceOptions` 的配置参数
+
+  参数        | 类型                  | 必填 | 说明                   |
+  ---------------- | --------------------- | ---- | ---------------------- |
+  `loginServiceConfig` | `NIMLoginServiceConfig` | 否   | LoginService的配置参数 |
+
+  `NIMLoginServiceConfig` 的配置参数
+
+  参数               | 类型     | 必填 | 说明                                                         |
+  ------------------ | -------- | ---- | ------------------------------------------------------------ |
+  `lbsUrls`          | string[] | 否   | lbs 地址。SDK 连接时会向 lbs 地址请求得到 socket 连接地址    |
+  `linkUrl`          | string   | 否   | socket 备用地址，当 lbs 请求失败时，尝试直接连接 socket 备用地址 |
+  `customClientType` | number   | 否   | 自定义客户端类型                                             |
+  `customTag`        | string   | 否   | 自定义客户端标签                                             |
+
+- 示例代码
+
+  ```typescript
+  let initializeOptions: NIMInitializeOptions = {
+    appkey: "45c6af3c98409b18a84451215d0bdd6e",
+  };
+
+  let serviceOptions: NIMServiceOptions = {
+    loginServiceConfig: {
+      lbsUrls: ['https://imtest.netease.im/lbs/webconf'],
+      linkUrl: 'weblink-harmony-tmp.netease.im:443'
+    }
   }
-}
-```
 
-### 2.3 安装本地 har 包依赖
-
-鼠标移动至红色波浪线位置停滞片刻，将会弹出提示框。点击 Run 'ohpm install'，即刻安装本地 har 包依赖
-
-![run_ohmp_install](Image/sdk_run_ohmp_install.jpg)
-
-### 2.4 同步项目工程
-
-点击 Sync Now，同步项目工程
-
-![sync_now](Image/sdk_sync_now.jpg)
-
-### 2.5 创建 SDK 实例 SampleCode
-
-引入 SDK SampleCode，创建SDK实例。使用 import 引入 NIMInterface，NIMInitializeOptions，NIMServiceOptions，NIMSdk
-
-```javascript
-import { NIMInterface, NIMInitializeOptions, NIMServiceOptions } from '@nimsdk/base'
-import { NIMSdk } from '@nimsdk/nim'
-```
-
-初始化
-
-![instance](Image/sdk_instance.png)
-
-### 2.6 通过SDK实例获取各业务service，通过业务service进行功能开发
-
-![service](Image/sdk_service.png)
-
+  const nim = NIMSdk.newInstance(context, initializeOptions, serviceOptions)
+  
 
 ## 三、DEMO 使用
 
