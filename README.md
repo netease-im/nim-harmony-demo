@@ -67,38 +67,37 @@ IMSDK 提供如下产品功能：登录、会话、消息、群组、用户、�
 ### 2.2 配置 har 包本地依赖
 
 修改模块目录的 `oh-package.json5` 文件，在 `dependencies` 节点增加依赖声明。
-    ```jsoin
-    {
-        "name": "entry",
-        "version": "1.0.0",
-        "description": "Please describe the basic information.",
-        "main": "",
-        "author": "",
-        "license": "",
-        
-        ...
-        
-        "dependencies": {
-            <!-- 业务模版har包， 可以按需添加 -->
-            "@nimsdk/conversation": "file:../../libs/conversation.har",
-            "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
-            "@nimsdk/message": "file:../../libs/message.har",
-            "@nimsdk/team": "file:../../libs/team.har",
-            "@nimsdk/user": "file:../../libs/user.har",
-            "@nimsdk/friend": "file:../../libs/friend.har",
-            "@nimsdk/signalling": "file:../../libs/signalling.har",
-            "@nimsdk/setting": "file:../../libs/setting.har",
-            "@nimsdk/notification": "file:../../libs/notification.har",
-            <!-- Harmony IMSDK 基础业务模块，必须添加 -->
-            "@nimsdk/nim": "file:./libs/nim.har",
-            "@nimsdk/base": "file:./libs/base.har",
-            "@nimsdk/vendor": ">= 0.7.0",
-            "@nimsdk/websocket": " >= 0.7.0"
-        }
-     ...
-     
-   }
-    ```
+```
+{
+    "name": "entry",
+    "version": "1.0.0",
+    "description": "Please describe the basic information.",
+    "main": "",
+    "author": "",
+    "license": "",
+    
+    ...
+    
+    "dependencies": {
+        <!-- 业务模版har包， 可以按需添加 -->
+        "@nimsdk/conversation": "file:../../libs/conversation.har",
+        "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
+        "@nimsdk/message": "file:../../libs/message.har",
+        "@nimsdk/team": "file:../../libs/team.har",
+        "@nimsdk/user": "file:../../libs/user.har",
+        "@nimsdk/friend": "file:../../libs/friend.har",
+        "@nimsdk/signalling": "file:../../libs/signalling.har",
+        "@nimsdk/setting": "file:../../libs/setting.har",
+        "@nimsdk/notification": "file:../../libs/notification.har",
+        <!-- Harmony IMSDK 基础业务模块，必须添加 -->
+        "@nimsdk/nim": "file:./libs/nim.har",
+        "@nimsdk/base": "file:./libs/base.har",
+        "@nimsdk/vendor": ">= 0.7.0",
+        "@nimsdk/websocket": " >= 0.7.0"
+    }
+  ...
+}
+```
 
 ### 2.3 初始化
 #### 2.3.1 注册服务
