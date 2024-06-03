@@ -77,7 +77,7 @@ export class NimRepository {
 
       serviceOptions = {
         loginServiceConfig: {
-          lbsUrls: ['https://imtest.netease.im/lbs/webconf'],
+          lbsUrls: ['https://lbs.netease.im/lbs/webconf'],
           linkUrl: 'weblink-harmony-tmp.netease.im:443'
         },
         pushServiceConfig: {
