@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_camera_set_pic_Resolution</title>
+    <g id="ic_camera_set_pic_Resolution" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M7,16.25 L7,18.5 L6,18.5 L6,16.25 L7,16.25 Z M18,16.25 L18,18.5 L17,18.5 L17,16.25 L18,16.25 Z M7,12.75 L7,14.75 L6,14.75 L6,12.75 L7,12.75 Z M18,12.75 L18,14.75 L17,14.75 L17,12.75 L18,12.75 Z M7,9.25 L7,11.25 L6,11.25 L6,9.25 L7,9.25 Z M18,9.25 L18,11.25 L17,11.25 L17,9.25 L18,9.25 Z M7,5.5 L7,7.75 L6,7.75 L6,5.5 L7,5.5 Z M18,5.5 L18,7.75 L17,7.75 L17,5.5 L18,5.5 Z M3.5,5.5 L3.5,18.5 L20.5,18.5 L20.5,5.5 L3.5,5.5 Z M3.5,4 L20.5,4 C21.3284271,4 22,4.67157288 22,5.5 L22,18.5 C22,19.3284271 21.3284271,20 20.5,20 L3.5,20 C2.67157288,20 2,19.3284271 2,18.5 L2,5.5 C2,4.67157288 2.67157288,4 3.5,4 Z" id="path-1" fill="#182431" fill-rule="nonzero"></path>
+    </g>
+</svg>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_camera_video_off</title>
+    <defs>
+        <path d="M18.3216883,14.4691871 L8.01526031,20.1979257 C6.89143516,20.8225942 5.45716227,20.447267 4.81172214,19.3596089 C4.60747775,19.0154282 4.5,18.6254526 4.5,18.2285466 L4.5,6.77106934 C4.5,5.51679238 5.55060305,4.5 6.84658759,4.5 C7.25669159,4.5 7.65963479,4.60401889 8.01526031,4.80169025 L18.3216883,10.5304289 C19.4455135,11.1550974 19.8333212,12.5432123 19.1878811,13.6308703 C18.9809347,13.9796042 18.6820185,14.2689007 18.3216883,14.4691871 Z" id="path-1"></path>
+    </defs>
+    <g id="ic_camera_video_off" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="多边形备份-5" fill="#FFFFFF" xlink:href="#path-1"></use>
+    </g>
+</svg>

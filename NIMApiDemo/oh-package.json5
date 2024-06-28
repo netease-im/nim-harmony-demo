@@ -1,17 +1,23 @@
 {
   "modelVersion": "5.0.0",
-  "name": "nimapidemo",
-  "version": "1.0.0",
-  "description": "Please describe the basic information.",
-  "main": "",
-  "author": "",
   "license": "",
-  "dependencies": {
-    "@nimsdk/vendor": ">= 0.7.0",
-    "@nimsdk/websocket": " >= 0.7.0"
-  },
   "devDependencies": {
-    "@ohos/hypium": "1.0.16",
-    "@ohos/hamock": "1.0.0"
+    "@ohos/hypium": "1.0.6"
+  },
+  "author": "NetEase IM",
+  "name": "nim",
+  "description": "NetEase Instant Messaging (IM) SDK is a software development kit used to develop instant messaging functionality, providing developers with solutions to integrate features such as instant messaging, group messaging, conversations, user management, and friend lists, etc.",
+  "main": "",
+  "version": "1.1.0-beta",
+  "keywords": [
+    "netease",
+    "im",
+    "nimsdk"
+  ],
+  "homepage": "yunxin.163.com",
+  "repository": "https://github.com/netease-im/nim-harmony-demo",
+  "dynamicDependencies": {},
+  "dependencies": {
+    "@nimsdk/vendor": "0.7.0",
   }
 }

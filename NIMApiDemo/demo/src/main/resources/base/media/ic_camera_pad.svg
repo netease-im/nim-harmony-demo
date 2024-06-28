@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_camera_pad</title>
+    <defs>
+        <path d="M20.5,3.75 L3.5,3.75 C1.98121694,3.75 0.75,4.98121694 0.75,6.5 L0.75,17.5 C0.75,19.0187831 1.98121694,20.25 3.5,20.25 L20.5,20.25 C22.0187831,20.25 23.25,19.0187831 23.25,17.5 L23.25,6.5 C23.25,4.98121694 22.0187831,3.75 20.5,3.75 Z M3.5,5.25 L20.5,5.25 C21.1903559,5.25 21.75,5.80964406 21.75,6.5 L21.75,17.5 C21.75,18.1903559 21.1903559,18.75 20.5,18.75 L3.5,18.75 C2.80964406,18.75 2.25,18.1903559 2.25,17.5 L2.25,6.5 C2.25,5.80964406 2.80964406,5.25 3.5,5.25 Z" id="path-1"></path>
+    </defs>
+    <g id="ic_camera_pad" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="Rectangle-Copy-6" fill="#182431" fill-rule="nonzero" opacity="0.6" xlink:href="#path-1"></use>
+    </g>
+</svg>

@@ -19,23 +19,19 @@
       {
         "name": "default",
         "signingConfig": "default",
+        //指定HarmonyOS应用/服务编译时的版本
         "compatibleSdkVersion": "4.0.0(10)",
-        "runtimeOS": "HarmonyOS",
-      }
-    ],
-    "buildModeSet": [
-      {
-        "name": "debug",
-      },
-      {
-        "name": "release"
+        //指定HarmonyOS应用/服务兼容的最低版本。版本号需改为"4.0.0(10)"，注意使用英文.和()
+        //        "targetSdkVersion": "5.0.0(12)",
+        //指定HarmonyOS应用/服务目标版本。若没有设置，默认为compatibleSdkVersion
+        "runtimeOS": "HarmonyOS"
       }
     ]
   },
   "modules": [
     {
-      "name": "entry",
-      "srcPath": "./entry",
+      "name": "demo",
+      "srcPath": "./demo",
       "targets": [
         {
           "name": "default",

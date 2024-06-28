@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="20px" viewBox="0 0 36 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_camera_switch_off</title>
+    <g id="ic_camera_switch_off" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10,0 L26,0 C31.5228475,-1.01453063e-15 36,4.4771525 36,10 C36,15.5228475 31.5228475,20 26,20 L10,20 C4.4771525,20 6.76353751e-16,15.5228475 0,10 C-6.76353751e-16,4.4771525 4.4771525,1.01453063e-15 10,0 Z" id="Rectangle-45" fill-opacity="0.0980392157" fill="#182431" transform="translate(18.000000, 10.000000) scale(-1, 1) translate(-18.000000, -10.000000) "></path>
+        <path d="M10,1 C5.02943725,1 1,5.02943725 1,10 C1,14.9705627 5.02943725,19 10,19 C14.9705627,19 19,14.9705627 19,10 C19,5.02943725 14.9705627,1 10,1 Z M10,2 C14.418278,2 18,5.581722 18,10 C18,14.418278 14.418278,18 10,18 C5.581722,18 2,14.418278 2,10 C2,5.581722 5.581722,2 10,2 Z" id="Oval-11" fill-opacity="0.05" fill="#000000" fill-rule="nonzero" transform="translate(10.000000, 10.000000) scale(-1, 1) translate(-10.000000, -10.000000) "></path>
+        <circle id="Oval-11" fill="#FFFFFF" transform="translate(10.000000, 10.000000) scale(-1, 1) translate(-10.000000, -10.000000) " cx="10" cy="10" r="8"></circle>
+    </g>
+</svg>

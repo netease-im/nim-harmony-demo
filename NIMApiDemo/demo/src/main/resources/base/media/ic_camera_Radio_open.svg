@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_camera_Radio_open</title>
+    <defs>
+        <circle id="path-1" cx="12" cy="12" r="5"></circle>
+        <filter x="-30.0%" y="-20.0%" width="160.0%" height="160.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feMorphology radius="1" operator="dilate" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+            <feOffset dx="0" dy="1" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+            <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowInner"></feMorphology>
+            <feOffset dx="0" dy="1" in="shadowInner" result="shadowInner"></feOffset>
+            <feComposite in="shadowOffsetOuter1" in2="shadowInner" operator="out" result="shadowOffsetOuter1"></feComposite>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="ic_camera_Radio_open" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <circle id="Oval-21" fill="#FF0034" cx="12" cy="12" r="10"></circle>
+        <g id="Oval-43">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <circle stroke-opacity="0.05" stroke="#000000" stroke-width="1" cx="12" cy="12" r="5.5"></circle>
+        </g>
+        <circle id="Oval-43" fill="#FFFFFF" cx="12" cy="12" r="5"></circle>
+    </g>
+</svg>

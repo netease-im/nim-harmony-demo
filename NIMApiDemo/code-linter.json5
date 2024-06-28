@@ -1,0 +1,135 @@
+{
+  "files":   //用于表示配置适用的文件范围的 glob 模式数组。在没有指定的情况下，应用默认配置
+  [
+    "**/*.js", //字符串类型
+    "**/*.ts",
+    "**/*.ets"
+  ],
+  "ignore":  //一个表示配置对象不应适用的文件的 glob 模式数组。如果没有指定，配置对象将适用于所有由 files 匹配的文件
+  [
+    "build/**/*",    //字符串类型
+    "node_modules/**/*"
+  ],
+  "ruleSet":       //设置检查待应用的规则集
+  [
+    "plugin:@typescript-eslint/recommended"    //快捷批量引入的规则集, 枚举类型：plugin:@typescript-eslint/all, plugin:@typescript-eslint/recommended, plugin:@cross-device-app-dev/all, plugin:@cross-device-app-dev/recommended
+  ],
+  "rules":         //可以对ruleSet配置的规则集中特定的某些规则进行修改、去使能, 或者新增规则集以外的规则；ruleSet和rules共同确定了代码检查所应用的规则
+  {
+    "@typescript-eslint/no-explicit-any":  // ruleId后面跟数组时, 第一个元素为告警级别, 后面的对象元素为规则特定开关配置
+    [
+      "error",              //告警级别: 枚举类型, 支持配置为error, warn, off
+      {
+        "ignoreRestArgs": true   //规则特定的开关配置, 为可选项, 不同规则其下层的配置项不同
+      }
+    ],
+    "@typescript-eslint/explicit-function-return-type": 2,   // ruleId后面跟单独一个数字时, 表示仅设置告警级别, 枚举值为: 2(error), 1(warn), 0(off)
+    "@typescript-eslint/no-unsafe-return": "warn",            // ruleId后面跟单独一个字符串时, 表示仅设置告警级别, 枚举值为: error, warn, off
+    "@typescript-eslint/no-restricted-syntax": [
+      // 告警级别: 枚举类型, 支持配置为error, warn, off
+      "error",
+      {
+        // selector属性必选，配置要禁用的语法
+        // 可通过特定DSL筛选待限制的语句，CallExpression表示方法调用表达式，后面的中括号里面是筛选条件（根据语法树Node节点来确定）
+        // 其中callee.object.name根据指定的名称筛选调用方法的对象（class，namespace或module），以上示例中为"Foo"
+        // callee.property.name则根据指定的名称筛选被调用的方法，以上示例中为"bar"
+        "selector": "CallExpression[callee.object.name='Foo'][callee.property.name='bar']",
+        // message属性可选，配置要展示的报错信息
+        "message": "Foo.bar() is not allowed"
+      }
+    ],
+    "@typescript-eslint/naming-convention": [
+      "error",
+      {
+        // selector属性必选，配置要检查的语法，这里配置的class表示检查自定义组件名
+        "selector": "class",
+        // format属性必选，配置期望的命名风格，支持枚举值，这里配置的PascalCase表示大驼峰风格
+        "format": ["PascalCase"],
+        // custom属性可选，配置用户自定义的命名风格
+        "custom": {
+          // regex属性必选，配置具体的正则
+          "regex": "^[a-zA-Z]+$",
+          // match属性必选，配置为true表示正则未命中时报错；配置为false表示正则命中时报错
+          "match": true
+        }
+      }
+    ],
+    "@hw-stylistic/file-naming-convention": [
+      // 告警级别：枚举类型，支持配置为error，warn，off
+      "error",
+      {
+        // selector属性可选，支持配置为code或者resources
+        // code表示检查代码文件的命名风格
+        // resources表示检查资源文件的命名风格
+        "selector": "code"
+      }
+    ],
+    // TS 通用配置
+    "@typescript-eslint/adjacent-overload-signatures": "warn",
+    "@typescript-eslint/await-thenable": "warn",
+    "@typescript-eslint/array-type": "warn",
+    "@typescript-eslint/ban-ts-comment": "warn",
+    "@typescript-eslint/ban-tslint-comment": "warn",
+    "@typescript-eslint/ban-types": "warn",
+    "@typescript-eslint/brace-style": "warn",
+    "@typescript-eslint/class-literal-property-style": "error",//建议类中的字面量属性对外暴露时，保持一致的风格。
+    "@typescript-eslint/comma-dangle": "error", //允许或禁止使用尾随逗号。
+    "@typescript-eslint/comma-spacing": "error", //强制逗号前后的空格风格保持一致。
+    "@typescript-eslint/consistent-type-assertions": "error", //强制使用一致的类型断言。
+    "@typescript-eslint/consistent-type-definitions": "error", //强制使用一致的类型声明样式，仅使用“interface”或者仅使用“type”。
+    "@typescript-eslint/consistent-type-imports": "error", //强制使用一致的类型导入风格。
+    "@typescript-eslint/no-invalid-void-type": "error", //强制默认参数位于参数列表的最后一个。
+    "@typescript-eslint/dot-notation": "error", //强制使用点表示法。
+    "@typescript-eslint/explicit-member-accessibility": "error", //在类属性和方法上需要显式定义访问修饰符。
+    "@typescript-eslint/explicit-module-boundary-types": "error", //导出到外部的函数和公共类方法，需要显式的定义返回类型和参数类型。
+    "@typescript-eslint/func-call-spacing": "error", //禁止或者要求函数名与函数名后面的括号之间加空格。
+    "@typescript-eslint/init-declarations": "error", //禁止或者要求在变量声明中进行初始化。
+    "@typescript-eslint/keyword-spacing": "error", //强制在关键字之前和关键字之后保持一致的空格风格。
+
+    "@performance/hp-performance-no-closures": "suggestion",
+    "@performance/hp-performance-no-dynamic-cls-func": "suggestion",
+    "@performance/high-frequency-log-check": "suggestion",
+    "@performance/sparse-array-check": "warn",
+    "@performance/number-init-check": "warn",
+    "@performance/typed-array-check": "warn",
+    "@performance/object-creation-check": "suggestion",
+    "@performance/lazyforeach-args-check": "warn",
+  //    代码风格规则： 华为官方推荐
+    "@hw-stylistic/comma-spacing": "error", //强制数组“[”之后和“]”之前加空格。
+    "@hw-stylistic/array-bracket-spacing": "error", // 强制大括号和语句位于同一行。
+    "@hw-stylistic/curly": "error", // 条件语句和循环语句的逻辑代码必须写在大括号中。
+    "@hw-stylistic/indent": "error", //强制switch语句中的case和default缩进一层。
+    "@hw-stylistic/keyword-spacing": "error", //在关键字前后强制加空格。
+    "@hw-stylistic/no-multi-spaces": "error", //不允许出现连续多个空格，除非是换行。
+    "@hw-stylistic/one-var-declaration-per-line": "error", // 变量声明时，要求一次仅声明一个变量。
+    "@hw-stylistic/quotes": "error", //强制字符串使用单引号。
+    "@hw-stylistic/space-before-function-paren": "error", // 在函数名和“(”之间强制不加空格。
+    "@hw-stylistic/space-infix-ops": "error", // 强制运算符前后都加空格。
+
+  },
+  "overrides":      //针对特定的目录或文件采用定制化的规则配置
+  [
+    {
+      "files":   //指定需要定制化配置规则的文件或目录
+      [
+        "entry/**/*.ts"   //字符串类型
+      ],
+      "excluded":
+      [
+        "entry/**/*.test.js" //指定需要排除的目录或文件, 被排除的目录或文件不会被检查; 字符串类型
+      ],
+      "rules":   //支持对overrides外公共配置的规则进行修改、去使能, 或者新增公共配置以外的规则; 该配置将覆盖公共配置
+      {
+        "@typescript-eslint/explicit-function-return-type":  // ruleId: 枚举类型
+        [
+          "warn",     //告警级别: 枚举类型, 支持配置为error, warn, off; 覆盖公共配置, explicit-function-return-type告警级别为warn
+          {
+            allowExpressions: true    //规则特定的开关配置, 为可选项, 不同规则其下层的配置项不同
+          }
+        ],
+        "@typescript-eslint/no-unsafe-return": "off"   // 覆盖公共配置, 不检查no-unsafe-return规则
+      },
+
+    }
+  ]
+}

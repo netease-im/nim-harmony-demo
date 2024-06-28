@@ -1,0 +1,228 @@
+{
+  "color": [
+    {
+      "name": "start_window_background",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "privacy_statement_font",
+      "value": "#007DFF"
+    },
+    {
+      "name": "problem_encountered_font",
+      "value": "#007DFF"
+    },
+    {
+      "name": "register_font_clickable",
+      "value": "#007DFF"
+    },
+    {
+      "name": "title",
+      "value": "#182431"
+    },
+    {
+      "name": "text_input_place_holder",
+      "value": "#99182431"
+    },
+    {
+      "name": "login_btn_normal",
+      "value": "#66007DFF"
+    },
+    {
+      "name": "login_btn_enabled",
+      "value": "#007DFF"
+    },
+    {
+      "name": "login_font_normal",
+      "value": "#66FFFFFF"
+    },
+    {
+      "name": "register_btn_clickable",
+      "value": "#0D000000"
+    },
+    {
+      "name": "divider",
+      "value": "#33000000"
+    },
+    {
+      "name": "login_input_text_background",
+      "value": "#00FFFFFF"
+    },
+    {
+      "name": "login_page_background",
+      "value": "#f1f3f5"
+    },
+    {
+      "name": "register_success_text_font",
+      "value": "#e6000000"
+    },
+    {
+      "name": "jump_text_font",
+      "value": "#007DFF"
+    },
+    {
+      "name": "item_divider",
+      "value": "#0D000000"
+    },
+    {
+      "name": "detail_background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "text",
+      "value": "#182431"
+    },
+    {
+      "name": "text_opacity",
+      "value": "#99182431"
+    },
+    {
+      "name": "input_border_color",
+      "value": "#33000000"
+    },
+    {
+      "name": "white",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "background",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "title_text_color",
+      "value": "#182431"
+    },
+    {
+      "name": "login_more_text_color",
+      "value": "#99182431"
+    },
+    {
+      "name": "placeholder_color",
+      "value": "#99182431"
+    },
+    {
+      "name": "line_color",
+      "value": "#33182431"
+    },
+    {
+      "name": "login_button_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "login_blue_text_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "other_login_text_color",
+      "value": "#838D97"
+    },
+    {
+      "name": "loading_color",
+      "value": "#182431"
+    },
+    {
+      "name": "mainPage_selected",
+      "value": "#1698CE"
+    },
+    {
+      "name": "mainPage_normal",
+      "value": "#6B6B6B"
+    },
+    {
+      "name": "mainPage_backgroundColor",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "home_grid_fontColor",
+      "value": "#99182431"
+    },
+    {
+      "name": "setting_button_backgroundColor",
+      "value": "#E5E8EA"
+    },
+    {
+      "name": "setting_button_fontColor",
+      "value": "#FA2A2D"
+    },
+    {
+      "name": "column_background_color",
+      "value": "#F5F5F5"
+    },
+    {
+      "name": "custom_color",
+      "value": "#182431"
+    },
+    {
+      "name": "custom_button_color",
+      "value": "#007DFF"
+    },
+    {
+      "name": "custom_blank_color",
+      "value": "#F2F2F2"
+    },
+    {
+      "name": "place_color",
+      "value": "#99000000"
+    },
+    {
+      "name": "divider_color",
+      "value": "#0D182431"
+    },
+    {
+      "name": "primaryBgColor",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "blueColor",
+      "value": "#007DFF"
+    },
+    {
+      "name": "tabTitleColor",
+      "value": "#999"
+    },
+    {
+      "name": "base_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "classify_background",
+      "value": "#0D182431"
+    },
+    {
+      "name": "theme_color",
+      "value": "#FF0034"
+    },
+    {
+      "name": "black",
+      "value": "#000000"
+    },
+    {
+      "name": "slider_track_color",
+      "value": "#99FFFFFF"
+    },
+    {
+      "name": "slide_text_font_color",
+      "value": "#182431"
+    },
+    {
+      "name": "border_color",
+      "value": "#FFFFFF"
+    },
+    {
+      "name": "dialog_background_color",
+      "value": "#F1F3F5"
+    },
+    {
+      "name": "flash_background_color",
+      "value": "#33FFFFFF"
+    },
+    {
+      "name": "text_color",
+      "value": "#E6000000"
+    },
+    {
+      "name": "list_item_background",
+      "value": "#F0F3F5"
+    }
+  ]
+}

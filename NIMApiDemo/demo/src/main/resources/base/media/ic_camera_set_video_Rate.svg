@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_camera_set_video_Rate</title>
+    <defs>
+        <path d="M20.5,4 C21.3284271,4 22,4.67157288 22,5.5 L22,18.5 C22,19.3284271 21.3284271,20 20.5,20 L3.5,20 C2.67157288,20 2,19.3284271 2,18.5 L2,5.5 C2,4.67157288 2.67157288,4 3.5,4 L20.5,4 Z M17,12.5 L7,12.5 L7,18.5 L6,18.5 L6,15.873 L3.5,15.873 L3.5,18.5 L17,18.5 L17,12.5 Z M20.5,16 L18,16 L18,18.5 L20.5,18.5 L20.5,16 Z M20.5,12.5 L18,12.5 L18,15 L20.5,15 L20.5,12.5 Z M6,12.5 L3.5,12.5 L3.5,14.873 L6,14.873 L6,12.5 Z M6,8.873 L3.5,8.873 L3.5,11.499 L6,11.499 L6,8.873 Z M17,5.5 L7,5.5 L7,11.499 L17,11.499 L17,5.5 Z M20.5,9 L18,9 L18,11.499 L20.5,11.499 L20.5,9 Z M20.5,5.5 L18,5.5 L18,8 L20.5,8 L20.5,5.5 Z M6,5.5 L3.5,5.5 L3.5,7.873 L6,7.873 L6,5.5 Z" id="path-1"></path>
+    </defs>
+    <g id="ic_camera_set_video_Rate" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <mask id="mask-2" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+        <use id="path-1" fill="#182431" xlink:href="#path-1"></use>
+    </g>
+</svg>

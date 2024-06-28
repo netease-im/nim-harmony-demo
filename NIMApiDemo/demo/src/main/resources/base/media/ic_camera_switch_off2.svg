@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="20px" viewBox="0 0 36 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_camera_switch_off 2</title>
+    <defs>
+        <linearGradient x1="0%" y1="34.5679012%" x2="100%" y2="65.4320988%" id="linearGradient-1">
+            <stop stop-color="#FD7B96" offset="0%"></stop>
+            <stop stop-color="#FF0034" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="ic_camera_switch_off" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10,0 L26,0 C31.5228475,-1.01453063e-15 36,4.4771525 36,10 C36,15.5228475 31.5228475,20 26,20 L10,20 C4.4771525,20 6.76353751e-16,15.5228475 0,10 C-6.76353751e-16,4.4771525 4.4771525,1.01453063e-15 10,0 Z" id="Rectangle-45" fill="url(#linearGradient-1)"></path>
+        <circle id="Oval-11" fill="#FFFFFF" cx="26" cy="10" r="8"></circle>
+    </g>
+</svg>

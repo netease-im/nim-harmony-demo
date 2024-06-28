@@ -1,0 +1,96 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "该模板实现了登录页的功能"
+    },
+    {
+      "name": "ability_desc",
+      "value": "该Ability加载主Page的内容"
+    },
+    {
+      "name": "ability_label",
+      "value": "NIMDemo"
+    },
+    {
+      "name": "title",
+      "value": "标题"
+    },
+    {
+      "name": "username",
+      "value": "手机号/邮箱地址/账号名"
+    },
+    {
+      "name": "password",
+      "value": "密码"
+    },
+    {
+      "name": "login",
+      "value": "登录"
+    },
+    {
+      "name": "logout",
+      "value": "登出"
+    },
+    {
+      "name": "register",
+      "value": "注册"
+    },
+    {
+      "name": "register_success_text",
+      "value": "注册成功"
+    },
+    {
+      "name": "jump_mine_page_text",
+      "value": "点击跳转到我的页面"
+    },
+    {
+      "name": "problem_encountered",
+      "value": "遇见问题"
+    },
+    {
+      "name": "privacy_statement",
+      "value": "隐私声明"
+    },
+    {
+      "name": "mine_page_title",
+      "value": "我的"
+    },
+    {
+      "name": "user_nickname",
+      "value": "韩梅梅"
+    },
+    {
+      "name": "component_list_item_text",
+      "value": "标题%d"
+    },
+    {
+      "name": "service_hotline",
+      "value": "客服热线"
+    },
+    {
+      "name": "email",
+      "value": "官方邮箱"
+    },
+    {
+      "name": "hotline_number",
+      "value": "12xxx"
+    },
+    {
+      "name": "email_address",
+      "value": "xxx@yyy.com"
+    },
+    {
+      "name": "contact_customer_service",
+      "value": "联系客服"
+    },
+    {
+      "name": "NimapidemoAbility_desc",
+      "value": "description"
+    },
+    {
+      "name": "NimapidemoAbility_label",
+      "value": "label"
+    }
+  ]
+}

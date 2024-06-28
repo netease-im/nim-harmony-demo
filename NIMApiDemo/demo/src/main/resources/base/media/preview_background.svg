@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1.5px" height="1.5px" viewBox="0 0 1.5 1.5" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>小圆@2x</title>
+    <g id="页面-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.2">
+        <g id="parabar/zoombar/new/1x" transform="translate(-220.500000, -47.250000)" fill="#FFFFFF" opacity="0.2">
+            <g id="编组" transform="translate(144.500000, 46.500000)">
+                <path d="M76.75,2.25 C77.1642136,2.25 77.5,1.91421356 77.5,1.5 C77.5,1.08578644 77.1642136,0.75 76.75,0.75 C76.3357864,0.75 76,1.08578644 76,1.5 C76,1.91421356 76.3357864,2.25 76.75,2.25 Z" id="小圆" transform="translate(76.750000, 1.500000) rotate(-90.000000) translate(-76.750000, -1.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>
