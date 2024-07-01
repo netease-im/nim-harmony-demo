@@ -16,7 +16,7 @@
 
 ## 一、环境要求
 ### 1.1 编译环境
-- DevEco Studio NEXT Developer Beta1（5.0.3.300） 及以上。
+- DevEco Studio NEXT Developer Beta1（5.0.3.403） 及以上。
 - HarmonyOS SDK API 11 及以上。
 - 运行环境 HarnomyOS NEXT 2.1.2.5 (Canary1) 以上
 
@@ -80,6 +80,7 @@ IMSDK 提供如下产品功能：登录、会话、消息、群组、用户、�
     
     "dependencies": {
         <!-- 业务模版har包， 可以按需添加 -->
+        "@nimsdk/login": "file:../../libs/login.har",
         "@nimsdk/conversation": "file:../../libs/conversation.har",
         "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
         "@nimsdk/message": "file:../../libs/message.har",
@@ -93,7 +94,6 @@ IMSDK 提供如下产品功能：登录、会话、消息、群组、用户、�
         "@nimsdk/nim": "file:./libs/nim.har",
         "@nimsdk/base": "file:./libs/base.har",
         "@nimsdk/vendor": ">= 0.7.0",
-        "@nimsdk/websocket": " >= 0.7.0"
     }
   ...
 }
