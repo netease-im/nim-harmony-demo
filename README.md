@@ -80,20 +80,20 @@ IMSDK 提供如下产品功能：登录、会话、消息、群组、用户、�
     
     "dependencies": {
         <!-- 业务模版har包， 可以按需添加 -->
+        "@nimsdk/nim": "file:../../libs/nim.har",
+        "@nimsdk/base": "file:../../libs/base.har",
+        "@nimsdk/chatroom": "file:../../libs/chatroom.har",
+        "@nimsdk/friend": "file:../../libs/friend.har",
+        "@nimsdk/notification": "file:../../libs/notification.har",
+        "@nimsdk/message": "file:../../libs/message.har",
+        "@nimsdk/user": "file:../../libs/user.har",
+        "@nimsdk/team": "file:../../libs/team.har",
+        "@nimsdk/sync": "file:../../libs/sync.har",
+        "@nimsdk/setting": "file:../../libs/setting.har",
         "@nimsdk/login": "file:../../libs/login.har",
         "@nimsdk/conversation": "file:../../libs/conversation.har",
         "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
-        "@nimsdk/message": "file:../../libs/message.har",
-        "@nimsdk/team": "file:../../libs/team.har",
-        "@nimsdk/user": "file:../../libs/user.har",
-        "@nimsdk/friend": "file:../../libs/friend.har",
-        "@nimsdk/signalling": "file:../../libs/signalling.har",
-        "@nimsdk/setting": "file:../../libs/setting.har",
-        "@nimsdk/notification": "file:../../libs/notification.har",
-        <!-- Harmony IMSDK 基础业务模块，必须添加 -->
-        "@nimsdk/nim": "file:./libs/nim.har",
-        "@nimsdk/base": "file:./libs/base.har",
-        "@nimsdk/vendor": ">= 0.7.0",
+        "@nimsdk/signalling": "file:../../libs/signalling.har"
     }
   ...
 }
