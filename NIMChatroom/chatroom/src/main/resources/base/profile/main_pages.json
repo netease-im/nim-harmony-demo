@@ -1,0 +1,34 @@
+{
+  "src": [
+    "pages/MainPage",
+    "pages/ChatroomClientPage",
+    "pages/ChatroomInstancePage",
+
+    "pages/client/NewInstancePage",
+    "pages/client/DestroyAllPage",
+    "pages/client/DestroyInstancePage",
+    "pages/client/EnterPage",
+    "pages/client/GetInstanceListPage",
+    "pages/client/GetInstancePage",
+    "pages/client/ExitPage",
+    "pages/client/GetChatroomInfoPage",
+    "pages/client/SetListenerPage",
+
+    "pages/instance/message/SendMessagePage",
+    "pages/instance/message/GetMessageListPage",
+    "pages/instance/message/GetMessageListByTagPage",
+    "pages/instance/info/UpdateChatroomInfoPage",
+    "pages/instance/info/UpdateChatroomLocationInfoPage",
+    "pages/instance/info/UpdateChatroomTagsPage",
+    "pages/instance/member/GetMemberListByOptionPage",
+    "pages/instance/member/UpdateMemberRolePage",
+    "pages/instance/member/SetMemberBlockedStatusPage",
+    "pages/instance/member/SetMemberChatBannedStatusPage",
+    "pages/instance/member/SetMemberTempChatBannedPage",
+    "pages/instance/member/UpdateSelfMemberInfoPage",
+    "pages/instance/member/KickMemberPage",
+    "pages/instance/member/SetTempChatBannedByTagPage",
+    "pages/instance/member/GetMemberListByTagPage",
+    "pages/instance/member/GetMemberCountByTagPage"
+  ]
+}

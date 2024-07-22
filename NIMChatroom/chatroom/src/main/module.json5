@@ -1,0 +1,53 @@
+{
+  "module": {
+    "name": "chatroom",
+    "type": "entry",
+    "description": "$string:module_desc",
+    "mainElement": "ChatroomAbility",
+    "deviceTypes": [
+      "phone",
+      "tablet",
+      "2in1"
+    ],
+    "deliveryWithInstall": true,
+    "installationFree": false,
+    "pages": "$profile:main_pages",
+    "abilities": [
+      {
+        "name": "ChatroomAbility",
+        "srcEntry": "./ets/chatroomability/ChatroomAbility.ets",
+        "description": "$string:ability_desc",
+        "icon": "$media:layered_image",
+        "icon": "$media:layered_image",
+        "label": "$string:ability_label",
+        "startWindowIcon": "$media:startIcon",
+        "startWindowBackground": "$color:start_window_background",
+        "exported": true,
+        "skills": [
+          {
+            "entities": [
+              "entity.system.home"
+            ],
+            "actions": [
+              "action.system.home"
+            ]
+          }
+        ]
+      }
+    ],
+    "extensionAbilities": [
+      {
+        "name": "ChatroomBackupAbility",
+        "srcEntry": "./ets/chatroombackupability/ChatroomBackupAbility.ets",
+        "type": "backup",
+        "exported": false,
+        "metadata": [
+          {
+            "name": "ohos.extension.backup",
+            "resource": "$profile:backup_config"
+          }
+        ],
+      }
+    ]
+  }
+}

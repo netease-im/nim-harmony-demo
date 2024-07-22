@@ -1,0 +1,12 @@
+{
+  "name": "chatroom",
+  "version": "1.0.0",
+  "description": "Please describe the basic information.",
+  "main": "",
+  "author": "",
+  "license": "",
+  "dependencies": {
+    "@nimsdk/base": "file:../lbs/base.har",
+    "@nimsdk/chatroom": "file:../lbs/chatroom.har"
+  }
+}

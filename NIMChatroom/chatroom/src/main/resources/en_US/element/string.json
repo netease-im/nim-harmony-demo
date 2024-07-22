@@ -1,0 +1,88 @@
+{
+  "string": [
+    {
+      "name": "module_desc",
+      "value": "This module template implements Login functions."
+    },
+    {
+      "name": "ability_desc",
+      "value": "This ability loads LoginPage."
+    },
+    {
+      "name": "ability_label",
+      "value": "Login Ability"
+    },
+    {
+      "name": "title",
+      "value": "Title"
+    },
+    {
+      "name": "username",
+      "value": "Phone number/Email address/Username"
+    },
+    {
+      "name": "password",
+      "value": "Password"
+    },
+    {
+      "name": "login",
+      "value": "Login"
+    },
+    {
+      "name": "register",
+      "value": "Register"
+    },
+    {
+      "name": "jump_mine_page_text",
+      "value": "Click to go to my page"
+    },
+    {
+      "name": "register_success_text",
+      "value": "Register success"
+    },
+    {
+      "name": "problem_encountered",
+      "value": "Problem encountered"
+    },
+    {
+      "name": "privacy_statement",
+      "value": "Privacy statement"
+    },
+    {
+      "name": "mine_page_title",
+      "value": "My"
+    },
+    {
+      "name": "user_nickname",
+      "value": "Han Meimei"
+    },
+    {
+      "name": "component_list_item_text",
+      "value": "Title%d"
+    },
+    {
+      "name": "service_hotline",
+      "value": "Service hotline"
+    },
+    {
+      "name": "email",
+      "value": "Official email address"
+    },
+    {
+      "name": "hotline_number",
+      "value": "12xxx"
+    },
+    {
+      "name": "email_address",
+      "value": "xxx@yyy.com"
+    },
+    {
+      "name": "contact_customer_service",
+      "value": "Contact customer service"
+    },
+    {
+      "name": "internet_permission",
+      "value": "internet_permission"
+    }
+  ]
+}
