@@ -70,8 +70,7 @@ struct GetJoinedTeamListPage {
     try {
       let teamService = this.getUserModel().getNimSdk().teamService! // Demo启用team模块，teamService不为空
       const teams = await teamService.getJoinedTeamList([this.teamType])
-
-      shownDialog(true, JSON.stringify(teams, null, 2))
+      shownDialog(true, JSON.stringify(teams, null, 2), ` joined count: ${teams.length}`)
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }

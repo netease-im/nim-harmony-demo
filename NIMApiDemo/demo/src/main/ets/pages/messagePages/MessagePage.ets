@@ -15,6 +15,7 @@ import {
   V2NIMMessageQuickCommentNotification,
   V2NIMMessageRevokeNotification,
   V2NIMP2PMessageReadReceipt, V2NIMTeamMessageReadReceipt } from '@nimsdk/base';
+import NotificationOperations from '../../notification/NotificationOperations';
 
 @Entry
 @Component
@@ -26,6 +27,8 @@ export default struct MessagePage {
   private scroller: Scroller = new Scroller();
   private userModel: UserModel | undefined;
 
+  private notificationOperations: NotificationOperations = new NotificationOperations(getContext(this));
+
   aboutToAppear() {
     // loading data.
     setTimeout(() => {
@@ -34,6 +37,8 @@ export default struct MessagePage {
     }, Constants.LOADING_DURATION);
     this.addListener()
   }
+
+
 
   @Builder ClassifyHeader(classifyName: string) {
     Row() {
@@ -136,19 +141,25 @@ export default struct MessagePage {
     })
 
     this.getUserModel().getNimSdk().messageService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
+      messages.map(message => {
+        const title = message.senderId;
+        const text = message.text ?? '无内容';
+        this.notificationOperations.publishBasicNotification(title, text);
+      })
+
       shownListenerDialog('onReceiveMessages', JSON.stringify(messages, null, 2))
     })
 
     this.getUserModel().getNimSdk().messageService!.on("onReceiveP2PMessageReadReceipts", (readReceipts: V2NIMP2PMessageReadReceipt[]) => {
-      shownListenerDialog('onMessageRevokedNotification', JSON.stringify(readReceipts, null, 2))
+      shownListenerDialog('onReceiveP2PMessageReadReceipts', JSON.stringify(readReceipts, null, 2))
     })
 
     this.getUserModel().getNimSdk().messageService!.on("onReceiveTeamMessageReadReceipts", (readReceipts: V2NIMTeamMessageReadReceipt[]) => {
       shownListenerDialog('onReceiveTeamMessageReadReceipts', JSON.stringify(readReceipts, null, 2))
     })
 
-    this.getUserModel().getNimSdk().messageService!.on("onMessageRevokeNotifications", (notification: V2NIMMessageRevokeNotification[]) => {
-      shownListenerDialog('onReceiveTeamMessageReadReceipts', JSON.stringify(notification, null, 2))
+    this.getUserModel().getNimSdk().messageService!.on("onMessageRevokeNotifications", (message: V2NIMMessageRevokeNotification[]) => {
+      shownListenerDialog('onMessageRevokeNotifications', JSON.stringify(message, null, 2))
     })
 
     this.getUserModel().getNimSdk().messageService!.on("onMessageDeletedNotifications", (notification: V2NIMMessageDeletedNotification[]) => {

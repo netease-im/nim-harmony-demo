@@ -88,12 +88,10 @@ IMSDK 提供如下产品功能：登录、会话、消息、群组、用户、�
         "@nimsdk/message": "file:../../libs/message.har",
         "@nimsdk/user": "file:../../libs/user.har",
         "@nimsdk/team": "file:../../libs/team.har",
-        "@nimsdk/sync": "file:../../libs/sync.har",
         "@nimsdk/setting": "file:../../libs/setting.har",
-        "@nimsdk/login": "file:../../libs/login.har",
         "@nimsdk/conversation": "file:../../libs/conversation.har",
         "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
-        "@nimsdk/signalling": "file:../../libs/signalling.har"
+        "@nimsdk/signalling": "file:../../libs/signalling.har",
     }
   ...
 }
@@ -117,7 +115,21 @@ IMSDK 提供如下产品功能：登录、会话、消息、群组、用户、�
 - 示例代码
 
   ```typescript
-  // 根据业务，选择所需服务进行注册
+    // import 
+    import { NIMInitializeOptions, NIMServiceOptions, V2NIMProvidedServiceType } from '@nimsdk/base'
+    import { NIMSdk } from '@nimsdk/nim'
+    import { NIMInterface } from '@nimsdk/base'
+    import { V2NIMTeamServiceImpl } from '@nimsdk/team'
+    import { V2NIMConversationServiceImpl } from '@nimsdk/conversation'
+    import { V2NIMUserServiceImpl } from '@nimsdk/user';
+    import { V2NIMFriendServiceImpl } from '@nimsdk/friend';
+    import { V2NIMClientAntispamUtil, V2NIMMessageServiceImpl } from '@nimsdk/message';
+    import { V2NIMConversationGroupServiceImpl } from '@nimsdk/conversationgroup';
+    import { V2NIMNotificationServiceImpl } from '@nimsdk/notification'
+    import { V2NIMSettingServiceImpl } from '@nimsdk/setting'
+    import { V2NIMSignallingServiceImpl } from '@nimsdk/signalling'
+  
+    // 根据业务，选择所需服务进行注册
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_TEAM, (core, serviceName, serviceConfig) => new V2NIMTeamServiceImpl(core, serviceName, serviceConfig))
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CLIENT_ANTISPAM_UTIL, (core, serviceName, serviceConfig) => new V2NIMClientAntispamUtil(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_NOTIFICATION, (core, serviceName, serviceConfig) => new V2NIMNotificationServiceImpl(core, serviceName, serviceConfig));

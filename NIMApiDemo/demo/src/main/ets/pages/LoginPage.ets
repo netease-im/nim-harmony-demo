@@ -23,8 +23,6 @@ struct LoginPage {
 
   build() {
     Column() {
-      this.Title()
-
       Scroll() {
         Column() {
           LoginComponent()

@@ -1,11 +1,11 @@
 import {
   V2NIMError,
-  V2NIMSignalingEventType,
+  V2NIMSignallingEventType,
   V2NIMSignallingAcceptInviteParams,
   V2NIMSignallingCancelInviteParams, V2NIMSignallingChannelType,
   V2NIMSignallingEvent,
   V2NIMSignallingRejectInviteParams,
-} from '@nimsdk/base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog, shownListenerDialog } from '../../../common/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -96,7 +96,7 @@ struct RejectInvitePage {
 
   aboutToAppear(): void {
     this.getUserModel().getNimSdk().signallingService!.on("onOnlineEvent", (event: V2NIMSignallingEvent) => {
-      if (event.eventType === V2NIMSignalingEventType.V2NIM_SIGNALLING_EVENT_TYPE_INVITE) {
+      if (event.eventType === V2NIMSignallingEventType.V2NIM_SIGNALLING_EVENT_TYPE_INVITE) {
         shownListenerDialog('收到邀请', JSON.stringify(event, null, 2))
         this.event = event
         this.channelId = this.event.channelInfo.channelId

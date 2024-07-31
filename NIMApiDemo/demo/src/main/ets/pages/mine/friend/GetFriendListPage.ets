@@ -68,7 +68,7 @@ struct GetFriendListPage {
     try {
       const friendService = this.getUserModel().getNimSdk().friendService! // Demo启用friend模块，friendService不为空
       const res = await friendService.getFriendList()
-      shownDialog(true, JSON.stringify(res, null, 2))
+      shownDialog(true, JSON.stringify(res, null, 2), `all: ${res.length}`)
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }

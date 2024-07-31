@@ -6,6 +6,8 @@ import MinePage from '../pages/mine/MinePage'
 import { NavList, TabId } from '../model/NavItemModel'
 import TeamPage from './teamPages/TeamPage'
 import SignallingPage from './signallingPages/SignallingPage'
+import LocalConversationPage from './localConversationPages/LocalConversationPage'
+import { notification } from '../notification/Notification'
 
 @Styles function allSize() {
   .width(CommonConstants.THOUSANDTH_1000)
@@ -17,6 +19,10 @@ import SignallingPage from './signallingPages/SignallingPage'
 struct MainPage {
   private tabController: TabsController = new TabsController()
   @State currentPage: number = 0
+
+  aboutToAppear(): void {
+    notification.enableNotification();
+  }
 
   build() {
     Tabs({barPosition: BarPosition.End, controller: this.tabController}) {
@@ -33,14 +39,21 @@ struct MainPage {
           .borderWidth({ bottom: 1 })
           .borderColor($r('app.color.primaryBgColor'))
       }
-
       .tabBar(this.TabBuilder(TabId.CONVERSATION))
+
       TabContent() {
         MessagePage()
           .borderWidth({ bottom: 1 })
           .borderColor($r('app.color.primaryBgColor'))
       }
       .tabBar(this.TabBuilder(TabId.MESSAGE))
+
+      TabContent() {
+        LocalConversationPage()
+          .borderWidth({ bottom: 1 })
+          .borderColor($r('app.color.primaryBgColor'))
+      }
+      .tabBar(this.TabBuilder(TabId.LOCAL_CONVERSATION))
 
       TabContent() {
         TeamPage()

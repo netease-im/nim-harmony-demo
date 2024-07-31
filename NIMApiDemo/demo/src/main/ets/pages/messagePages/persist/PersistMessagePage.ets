@@ -79,11 +79,12 @@ struct PersistMessagePage {
       shownDialog(false, processV2ErrorForPrint(error))
     }
   }
+
   async updateMessage(): Promise<void> {
     try {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const resultR = await messageService.updateMessageLocalExtension
-      (this.sendMessage, '12222')
+      (this.sendMessage, this.serverExtension)
       shownDialog(true, JSON.stringify(resultR))
     }
     catch (err) {

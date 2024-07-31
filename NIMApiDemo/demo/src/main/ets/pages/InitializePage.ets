@@ -1,6 +1,7 @@
 import { CommonConstants } from '../common/CommonConstants';
 import { UserModel } from '../viewmodel/UserModel';
 import prompt from '@ohos.promptAction';
+import { DatabaseOptions, NIMHttpServiceConfig, NIMLoginServiceConfig, NIMPushServiceConfig } from '@nimsdk/base';
 
 @Entry
 @Component
@@ -8,6 +9,28 @@ struct Index {
   // TextInput多行显示存在Bug，暂时使用单行字符串
   @State initializeOptions: string = '{"appkey":"fe416640c8e8a72734219e1847ad2547","debugLevel":"debug","xhrConnectTimeout":30000,"socketConnectTimeout":30000}';
   @State serviceOptions: string = '{"loginServiceConfig":{"lbsUrls":["https://imtest.netease.im/lbs/webconf"],"linkUrl":"imtest-jd.netease.im:8091"}}';
+
+  @State appkey: string = 'fe416640c8e8a72734219e1847ad2547'
+  @State debugLevel: string = 'debug'
+  @State xhrConnectTimeout: number = 30000
+  @State socketConnectTimeout: number = 30000
+  //private loginServiceConfig?:
+  /**
+   * 登录模块的特殊配置
+   */
+  private loginServiceConfig?: NIMLoginServiceConfig
+  /**
+   * 推送配置项
+   */
+  private pushServiceConfig?: NIMPushServiceConfig
+  /**
+   * HTTP 配置项，含私有化配置
+   */
+  private httpServiceConfig?: NIMHttpServiceConfig
+  /**
+   * 数据库初始化配置
+   */
+  private  databaseServiceConfig?: DatabaseOptions
 
   build() {
     Navigation() {

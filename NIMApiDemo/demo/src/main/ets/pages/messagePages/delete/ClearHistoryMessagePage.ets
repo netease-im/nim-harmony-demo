@@ -57,8 +57,9 @@ struct ClearHistoryMessagesPage {
     console.info(`-----------清空历史消息----------- \n`)
     try {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
+      const conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + '|1|' + this.conversationId
       const option = {
-        conversationId: this.conversationId,
+        conversationId: conversationId,
         deleteRoam: this.deleteRoam,
         onlineSync: this.onlineSync,
         serverExtension: this.serverExtension

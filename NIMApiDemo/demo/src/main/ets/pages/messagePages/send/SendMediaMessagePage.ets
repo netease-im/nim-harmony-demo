@@ -13,10 +13,9 @@ import {
 } from '@nimsdk/base';
 
 import fs from '@ohos.file.fs';
-import { CommonConstants, shownDialog } from '../../../common/constants/CommonConstants';
-// import { PictureFiles } from '../../../message/view/PictureFiles';
 import { UserModel } from '../../../viewmodel/UserModel';
 import { router } from '@kit.ArkUI';
+import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
 
 @Extend(TextInput)
 function inputStyle() {

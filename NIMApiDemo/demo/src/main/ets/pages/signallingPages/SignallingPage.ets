@@ -7,7 +7,7 @@ import ClassifyItem from '../../message/view/ClassityItem';
 import ClassifyViewModel from '../../message/viewmodel/ClassifyViewModel';
 import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
-import { V2NIMSignallingEvent, V2NIMSignallingRoomInfo} from '@nimsdk/base/Index';
+import { V2NIMSignallingEvent, V2NIMSignallingRoomInfo} from '@nimsdk/base';
 
 @Entry
 @Component

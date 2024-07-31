@@ -1,7 +1,7 @@
 /**
  * Common Constants for all features.
  */
-import { V2NIMError } from '@nimsdk/base/';
+import { V2NIMError } from '@nimsdk/base';
 import { camera } from '@kit.CameraKit';
 import { Permissions } from '@kit.AbilityKit';
 import { geoLocationManager } from '@kit.LocationKit';
@@ -208,7 +208,7 @@ export class CommonConstants {
   static readonly PUSH_SERVICE_URL: string = 'pages/PushServicePage';
   static readonly CONVERSATION_SERVICE_URL: string = 'pages/ConversationServicePage';
   static readonly NOS_SERVICE_URL: string = 'pages/NosServicePage';
-  static readonly INITIALIZE_PAGE_URL: string = 'pages/InitializePage';
+  static readonly INITIALIZE_PAGE_URL: string = 'pages/Initialize1Page';
 
   /**
    * Mine page url.
@@ -569,10 +569,25 @@ export class CommonConstants {
   static readonly KEY_PAGE_CHANGE: string = 'page_change'
 }
 
-export async function shownDialog(result: boolean, message: string): Promise<void> {
+function truncateText(message: string) {
+  if (!message) {
+    return ""
+  }
+
+  if (message.length > 1000) {
+    console.warn("shownDialog:" + message);
+    message = message.slice(0, 1000) +
+      "\n...........................\n\n\n---------\nPlease check the console log for the full content.";
+  }
+  return message;
+}
+
+export async function shownDialog(result: boolean, message: string, title?: string): Promise<void> {
+  message = truncateText(message);
+
   AlertDialog.show(
     {
-      title: result? 'Success' : 'Failed',
+      title: result? 'Success' + `${title}` : 'Failed'+ `${title}`,
       message: message,
       autoCancel: true,
       alignment: DialogAlignment.Bottom,
@@ -592,6 +607,8 @@ export async function shownDialog(result: boolean, message: string): Promise<voi
 }
 
 export async function shownListenerDialog(title: string, message: string): Promise<void> {
+  message = truncateText(message)
+
   AlertDialog.show(
     {
       title: title,

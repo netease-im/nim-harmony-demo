@@ -69,7 +69,7 @@ struct CreateConversationPage {
     }
   }
   aboutToAppear(): void {
-    this.conversationId = 'cjl|1|cjl1'
+    this.conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + '|1|cjl1'
   }
 
   aboutToDisappear() {

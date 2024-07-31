@@ -1,6 +1,6 @@
 import common from '@ohos.app.ability.common'
 import { NIMInitializeOptions, NIMServiceOptions, V2NIMProvidedServiceType } from '@nimsdk/base'
-
+import { NIMSdk } from '@nimsdk/nim'
 import { NIMInterface } from '@nimsdk/base'
 import { V2NIMTeamServiceImpl } from '@nimsdk/team'
 import { V2NIMConversationServiceImpl } from '@nimsdk/conversation'
@@ -12,7 +12,7 @@ import { V2NIMNotificationServiceImpl } from '@nimsdk/notification'
 import { V2NIMSettingServiceImpl } from '@nimsdk/setting'
 import { V2NIMSignallingServiceImpl } from '@nimsdk/signalling'
 import { USER_MODEL_LIST } from '../viewmodel/UserModel'
-import { NIMSdk } from '@nimsdk/nim'
+// import { V2NIMLocalConversationServiceImpl } from '@nimsdk/localconversation'
 
 export class NimRepository {
   private _context: common.Context
@@ -51,7 +51,12 @@ export class NimRepository {
     let initializeOptions: NIMInitializeOptions = {
       appkey: "xxx",
     }
-    let serviceOptions: NIMServiceOptions = {}
+
+    let serviceOptions: NIMServiceOptions = {
+      loginServiceConfig :{
+
+      },
+    }
     // 测试服
     if (this._mode === USER_MODEL_LIST.TEST) {
       initializeOptions = {
@@ -62,11 +67,15 @@ export class NimRepository {
 
       serviceOptions = {
         loginServiceConfig: {
-          lbsUrls: ['https://imtest.netease.im/lbs/webconf'],
-          linkUrl: 'imtest-jd.netease.im:8091'
+          lbsUrls: ['https://imtest-gy.netease.im/lbs/webconf'],
+          linkUrl: 'weblink-dev-gy.netease.im:443'
         },
         pushServiceConfig: {
           harmonyCertificateName: "DEMO_HMOS_PUSH"
+        },
+        databaseServiceConfig:{
+          encrypt: false,
+          appKey: "fe416640c8e8a72734219e1847ad2547",
         }
       }
     } else if (this._mode === USER_MODEL_LIST.CUSTOM) {
@@ -88,6 +97,10 @@ export class NimRepository {
         httpServiceConfig: {
           chunkUploadHost: 'https://yunxinent-demo.netease.im',
           uploadReplaceFormat: 'https://yunxinent-demo.netease.im/yunxin/{object}'
+        },
+        databaseServiceConfig:{
+          encrypt: false,
+          appKey: "c3a82b40cd2b0998cb11afbcdeff1837",
         }
       }
     } else {
@@ -105,6 +118,10 @@ export class NimRepository {
         },
         pushServiceConfig: {
           harmonyCertificateName: "DEMO_HMOS_PUSH"
+        },
+        databaseServiceConfig: {
+          encrypt: false,
+          appKey: "45c6af3c98409b18a84451215d0bdd6e",
         }
       }
     }
@@ -118,6 +135,7 @@ export class NimRepository {
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CLIENT_ANTISPAM_UTIL, (core, serviceName, serviceConfig) => new V2NIMClientAntispamUtil(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_NOTIFICATION, (core, serviceName, serviceConfig) => new V2NIMNotificationServiceImpl(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION, (core, serviceName, serviceConfig) => new V2NIMConversationServiceImpl(core, serviceName, serviceConfig));
+    // NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_LOCAL_CONVERSATION, (core, serviceName, serviceConfig) => new V2NIMLocalConversationServiceImpl(core, serviceName, serviceConfig))
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION_GROUP, (core, serviceName, serviceConfig) => new V2NIMConversationGroupServiceImpl(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_MESSAGE, (core, serviceName, serviceConfig) => new V2NIMMessageServiceImpl(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_USER, (core, serviceName, serviceConfig) => new V2NIMUserServiceImpl(core, serviceName, serviceConfig));

@@ -18,7 +18,7 @@ struct SyncServicePage {
   build() {
     Column() {
       TitleWithBack({ title: "NosService" })
-      Scroll(){
+      Scroll() {
         GridRow({
           columns: {
             sm: CommonConstants.GRID_ROW_SM,

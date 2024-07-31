@@ -4,11 +4,14 @@ import window from '@ohos.window';
 import { BusinessError } from '@ohos.base';
 import common from '@ohos.app.ability.common';
 import { CommonConstants } from '../common/CommonConstants';
+import { UserModel } from '../viewmodel/UserModel';
 
 /**
  * Lift cycle management of Ability.
  */
 export default class EntryAbility extends UIAbility {
+  private isFirstStart: boolean = true
+
   onCreate(want: Want, launchParam: AbilityConstant.LaunchParam): void {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onCreate');
   }
@@ -63,13 +66,22 @@ export default class EntryAbility extends UIAbility {
     hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onWindowStageDestroy');
   }
 
-  onForeground(): void {
-    // Ability has brought to foreground
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onForeground');
-  }
-
-  onBackground(): void {
-    // Ability has back to background
-    hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onBackground');
-  }
+  // 已废弃主动调用，当前前后台切换由 NIMSDK 负责上报云信服务器
+  // onForeground(): void {
+  //   // Ability has brought to foreground
+  //   hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onForeground');
+  //   if (this.isFirstStart === false) {
+  //     const userModel = UserModel.getInstance(getContext(this)?.getApplicationContext());
+  //     userModel.getNimSdk().settingService?.setAppBackground(false, 0)
+  //   }
+  //
+  //   this.isFirstStart = false
+  // }
+  //
+  // onBackground(): void {
+  //   // Ability has back to background
+  //   hilog.info(0x0000, 'testTag', '%{public}s', 'Ability onBackground');
+  //   const userModel = UserModel.getInstance(getContext(this).getApplicationContext());
+  //   userModel.getNimSdk().settingService?.setAppBackground(true)
+  // }
 }

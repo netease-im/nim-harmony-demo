@@ -10,7 +10,7 @@ struct LoginServicePage {
   build() {
     Column() {
       TitleWithBack({ title: "LoginService" })
-      Scroll(){
+      Scroll() {
         GridRow({
           columns: {
             sm: CommonConstants.GRID_ROW_SM,
@@ -42,7 +42,6 @@ struct LoginServicePage {
           right: $r('app.float.user_grid_row_margin')
         })
       }
-      .margin({ top: $r('app.float.profile_image_margin_top') })
     }
     .alignItems(HorizontalAlign.Center)
     .backgroundColor($r('app.color.login_page_background'))

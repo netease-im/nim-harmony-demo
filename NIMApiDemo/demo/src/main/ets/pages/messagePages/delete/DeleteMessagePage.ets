@@ -32,12 +32,12 @@ function blueTextStyle() {
 struct DeleteMessagePage {
   @State conversationId: string = '';
   @State text: string = '';
-  @State isOnlyRemoveLocal: boolean = false;
+  @State isOnlyRemoveLocal: number = 1;
 
   private timeOutId: number = -1;
   private userModel: UserModel | undefined;
   private messages: V2NIMMessage[] = []
-
+  private deleteLocal: boolean = true
   @Builder
   imageButton(src: Resource) {
     Button({ type: ButtonType.Circle, stateEffect: true }) {
@@ -83,8 +83,9 @@ struct DeleteMessagePage {
         console.info(`-----------deleteMessage----------- \n`)
         // let conversationId: string = 'cjl64|1|cjl1'
         let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
+        this.deleteLocal = this.isOnlyRemoveLocal > 0 ? true : false
         await messageService.deleteMessage(this.messages.pop(), 'delete', this
-          .isOnlyRemoveLocal)
+          .deleteLocal)
         shownDialog(true, JSON.stringify('this.message'))
       } catch (error) {
         console.log('----------- deleteMessage失败 -----------', error)
@@ -135,7 +136,7 @@ struct DeleteMessagePage {
             .type(InputType.Number)
             .inputStyle()
             .onChange((value: string) => {
-              this.isOnlyRemoveLocal = parseInt(value) > 0 ? true : false;
+              this.isOnlyRemoveLocal = parseInt(value)
             })
           Line().lineStyle()
 

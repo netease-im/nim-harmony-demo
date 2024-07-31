@@ -373,6 +373,10 @@
       "value": "消息"
     },
     {
+      "name": "tab_local_conversation",
+      "value": "本地会话（开发中）"
+    },
+    {
       "name": "tab_team",
       "value": "群"
     },

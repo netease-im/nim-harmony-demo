@@ -1,4 +1,4 @@
-import { V2NIMError, V2NIMMessage, V2NIMMessageRevokeParams } from '@nimsdk/base';
+import { V2NIMConversationType, V2NIMError, V2NIMMessage, V2NIMMessageRevokeParams } from '@nimsdk/base';
 import { CommonConstants,
   shownDialog } from '../../../common/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -35,6 +35,7 @@ function blueTextStyle() {
 @Component
 struct RevokeMessagePage {
   @State conversationId: string = '';
+  @State conversationType: V2NIMConversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_UNKNOWN;
   @State text: string = '';
   @State isShowProgress: boolean = false;
   @State message: V2NIMMessage = {} as V2NIMMessage
@@ -63,7 +64,7 @@ struct RevokeMessagePage {
         let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
         const messageCreator = this.getUserModel().getNimSdk().messageCreator
         let message: V2NIMMessage = messageCreator.createTextMessage(`${this.text}`)
-        const conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + '|1|' + this.conversationId
+        const conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + `|${this.conversationType}|` + this.conversationId
         const result = await messageService.sendMessage(message, conversationId)
         this.message = result.message
         shownDialog(true, JSON.stringify(this.message, null, 2))
@@ -121,6 +122,49 @@ struct RevokeMessagePage {
             .onChange((value: string) => {
               this.conversationId = value;
             })
+          Line().lineStyle()
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'p2p', group: 'conversationTypeGroup' }).checked(true)
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P
+                }
+              })
+            Text('p2p')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'team', group: 'conversationTypeGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_TEAM
+                }
+              })
+            Text('team')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'superTeam', group: 'conversationTypeGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_SUPER_TEAM
+                }
+              })
+            Text('superTeam')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
           Line().lineStyle()
           TextInput({ placeholder: `send message text ` })
             .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)

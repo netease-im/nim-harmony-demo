@@ -56,6 +56,9 @@ struct SendImageMessagePage {
   @State pictureUri: string = ''
   @State pushPayload: string = ''
 
+  @State imageUri: string = '';
+  @State isUploading: boolean = false;
+
   @State tabsIndex: number = 1;
   @State isEnterCamera: boolean = false;
   @State cameraIndex: number = 0;

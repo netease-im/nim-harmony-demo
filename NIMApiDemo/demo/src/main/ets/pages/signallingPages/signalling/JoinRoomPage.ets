@@ -4,7 +4,7 @@ import {
   V2NIMSignallingJoinParams,
   V2NIMSignallingRoomInfo,
   V2NIMSignallingRtcConfig,
-} from '@nimsdk/base/Index';
+} from '@nimsdk/base';
 import { V2NIMSignallingConfig, V2NIMSignallingChannelInfo } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';

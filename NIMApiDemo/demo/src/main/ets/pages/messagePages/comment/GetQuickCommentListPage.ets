@@ -35,6 +35,7 @@ struct GetQuickCommentListPage {
   @State conversationId: string = ''
   @State text: string = ''
   @State serverExtension: string = ''
+  @State index: number = 1
   @State isShowProgress: boolean = false;
   @State sendMessages: V2NIMMessage[] = []
 
@@ -70,7 +71,7 @@ struct GetQuickCommentListPage {
     try {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const message = this.sendMessages[this.sendMessages.length - 1]
-      await messageService.addQuickComment(message, 2, '222')
+      await messageService.addQuickComment(message, this.index, this.serverExtension)
       shownDialog(true, 'addQuickComment success')
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
@@ -171,6 +172,15 @@ struct GetQuickCommentListPage {
               this.sendTextMessage();
             })
 
+          Line().lineStyle()
+          TextInput({ placeholder: `add comment index ${this.index} ` })
+            .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
+            .type(InputType.Number)
+            .inputStyle()
+            .onChange((value: string) => {
+              this.index = parseInt(value)
+            })
+
           Button(('add comment '), { type: ButtonType.Capsule })
             .width(CommonConstants.BUTTON_WIDTH)
             .height($r('app.float.login_button_height'))
@@ -178,7 +188,7 @@ struct GetQuickCommentListPage {
             .fontWeight(FontWeight.Medium)
             .backgroundColor($r('app.color.login_button_color'))
             .margin({
-              top: $r('app.float.login_button_margin_top'),
+              top: $r('app.float.forgot_margin_top'),
               bottom: $r('app.float.login_button_margin_bottom')
             })
             .onClick(() => {
@@ -192,7 +202,7 @@ struct GetQuickCommentListPage {
             .fontWeight(FontWeight.Medium)
             .backgroundColor($r('app.color.login_button_color'))
             .margin({
-              top: $r('app.float.login_button_margin_top'),
+              top: $r('app.float.forgot_margin_top'),
               bottom: $r('app.float.login_button_margin_bottom')
             })
             .onClick(() => {

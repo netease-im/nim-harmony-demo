@@ -8,7 +8,7 @@
   "name": "nim",
   "description": "NetEase Instant Messaging (IM) SDK is a software development kit used to develop instant messaging functionality, providing developers with solutions to integrate features such as instant messaging, group messaging, conversations, user management, and friend lists, etc.",
   "main": "",
-  "version": "1.1.0-beta",
+  "version": "1.2.0-beta",
   "keywords": [
     "netease",
     "im",

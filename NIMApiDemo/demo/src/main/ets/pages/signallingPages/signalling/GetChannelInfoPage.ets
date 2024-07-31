@@ -1,6 +1,6 @@
 import {
   V2NIMError, V2NIMSignallingRoomInfo,
-} from '@nimsdk/base/Index';
+} from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
 import { UserModel } from '../../../viewmodel/UserModel';

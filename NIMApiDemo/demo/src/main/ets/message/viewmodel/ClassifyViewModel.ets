@@ -60,6 +60,24 @@ class ClassifyViewModel {
     return linkDataList;
   }
 
+  getLocalConversationLinkData(): Array<ClassifyModel> {
+    let linkDataList: Array<ClassifyModel> = [];
+    let superId: number = 0;
+    LOCAL_CONVERSATION_LINK_DATA.forEach((item: LinkDataModel) => {
+      if (superId !== item.superId) {
+        // add the course classify model.
+        let classifyItem: ClassifyModel = new ClassifyModel(item.superId, item.superName, []);
+        linkDataList.push(classifyItem);
+      }
+      // add the course model.
+      let courseItem: FunctionalModel = new FunctionalModel(superId, item.id, item.module, item.methodName);
+      linkDataList[linkDataList.length-1].courseList.push(courseItem);
+      superId = item.superId;
+    });
+    return linkDataList;
+  }
+
+
   getMineLinkData(): Array<ClassifyModel> {
     let linkDataList: Array<ClassifyModel> = [];
     let superId: number = 0;
@@ -159,6 +177,29 @@ const CONVERSATION_LINK_DATA: LinkDataModel[] = [
   new LinkDataModel(2, '未读数 功能', 8, 'unreadCount', 'subscribeAndUnsubscribeUnreadCountByFilter'),
 ]
 
+const LOCAL_CONVERSATION_LINK_DATA: LinkDataModel[] = [
+  new LinkDataModel(1, '本地会话 功能', 1, 'conversation', 'getConversationList'),
+  new LinkDataModel(1, '本地会话 功能', 2, 'conversation', 'getConversationListByOption'),
+  new LinkDataModel(1, '本地会话 功能', 3, 'conversation', 'getConversation'),
+  new LinkDataModel(1, '本地会话 功能', 4, 'conversation', 'getConversationListByIds'),
+  new LinkDataModel(1, '本地会话 功能', 5, 'conversation', 'createConversation'),
+  new LinkDataModel(1, '本地会话 功能', 6, 'conversation', 'deleteConversation'),
+  new LinkDataModel(1, '本地会话 功能', 7, 'conversation', 'deleteConversationListByIds'),
+  new LinkDataModel(1, '本地会话 功能', 8, 'conversation', 'stickTopConversation'),
+  new LinkDataModel(1, '本地会话 功能', 9, 'conversation', 'updateConversation'),
+  new LinkDataModel(1, '本地会话 功能', 10, 'conversation', 'updateConversationLocalExtension'),
+  new LinkDataModel(2, '本地未读数 功能', 1, 'unreadCount', 'getTotalUnreadCount'),
+  new LinkDataModel(2, '本地未读数 功能', 2, 'unreadCount', 'getUnreadCountByIds'),
+  new LinkDataModel(2, '本地未读数 功能', 3, 'unreadCount', 'getUnreadCountByFilter'),
+  new LinkDataModel(2, '本地未读数 功能', 4, 'unreadCount', 'clearTotalUnreadCount'),
+  new LinkDataModel(2, '本地未读数 功能', 5, 'unreadCount', 'clearUnreadCountByIds'),
+  new LinkDataModel(2, '本地未读数 功能', 6, 'unreadCount', 'clearUnreadCountByGroupId'),
+  new LinkDataModel(2, '本地未读数 功能', 7, 'unreadCount', 'clearUnreadCountByTypes'),
+  new LinkDataModel(2, '本地未读数 功能', 8, 'unreadCount', 'subscribeUnreadCountByFilter'),
+  new LinkDataModel(2, '本地未读数 功能', 9, 'unreadCount', 'markConversationRead'),
+  new LinkDataModel(2, '本地未读数 功能', 10, 'unreadCount', 'getConversationReadTime'),
+]
+
 const LINK_TEAM_DATA: LinkDataModel[] = [
   new LinkDataModel(1, 'Team', 1, 'team', 'createTeam'),
   new LinkDataModel(1, 'Team', 2, 'team', 'updateTeamInfo'),
@@ -213,6 +254,11 @@ const LINK_MINE_DATA: LinkDataModel[] = [
   new LinkDataModel(4, 'Setting', 8, 'setting', 'setDndConfig'),
   new LinkDataModel(4, 'Setting', 9, 'setting', 'getDndConfig'),
   new LinkDataModel(5, 'Login', 1, 'login', 'fetchChatroomList'),
+  new LinkDataModel(5, 'Login', 2, 'login', 'getLoginUser'),
+  new LinkDataModel(5, 'Login', 3, 'login', 'getLoginStatus'),
+  new LinkDataModel(5, 'Login', 4, 'login', 'getConnectStatus'),
+  new LinkDataModel(5, 'Login', 5, 'login', 'getDataSync'),
+  new LinkDataModel(5, 'Login', 6, 'login', 'getLoginClients'),
 ]
 
 const LINK_Signalling_DATA: LinkDataModel[] = [

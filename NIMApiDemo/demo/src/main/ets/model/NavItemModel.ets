@@ -9,6 +9,7 @@ export enum TabId {
   // HOME,
   CONVERSATION,
   MESSAGE,
+  LOCAL_CONVERSATION,
   TEAM,
   SIGNALING,
   MINE
@@ -32,6 +33,12 @@ export const NavList: NavItem[] = [
     icon_selected: $r('app.media.ic_tabs_message_sel'),
     text: $r('app.string.tab_message'),
     id: TabId.MESSAGE
+  },
+  {
+    icon: $r('app.media.ic_tabs_conversation_normal'),
+    icon_selected: $r('app.media.ic_tabs_conversation_sel'),
+    text: $r('app.string.tab_local_conversation'),
+    id: TabId.CONVERSATION
   },
   {
     icon: $r('app.media.ic_tabs_team_normal'),
