@@ -59,7 +59,7 @@ struct UpdateConversationPage {
       }
 
       // call interface
-      const res = await localConversationService.updateConversation(conversationId, updateInfo)
+      const res = await localConversationService.updateConversationLocalExtension(conversationId, '')
       console.info(`-----------更新会话成功----------- ${res}`)
       shownDialog(true, JSON.stringify(res, null, 2))
     }
@@ -131,13 +131,13 @@ struct UpdateConversationPage {
 }
 
 function processV2ErrorForPrint(err: V2NIMError): string {
-  if (err instanceof Error) {
+  //if (err instanceof Error) {
     let desc = `\n${err.name}\n code: ${err.code}\n message: "${err.message}"\n detail: ${err.detail ? JSON.stringify(err.detail) : ''}`
     if (err?.detail?.rawError) {
       desc += `\n rawError: ${err.detail.rawError.message}`
     }
     return desc
-  } else {
-    return `Caught an exception: ${err}`
-  }
+  //} else {
+  //  return `Caught an exception: ${err}`
+  //}
 }
