@@ -1,5 +1,5 @@
 import common from '@ohos.app.ability.common'
-import { NIMInitializeOptions, NIMServiceOptions, V2NIMProvidedServiceType } from '@nimsdk/base'
+import { LogLevel, NIMInitializeOptions, NIMServiceOptions, V2NIMProvidedServiceType } from '@nimsdk/base'
 import { NIMSdk } from '@nimsdk/nim'
 import { NIMInterface } from '@nimsdk/base'
 import { V2NIMTeamServiceImpl } from '@nimsdk/team'
@@ -8,8 +8,8 @@ import { V2NIMUserServiceImpl } from '@nimsdk/user';
 import { V2NIMFriendServiceImpl } from '@nimsdk/friend';
 import { V2NIMClientAntispamUtil, V2NIMMessageServiceImpl } from '@nimsdk/message';
 import { V2NIMConversationGroupServiceImpl } from '@nimsdk/conversationgroup';
-import { V2NIMNotificationServiceImpl } from '@nimsdk/notification'
-import { V2NIMSettingServiceImpl } from '@nimsdk/setting'
+import { V2NIMNotificationServiceImpl } from '@nimsdk/nim'
+import { V2NIMSettingServiceImpl } from '@nimsdk/nim'
 import { V2NIMSignallingServiceImpl } from '@nimsdk/signalling'
 import { USER_MODEL_LIST } from '../viewmodel/UserModel'
 // import { V2NIMLocalConversationServiceImpl } from '@nimsdk/localconversation'
@@ -61,7 +61,7 @@ export class NimRepository {
     if (this._mode === USER_MODEL_LIST.TEST) {
       initializeOptions = {
         appkey: "fe416640c8e8a72734219e1847ad2547",
-        debugLevel: "debug",
+        logLevel: LogLevel.Debug,
         // ...其他属性
       };
 
@@ -82,7 +82,7 @@ export class NimRepository {
       // 私有化
       initializeOptions = {
         appkey: "c3a82b40cd2b0998cb11afbcdeff1837",
-        debugLevel: "debug",
+        logLevel: LogLevel.Debug,
         // ...其他属性
       };
 
@@ -107,7 +107,7 @@ export class NimRepository {
       // 正式服
       initializeOptions = {
         appkey: "45c6af3c98409b18a84451215d0bdd6e",
-        debugLevel: "debug",
+        logLevel: LogLevel.Debug,
         // ...其他属性
       };
 
