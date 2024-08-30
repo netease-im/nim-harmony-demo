@@ -14,23 +14,7 @@
   "repository": "https://github.com/netease-im/nim-harmony-demo",
   "dynamicDependencies": {
   },
-  "devDependencies": {
-//    "@nimsdk/nim": "file:../nim",
-//    "@nimsdk/base": "file:../base",
-//    "@nimsdk/chatroom": "file:../chatroom",
-//    "@nimsdk/friend": "file:../services/friend",
-//    "@nimsdk/notification": "file:../services/notification",
-//    "@nimsdk/message": "file:../services/message",
-//    "@nimsdk/user": "file:../services/user",
-//    "@nimsdk/team": "file:../services/team",
-//    "@nimsdk/sync": "file:../services/sync",
-//    "@nimsdk/setting": "file:../services/setting",
-//    "@nimsdk/login": "file:../services/login",
-//    "@nimsdk/conversation": "file:../services/conversation",
-//    "@nimsdk/conversationgroup": "file:../services/conversationgroup",
-//    "@nimsdk/signalling": "file:../services/signalling",
-//    "@nimsdk/localconversation": "file:../services/localconversation",
-  },
+  "devDependencies": {},
   "dependencies": {
     "@nimsdk/nim": "file:../../libs/nim.har",
     "@nimsdk/base": "file:../../libs/base.har",
@@ -42,6 +26,6 @@
     "@nimsdk/conversation": "file:../../libs/conversation.har",
     "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
     "@nimsdk/signalling": "file:../../libs/signalling.har",
-//    "@nimsdk/localconversation": "file:../../libs/localconversation-test.har",
+    "@nimsdk/localconversation": "file:../../libs/localconversation.har",
   }
 }
