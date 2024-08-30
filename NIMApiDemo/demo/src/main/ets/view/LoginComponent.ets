@@ -1,22 +1,22 @@
 import { http } from '@kit.NetworkKit';
 import {
-    V2NIMClearHistoryNotification,
-    V2NIMConnectStatus,
-    V2NIMDataSyncState,
-    V2NIMDataSyncType,
-    V2NIMError,
-    V2NIMKickedOfflineDetail,
-    V2NIMLoginClient,
-    V2NIMLoginClientChange,
-    V2NIMLoginOption,
-    V2NIMLoginStatus,
-    V2NIMMessage,
-    V2NIMMessageDeletedNotification,
-    V2NIMMessagePinNotification,
-    V2NIMMessageQuickCommentNotification,
-    V2NIMMessageRevokeNotification,
-    V2NIMP2PMessageReadReceipt,
-    V2NIMTeamMessageReadReceipt
+  V2NIMClearHistoryNotification,
+  V2NIMConnectStatus,
+  V2NIMDataSyncState,
+  V2NIMDataSyncType,
+  V2NIMError,
+  V2NIMKickedOfflineDetail,
+  V2NIMLoginClient,
+  V2NIMLoginClientChange,
+  V2NIMLoginOption,
+  V2NIMLoginStatus,
+  V2NIMMessage,
+  V2NIMMessageDeletedNotification,
+  V2NIMMessagePinNotification,
+  V2NIMMessageQuickCommentNotification,
+  V2NIMMessageRevokeNotification,
+  V2NIMP2PMessageReadReceipt,
+  V2NIMTeamMessageReadReceipt
 } from '@nimsdk/base';
 import common from '@ohos.app.ability.common';
 import router from '@ohos.router';
@@ -184,193 +184,193 @@ export struct LoginComponent {
           })
       }
 
-      // GridCol({
-      //   span: {
-      //     sm: CommonConstants.SPAN_SM,
-      //     md: CommonConstants.SPAN_MD,
-      //     lg: CommonConstants.SPAN_LG
-      //   },
-      //   offset: {
-      //     sm: CommonConstants.OFFSET_SM,
-      //     md: CommonConstants.OFFSET_MD,
-      //     lg: CommonConstants.OFFSET_LG
-      //   }
-      // }) {
-      //   Column() {
-      //     Text('V2NIMLoginOption').fontWeight(FontWeight.Bold).width(CommonConstants.LOGIN_PAGE_WIDTH_PERCENT)
-      //     Row() {
-      //       Text('forceMode').fontWeight(FontWeight.Bold)
-      //       Checkbox({ name: 'forceMode' })
-      //         .select(this.forceMode)
-      //         .onChange((value: boolean) => {
-      //           this.forceMode = value
-      //         })
-      //       Text('authType:').fontWeight(FontWeight.Bold)
-      //       TextInput({ text: `${this.authType}` })
-      //         .width(30)
-      //         .type(InputType.Number)
-      //         .placeholderColor($r('app.color.text_input_place_holder'))
-      //         .placeholderFont({ size: $r('app.float.text_input_font_size') })
-      //         .backgroundColor($r('app.color.login_input_text_background'))
-      //         .fontSize($r('app.float.text_input_font_size'))
-      //         .padding({ left: $r('app.float.username_padding_left') })
-      //         .border({
-      //           width: { bottom: $r('app.float.input_border_width') },
-      //           color: $r('app.color.input_border_color'),
-      //           radius: $r('app.float.input_border_radius')
-      //         })
-      //         .onChange((value: string) => {
-      //           this.authType = parseInt(value);
-      //         })
-      //       Text('syncLevel:').fontWeight(FontWeight.Bold)
-      //       TextInput({ text: `${this.syncLevel}` })
-      //         .width(30)
-      //         .type(InputType.Number)
-      //         .placeholderColor($r('app.color.text_input_place_holder'))
-      //         .placeholderFont({ size: $r('app.float.text_input_font_size') })
-      //         .backgroundColor($r('app.color.login_input_text_background'))
-      //         .fontSize($r('app.float.text_input_font_size'))
-      //         .padding({ left: $r('app.float.username_padding_left') })
-      //         .border({
-      //           width: { bottom: $r('app.float.input_border_width') },
-      //           color: $r('app.color.input_border_color'),
-      //           radius: $r('app.float.input_border_radius')
-      //         })
-      //         .onChange((value: string) => {
-      //           this.syncLevel = parseInt(value);
-      //         })
-      //     }.width(CommonConstants.BUTTON_WIDTH_PERCENT)
-      //
-      //     Row() {
-      //       Text('retry count:').fontWeight(FontWeight.Bold)
-      //       TextInput({ text: `${this.retryCount}` })
-      //         .width(50)
-      //         .type(InputType.Number)
-      //         .placeholderColor($r('app.color.text_input_place_holder'))
-      //         .placeholderFont({ size: $r('app.float.text_input_font_size') })
-      //         .backgroundColor($r('app.color.login_input_text_background'))
-      //         .fontSize($r('app.float.text_input_font_size'))
-      //         .padding({ left: $r('app.float.username_padding_left') })
-      //         .border({
-      //           width: { bottom: $r('app.float.input_border_width') },
-      //           color: $r('app.color.input_border_color'),
-      //           radius: $r('app.float.input_border_radius')
-      //         })
-      //         .onChange((value: string) => {
-      //           this.retryCount = parseInt(value);
-      //         })
-      //
-      //       Text('timeout:').fontWeight(FontWeight.Bold)
-      //       TextInput({ text: `${this.timeout}` })
-      //         .width(80)
-      //         .type(InputType.Number)
-      //         .placeholderColor($r('app.color.text_input_place_holder'))
-      //         .placeholderFont({ size: $r('app.float.text_input_font_size') })
-      //         .backgroundColor($r('app.color.login_input_text_background'))
-      //         .fontSize($r('app.float.text_input_font_size'))
-      //         .padding({ left: $r('app.float.username_padding_left') })
-      //         .border({
-      //           width: { bottom: $r('app.float.input_border_width') },
-      //           color: $r('app.color.input_border_color'),
-      //           radius: $r('app.float.input_border_radius')
-      //         })
-      //         .onChange((value: string) => {
-      //           this.timeout = parseInt(value);
-      //         })
-      //     }.width(CommonConstants.BUTTON_WIDTH_PERCENT)
-      //
-      //     Row() {
-      //       Text('V2NIMTokenProvider').fontWeight(FontWeight.Bold)
-      //       Checkbox()
-      //         .select(this.tokenProviderEnabled)
-      //         .onChange((value: boolean) => {
-      //           this.tokenProviderEnabled = value
-      //         })
-      //       Text('自动生成').fontWeight(FontWeight.Bold)
-      //       Checkbox()
-      //         .select(this.tokenProviderAutogen)
-      //         .onChange((value: boolean) => {
-      //           this.tokenProviderAutogen = value
-      //         })
-      //     }
-      //     .width(CommonConstants.BUTTON_WIDTH_PERCENT)
-      //
-      //     Row() {
-      //       TextInput({ text: "", placeholder: 'V2NIMTokenProvider' })
-      //         .placeholderColor($r('app.color.text_input_place_holder'))
-      //         .placeholderFont({ size: $r('app.float.text_input_font_size') })
-      //         .backgroundColor($r('app.color.login_input_text_background'))
-      //         .fontSize($r('app.float.text_input_font_size'))
-      //         .padding({ left: $r('app.float.username_padding_left') })
-      //         .border({
-      //           width: { bottom: $r('app.float.input_border_width') },
-      //           color: $r('app.color.input_border_color'),
-      //           radius: $r('app.float.input_border_radius')
-      //         })
-      //         .onChange((value: string) => {
-      //           this.tokenProviderValue = value
-      //         })
-      //     }
-      //
-      //     Row() {
-      //       Text('V2NIMLoginExtensionProvider').fontWeight(FontWeight.Bold)
-      //       Checkbox()
-      //         .select(this.extensionProviderEnabled)
-      //         .onChange((value: boolean) => {
-      //           this.extensionProviderEnabled = value
-      //         })
-      //     }
-      //     .width(CommonConstants.BUTTON_WIDTH_PERCENT)
-      //
-      //     Row() {
-      //       TextInput({ text: "", placeholder: 'V2NIMLoginExtensionProvider' })
-      //         .placeholderColor($r('app.color.text_input_place_holder'))
-      //         .placeholderFont({ size: $r('app.float.text_input_font_size') })
-      //         .backgroundColor($r('app.color.login_input_text_background'))
-      //         .fontSize($r('app.float.text_input_font_size'))
-      //         .padding({ left: $r('app.float.username_padding_left') })
-      //         .border({
-      //           width: { bottom: $r('app.float.input_border_width') },
-      //           color: $r('app.color.input_border_color'),
-      //           radius: $r('app.float.input_border_radius')
-      //         })
-      //         .onChange((value: string) => {
-      //           this.extensionProviderValue = value
-      //         })
-      //     }
-      //
-      //     Row() {
-      //       Text('setReconnectDelayProvider').fontWeight(FontWeight.Bold)
-      //       Checkbox()
-      //         .select(this.reconnectDelayProviderEnabled)
-      //         .onChange((value: boolean) => {
-      //           this.reconnectDelayProviderEnabled = value
-      //           if (this.reconnectDelayProviderEnabled) {
-      //             this.setReconnectDelayProvider(true, this.reconnectDelayProviderTimeout)
-      //           } else {
-      //             this.setReconnectDelayProvider(false)
-      //           }
-      //
-      //         })
-      //       TextInput({ text: `${this.reconnectDelayProviderTimeout}`, placeholder: '重联timeout' })
-      //         .placeholderColor($r('app.color.text_input_place_holder'))
-      //         .placeholderFont({ size: $r('app.float.text_input_font_size') })
-      //         .backgroundColor($r('app.color.login_input_text_background'))
-      //         .fontSize($r('app.float.text_input_font_size'))
-      //         .padding({ left: $r('app.float.username_padding_left') })
-      //         .border({
-      //           width: { bottom: $r('app.float.input_border_width') },
-      //           color: $r('app.color.input_border_color'),
-      //           radius: $r('app.float.input_border_radius')
-      //         })
-      //         .onChange((value: string) => {
-      //           const timeout = parseInt(value)
-      //           this.reconnectDelayProviderTimeout = timeout
-      //         })
-      //     }
-      //   }
-      //   .justifyContent(FlexAlign.Start)
-      // }
+      GridCol({
+        span: {
+          sm: CommonConstants.SPAN_SM,
+          md: CommonConstants.SPAN_MD,
+          lg: CommonConstants.SPAN_LG
+        },
+        offset: {
+          sm: CommonConstants.OFFSET_SM,
+          md: CommonConstants.OFFSET_MD,
+          lg: CommonConstants.OFFSET_LG
+        }
+      }) {
+        Column() {
+          Text('V2NIMLoginOption').fontWeight(FontWeight.Bold).width(CommonConstants.LOGIN_PAGE_WIDTH_PERCENT)
+          Row() {
+            Text('forceMode').fontWeight(FontWeight.Bold)
+            Checkbox({ name: 'forceMode' })
+              .select(this.forceMode)
+              .onChange((value: boolean) => {
+                this.forceMode = value
+              })
+            Text('authType:').fontWeight(FontWeight.Bold)
+            TextInput({ text: `${this.authType}` })
+              .width(30)
+              .type(InputType.Number)
+              .placeholderColor($r('app.color.text_input_place_holder'))
+              .placeholderFont({ size: $r('app.float.text_input_font_size') })
+              .backgroundColor($r('app.color.login_input_text_background'))
+              .fontSize($r('app.float.text_input_font_size'))
+              .padding({ left: $r('app.float.username_padding_left') })
+              .border({
+                width: { bottom: $r('app.float.input_border_width') },
+                color: $r('app.color.input_border_color'),
+                radius: $r('app.float.input_border_radius')
+              })
+              .onChange((value: string) => {
+                this.authType = parseInt(value);
+              })
+            Text('syncLevel:').fontWeight(FontWeight.Bold)
+            TextInput({ text: `${this.syncLevel}` })
+              .width(30)
+              .type(InputType.Number)
+              .placeholderColor($r('app.color.text_input_place_holder'))
+              .placeholderFont({ size: $r('app.float.text_input_font_size') })
+              .backgroundColor($r('app.color.login_input_text_background'))
+              .fontSize($r('app.float.text_input_font_size'))
+              .padding({ left: $r('app.float.username_padding_left') })
+              .border({
+                width: { bottom: $r('app.float.input_border_width') },
+                color: $r('app.color.input_border_color'),
+                radius: $r('app.float.input_border_radius')
+              })
+              .onChange((value: string) => {
+                this.syncLevel = parseInt(value);
+              })
+          }.width(CommonConstants.BUTTON_WIDTH_PERCENT)
+
+          Row() {
+            Text('retry count:').fontWeight(FontWeight.Bold)
+            TextInput({ text: `${this.retryCount}` })
+              .width(50)
+              .type(InputType.Number)
+              .placeholderColor($r('app.color.text_input_place_holder'))
+              .placeholderFont({ size: $r('app.float.text_input_font_size') })
+              .backgroundColor($r('app.color.login_input_text_background'))
+              .fontSize($r('app.float.text_input_font_size'))
+              .padding({ left: $r('app.float.username_padding_left') })
+              .border({
+                width: { bottom: $r('app.float.input_border_width') },
+                color: $r('app.color.input_border_color'),
+                radius: $r('app.float.input_border_radius')
+              })
+              .onChange((value: string) => {
+                this.retryCount = parseInt(value);
+              })
+
+            Text('timeout:').fontWeight(FontWeight.Bold)
+            TextInput({ text: `${this.timeout}` })
+              .width(80)
+              .type(InputType.Number)
+              .placeholderColor($r('app.color.text_input_place_holder'))
+              .placeholderFont({ size: $r('app.float.text_input_font_size') })
+              .backgroundColor($r('app.color.login_input_text_background'))
+              .fontSize($r('app.float.text_input_font_size'))
+              .padding({ left: $r('app.float.username_padding_left') })
+              .border({
+                width: { bottom: $r('app.float.input_border_width') },
+                color: $r('app.color.input_border_color'),
+                radius: $r('app.float.input_border_radius')
+              })
+              .onChange((value: string) => {
+                this.timeout = parseInt(value);
+              })
+          }.width(CommonConstants.BUTTON_WIDTH_PERCENT)
+
+          Row() {
+            Text('V2NIMTokenProvider').fontWeight(FontWeight.Bold)
+            Checkbox()
+              .select(this.tokenProviderEnabled)
+              .onChange((value: boolean) => {
+                this.tokenProviderEnabled = value
+              })
+            Text('自动生成').fontWeight(FontWeight.Bold)
+            Checkbox()
+              .select(this.tokenProviderAutogen)
+              .onChange((value: boolean) => {
+                this.tokenProviderAutogen = value
+              })
+          }
+          .width(CommonConstants.BUTTON_WIDTH_PERCENT)
+
+          Row() {
+            TextInput({ text: "", placeholder: 'V2NIMTokenProvider' })
+              .placeholderColor($r('app.color.text_input_place_holder'))
+              .placeholderFont({ size: $r('app.float.text_input_font_size') })
+              .backgroundColor($r('app.color.login_input_text_background'))
+              .fontSize($r('app.float.text_input_font_size'))
+              .padding({ left: $r('app.float.username_padding_left') })
+              .border({
+                width: { bottom: $r('app.float.input_border_width') },
+                color: $r('app.color.input_border_color'),
+                radius: $r('app.float.input_border_radius')
+              })
+              .onChange((value: string) => {
+                this.tokenProviderValue = value
+              })
+          }
+
+          Row() {
+            Text('V2NIMLoginExtensionProvider').fontWeight(FontWeight.Bold)
+            Checkbox()
+              .select(this.extensionProviderEnabled)
+              .onChange((value: boolean) => {
+                this.extensionProviderEnabled = value
+              })
+          }
+          .width(CommonConstants.BUTTON_WIDTH_PERCENT)
+
+          Row() {
+            TextInput({ text: "", placeholder: 'V2NIMLoginExtensionProvider' })
+              .placeholderColor($r('app.color.text_input_place_holder'))
+              .placeholderFont({ size: $r('app.float.text_input_font_size') })
+              .backgroundColor($r('app.color.login_input_text_background'))
+              .fontSize($r('app.float.text_input_font_size'))
+              .padding({ left: $r('app.float.username_padding_left') })
+              .border({
+                width: { bottom: $r('app.float.input_border_width') },
+                color: $r('app.color.input_border_color'),
+                radius: $r('app.float.input_border_radius')
+              })
+              .onChange((value: string) => {
+                this.extensionProviderValue = value
+              })
+          }
+
+          Row() {
+            Text('setReconnectDelayProvider').fontWeight(FontWeight.Bold)
+            Checkbox()
+              .select(this.reconnectDelayProviderEnabled)
+              .onChange((value: boolean) => {
+                this.reconnectDelayProviderEnabled = value
+                if (this.reconnectDelayProviderEnabled) {
+                  this.setReconnectDelayProvider(true, this.reconnectDelayProviderTimeout)
+                } else {
+                  this.setReconnectDelayProvider(false)
+                }
+
+              })
+            TextInput({ text: `${this.reconnectDelayProviderTimeout}`, placeholder: '重联timeout' })
+              .placeholderColor($r('app.color.text_input_place_holder'))
+              .placeholderFont({ size: $r('app.float.text_input_font_size') })
+              .backgroundColor($r('app.color.login_input_text_background'))
+              .fontSize($r('app.float.text_input_font_size'))
+              .padding({ left: $r('app.float.username_padding_left') })
+              .border({
+                width: { bottom: $r('app.float.input_border_width') },
+                color: $r('app.color.input_border_color'),
+                radius: $r('app.float.input_border_radius')
+              })
+              .onChange((value: string) => {
+                const timeout = parseInt(value)
+                this.reconnectDelayProviderTimeout = timeout
+              })
+          }
+        }
+        .justifyContent(FlexAlign.Start)
+      }
     }
   }
 
@@ -648,6 +648,10 @@ export struct LoginComponent {
       .on('onDataSync', (type: V2NIMDataSyncType, state: V2NIMDataSyncState, error?: V2NIMError) => {
         shownListenerDialog('onDataSync', `${type}, ${state}, ${JSON.stringify(error)}`);
       });
+
+    this.getUserModel().getNimSdk().messageService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
+      console.info('onReceiveMessages', JSON.stringify(messages, null, 2))
+    })
   }
 
   removeListener() {
