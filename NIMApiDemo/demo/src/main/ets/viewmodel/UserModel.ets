@@ -25,17 +25,18 @@ export enum USER_MODEL_LIST {
   CUSTOM = 'userModel-custom'
 }
 export class UserModel {
+
   public static USER_MODEL: USER_MODEL_LIST = USER_MODEL_LIST.REL
 
-  private nimRepository: NimRepository
+  public  nimRepository: NimRepository
   private loginCachePreferences: preferences.Preferences
 
-  constructor(context: common.Context, mode?: USER_MODEL_LIST) {
+  public constructor(context: common.Context, mode?: USER_MODEL_LIST) {
     this.nimRepository = new NimRepository(context, mode)
-    this.nimRepository.nim.loginService.on('onKickedOffline', detail => {
-      console.log("onKickedOffline:" + JSON.stringify(detail))
-      this.saveLastLoginAccount("")
-    })
+    //this.nimRepository.nim.loginService.on('onKickedOffline', detail => {
+    //  console.log("onKickedOffline:" + JSON.stringify(detail))
+    //  this.saveLastLoginAccount("")
+    //})
     this.loginCachePreferences = preferences.getPreferencesSync(context, {'name': 'loginCache'})
   }
 
@@ -77,6 +78,4 @@ export class UserModel {
     this.loginCachePreferences.put("lastAccid", accid)
     this.loginCachePreferences.flush()
   }
-
-
 }

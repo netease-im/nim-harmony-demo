@@ -1,10 +1,8 @@
 import {
   V2NIMError,
-  V2NIMSignallingEventType,
-  V2NIMSignallingAcceptInviteParams,
-  V2NIMSignallingCancelInviteParams, V2NIMSignallingChannelType,
   V2NIMSignallingEvent,
-  V2NIMSignallingRejectInviteParams,
+  V2NIMSignallingEventType,
+  V2NIMSignallingRejectInviteParams
 } from '@nimsdk/base';
 import { CommonConstants, shownDialog, shownListenerDialog } from '../../../common/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
@@ -44,9 +42,6 @@ struct RejectInvitePage {
   @State serverExtension: string = ''
   @State offlineEnabled: boolean = false
   @State isShowProgress: boolean = false
-  private event?: V2NIMSignallingEvent
-  private timeOutId: number = -1;
-  private userModel: UserModel | undefined;
   customDialogController: CustomDialogController = new CustomDialogController({
     builder: CustomDialogWidget({
       hobbies: $hobbies
@@ -58,6 +53,9 @@ struct RejectInvitePage {
       dy: -20
     }
   });
+  private event?: V2NIMSignallingEvent
+  private timeOutId: number = -1;
+  private userModel: UserModel | undefined;
 
   @Builder
   imageButton(src: Resource) {
@@ -215,7 +213,8 @@ struct RejectInvitePage {
 
 function processV2ErrorForPrint(err: V2NIMError): string {
   if (err instanceof Error) {
-    let desc = `\n${err.name}\n code: ${err.code}\n message: "${err.message}"\n detail: ${err.detail ? JSON.stringify(err.detail) : ''}`
+    let desc = `\n${err.name}\n code: ${err.code}\n message: "${err.message}"\n detail: ${err.detail ?
+    JSON.stringify(err.detail) : ''}`
     if (err?.detail?.rawError) {
       desc += `\n rawError: ${err.detail.rawError.message}`
     }

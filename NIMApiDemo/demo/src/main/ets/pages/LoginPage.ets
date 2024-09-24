@@ -1,5 +1,4 @@
 import router from '@ohos.router';
-import MediaQueryModel from '../model/MediaQueryModel';
 import { CommonConstants } from '../common/CommonConstants';
 import { InitializeComponent } from '../view/InitializeComponent';
 import { LoginComponent } from '../view/LoginComponent';
@@ -14,11 +13,9 @@ import { LoginComponent } from '../view/LoginComponent';
 @Component
 struct LoginPage {
   aboutToAppear() {
-    MediaQueryModel.register();
   }
 
   aboutToDisappear() {
-    MediaQueryModel.unRegister();
   }
 
   build() {
@@ -29,7 +26,40 @@ struct LoginPage {
 
           Blank()
 
-          InitializeComponent()
+          //InitializeComponent()
+          Text('自定义初始化: (*默认初始化为线上环境*)')
+            .fontSize($r('app.float.item_text_font_size'))
+            .fontColor($r('app.color.problem_encountered_font'))
+            .textAlign(TextAlign.Center)
+            .onClick(() => {
+              router.pushUrl({
+                url: CommonConstants.INITIALIZE_PAGE_URL
+              });
+            })
+
+          Blank()
+          Text('云信服务探测')
+            .fontSize($r('app.float.item_text_font_size'))
+            .fontColor($r('app.color.problem_encountered_font'))
+            .textAlign(TextAlign.Center)
+            .onClick(() => {
+              router.pushUrl({
+                url: "pages/netPerformance/HttpPerformancePage"
+              });
+            })
+            .margin({bottom: 24})
+
+          Blank()
+          Text('系统功能')
+            .fontSize($r('app.float.item_text_font_size'))
+            .fontColor($r('app.color.problem_encountered_font'))
+            .textAlign(TextAlign.Center)
+            .onClick(() => {
+              router.pushUrl({
+                url: "pages/systemFeaturePages/SystemFeaturePage"
+              });
+            })
+            .margin({bottom: 24})
         }
         .height(CommonConstants.SCROLL_HEIGHT_PERCENT)
         .constraintSize({ minHeight: $r('app.float.scroll_min_height') })

@@ -1,10 +1,10 @@
 
 import {CommonConstants as Constants, shownDialog, shownListenerDialog} from '../../common/CommonConstants';
-import ClassifyModel from '../../message/viewmodel/ClassifyModel';
-import FunctionalModel from '../../message/viewmodel/CourseModel';
-import CourseItem from '../../message/view/CourseItem';
-import ClassifyItem from '../../message/view/ClassityItem';
-import ClassifyViewModel from '../../message/viewmodel/ClassifyViewModel';
+import ClassifyModel from '../../viewmodel/ClassifyModel';
+import FunctionalModel from '../../viewmodel/CourseModel';
+import CourseItem from '../../view/CourseItem';
+import ClassifyItem from '../../view/ClassityItem';
+import ClassifyViewModel from '../../viewmodel/ClassifyViewModel';
 import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
 import {
@@ -35,7 +35,7 @@ export default struct MessagePage {
       this.classifyList = ClassifyViewModel.getLinkData();
       this.requestSuccess = true;
     }, Constants.LOADING_DURATION);
-    this.addListener()
+    //this.addListener()
   }
 
 
@@ -134,49 +134,49 @@ export default struct MessagePage {
     return UserModel.getInstance(getContext(this).getApplicationContext());
   }
 
-  addListener() {
-    // Demo启用message模块，messageService不为空
-    this.getUserModel().getNimSdk().messageService!.on("onSendMessage", (message: V2NIMMessage) => {
-      shownListenerDialog('onSendMessage', JSON.stringify(message, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
-      messages.map(message => {
-        const title = message.senderId;
-        const text = message.text ?? '无内容';
-        this.notificationOperations.publishBasicNotification(title, text);
-      })
-
-      shownListenerDialog('onReceiveMessages', JSON.stringify(messages, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onReceiveP2PMessageReadReceipts", (readReceipts: V2NIMP2PMessageReadReceipt[]) => {
-      shownListenerDialog('onReceiveP2PMessageReadReceipts', JSON.stringify(readReceipts, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onReceiveTeamMessageReadReceipts", (readReceipts: V2NIMTeamMessageReadReceipt[]) => {
-      shownListenerDialog('onReceiveTeamMessageReadReceipts', JSON.stringify(readReceipts, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onMessageRevokeNotifications", (message: V2NIMMessageRevokeNotification[]) => {
-      shownListenerDialog('onMessageRevokeNotifications', JSON.stringify(message, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onMessageDeletedNotifications", (notification: V2NIMMessageDeletedNotification[]) => {
-      shownListenerDialog('onMessageDeletedNotifications', JSON.stringify(notification, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onClearHistoryNotifications", (notification: V2NIMClearHistoryNotification[]) => {
-      shownListenerDialog('onClearHistoryNotifications', JSON.stringify(notification, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onMessagePinNotification", (notification:  V2NIMMessagePinNotification) => {
-      shownListenerDialog('onMessagePinNotification', JSON.stringify(notification, null, 2))
-    })
-
-    this.getUserModel().getNimSdk().messageService!.on("onMessageQuickCommentNotification", (notification:  V2NIMMessageQuickCommentNotification) => {
-      shownListenerDialog('onMessageQuickCommentNotification', JSON.stringify(notification, null, 2))
-    })
-
-  }
+  //addListener() {
+  //  // Demo启用message模块，messageService不为空
+  //  this.getUserModel().getNimSdk().messageService!.on("onSendMessage", (message: V2NIMMessage) => {
+  //    shownListenerDialog('onSendMessage', JSON.stringify(message, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
+  //    messages.map(message => {
+  //      const title = message.senderId;
+  //      const text = message.text ?? '无内容';
+  //      this.notificationOperations.publishBasicNotification(title, text);
+  //    })
+  //
+  //    console.info('onReceiveMessages', JSON.stringify(messages, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onReceiveP2PMessageReadReceipts", (readReceipts: V2NIMP2PMessageReadReceipt[]) => {
+  //    shownListenerDialog('onReceiveP2PMessageReadReceipts', JSON.stringify(readReceipts, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onReceiveTeamMessageReadReceipts", (readReceipts: V2NIMTeamMessageReadReceipt[]) => {
+  //    shownListenerDialog('onReceiveTeamMessageReadReceipts', JSON.stringify(readReceipts, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onMessageRevokeNotifications", (message: V2NIMMessageRevokeNotification[]) => {
+  //    shownListenerDialog('onMessageRevokeNotifications', JSON.stringify(message, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onMessageDeletedNotifications", (notification: V2NIMMessageDeletedNotification[]) => {
+  //    shownListenerDialog('onMessageDeletedNotifications', JSON.stringify(notification, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onClearHistoryNotifications", (notification: V2NIMClearHistoryNotification[]) => {
+  //    shownListenerDialog('onClearHistoryNotifications', JSON.stringify(notification, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onMessagePinNotification", (notification:  V2NIMMessagePinNotification) => {
+  //    shownListenerDialog('onMessagePinNotification', JSON.stringify(notification, null, 2))
+  //  })
+  //
+  //  this.getUserModel().getNimSdk().messageService!.on("onMessageQuickCommentNotification", (notification:  V2NIMMessageQuickCommentNotification) => {
+  //    shownListenerDialog('onMessageQuickCommentNotification', JSON.stringify(notification, null, 2))
+  //  })
+  //
+  //}
 }

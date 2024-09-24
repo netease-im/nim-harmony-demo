@@ -11,6 +11,7 @@ import {
   V2NIMSendMessageParams,
   V2NIMSendMessageResult
 } from '@nimsdk/base';
+import { V2NIMStorageUtilImpl } from '@nimsdk/nim';
 
 import fs from '@ohos.file.fs';
 import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
@@ -77,8 +78,12 @@ struct SendFileMessagePage {
     const randomNum = getRandomNumber(0, 100);
 
     const filePath = fileDir + `/${randomNum}.${mediaType}`
-    let storageService = this.getUserModel().getNimSdk().storageService! // Demo启用message模块，messageService不为空
-    const path = await storageService.downloadFile(url, filePath, (percent) => {
+    let storageService = this.getUserModel().getNimSdk().storageService!
+    // Demo启用message模块，messageService不为空
+    let storageUtil = this.getUserModel().getNimSdk().storageUtil!
+    const thumbUrl = storageUtil.imageThumbUrl(url, 100)
+
+    const path = await storageService.downloadFile(thumbUrl, filePath, (percent) => {
       console.log(`downloadFile percent: ${percent}`)
     })
 

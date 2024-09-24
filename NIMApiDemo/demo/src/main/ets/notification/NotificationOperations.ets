@@ -25,7 +25,7 @@ export default class NotificationOperations {
   private context: Context;
   private basicContent: notificationManager.NotificationBasicContent;
 
-  constructor(context: Context) {
+  public constructor(context: Context) {
     this.context = context;
     let notificationTitle = '';
     let notificationText = '通知内容';

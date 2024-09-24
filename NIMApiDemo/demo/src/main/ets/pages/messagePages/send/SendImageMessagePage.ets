@@ -6,6 +6,7 @@ import {
   V2NIMError,
   V2NIMMessage,
   V2NIMMessageAttachment,
+  V2NIMMessageAttachmentUploadState,
   V2NIMMessageFileAttachment,
   V2NIMMessagePushConfig,
   V2NIMSendMessageParams,
@@ -83,21 +84,21 @@ struct SendImageMessagePage {
   }
 
   async downloadFile(url: string, mediaType: string): Promise<void> {
-    const catchDir = getContext(this).getApplicationContext().cacheDir
-    let fileDir = catchDir + '/nim';
-    if (!fs.accessSync(fileDir)) {
-      fs.mkdirSync(fileDir);
-    }
-
-    const randomNum = getRandomNumber(0, 100);
-
-    const filePath = fileDir + `/${randomNum}.${mediaType}`
-    let storageService = this.getUserModel().getNimSdk().storageService! // Demo启用message模块，messageService不为空
-    const path = await storageService.downloadFile(url, filePath, (percent) => {
-      console.log(`downloadFile percent: ${percent}`)
-    })
-
-    shownDialog(true, JSON.stringify(path, null, 2))
+    //const catchDir = getContext(this).getApplicationContext().cacheDir
+    //let fileDir = catchDir + '/nim';
+    //if (!fs.accessSync(fileDir)) {
+    //  fs.mkdirSync(fileDir);
+    //}
+    //
+    //const randomNum = getRandomNumber(0, 100);
+    //
+    //const filePath = fileDir + `/${randomNum}.${mediaType}`
+    //let storageService = this.getUserModel().getNimSdk().storageService! // Demo启用message模块，messageService不为空
+    //const path = await storageService.downloadFile(url, filePath, (percent) => {
+    //  console.log(`downloadFile percent: ${percent}`)
+    //})
+    console.error('messageUrl', url)
+    //shownDialog(true, JSON.stringify(url, null, 2))
   }
 
   async sendImageMessage(): Promise<void> {
@@ -115,7 +116,7 @@ struct SendImageMessagePage {
 
       // 2.读取系统相册 => buffer
       let uriFile = fs.openSync(this.selectPhotoUri, fs.OpenMode.READ_ONLY);
-      let buffer = new ArrayBuffer(4096*512);
+      let buffer = new ArrayBuffer(4096*4096);
 
       let readLen = fs.readSync(uriFile.fd, buffer);
       console.info('readSync data to file succeed and buffer size is:' + readLen);
@@ -143,8 +144,8 @@ struct SendImageMessagePage {
       let messageResult: V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId, params,
         onUploadProgress)
       const attachment: V2NIMMessageFileAttachment = messageResult.message.attachment as V2NIMMessageFileAttachment
-      this.downloadFile(attachment.url as string, 'png')
-      shownDialog(true, JSON.stringify(messageResult, null, 2))
+      //this.downloadFile(attachment.url as string, 'png')
+      shownDialog(true, JSON.stringify(attachment, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }
@@ -168,6 +169,12 @@ struct SendImageMessagePage {
   }
 
   aboutToAppear() {
+    this.getUserModel().getNimSdk().messageService?.on('onSendMessage', (message: V2NIMMessage) => {
+      if (message.attachmentUploadState === V2NIMMessageAttachmentUploadState.V2NIM_MESSAGE_ATTACHMENT_UPLOAD_STATE_SUCCESS) {
+        const attachment: V2NIMMessageFileAttachment = message.attachment as V2NIMMessageFileAttachment
+        this.downloadFile(attachment.url as string, 'png')
+      }
+    })
     this.conversationId = ''
     this.pushPayload =
       `{"harmonyField":{"payload": {"notification": {"category": "IM","clickAction": {"actionType": 0}}},"pushOptions": {"testMessage": true}}}`

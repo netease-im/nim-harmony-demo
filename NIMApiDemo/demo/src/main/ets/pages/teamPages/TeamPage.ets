@@ -1,10 +1,10 @@
 
 import {CommonConstants as Constants, shownListenerDialog} from '../../common/CommonConstants';
-import ClassifyModel from '../../message/viewmodel/ClassifyModel';
-import FunctionalModel from '../../message/viewmodel/CourseModel';
-import CourseItem from '../../message/view/CourseItem';
-import ClassifyItem from '../../message/view/ClassityItem';
-import ClassifyViewModel from '../../message/viewmodel/ClassifyViewModel';
+import ClassifyModel from '../../viewmodel/ClassifyModel';
+import FunctionalModel from '../../viewmodel/CourseModel';
+import CourseItem from '../../view/CourseItem';
+import ClassifyItem from '../../view/ClassityItem';
+import ClassifyViewModel from '../../viewmodel/ClassifyViewModel';
 import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
 import { V2NIMTeam, V2NIMTeamJoinActionInfo, V2NIMTeamMember } from '@nimsdk/base';

@@ -1,5 +1,5 @@
 
-import {CommonConstants} from '../../common/CommonConstants'
+import {CommonConstants} from '../common/CommonConstants'
 import FunctionalModel from '../viewmodel/CourseModel';
 
 @Component

@@ -39,7 +39,6 @@ export struct LoginComponent {
   @State loginStatus: string = 'loginStatus:init';
   @State userName: string = '';
   @State password: string = '';
-  //@State loginOptionValue: string = '{"retryCount":3,"timeout":60000,"forceMode":false,"authType":0,"syncLevel":0}';
   @State forceMode: boolean = false;
   @State retryCount: number = 3;
   @State timeout: number = 60000;
@@ -52,9 +51,6 @@ export struct LoginComponent {
   @State reconnectDelayProviderTimeout: number = 3000;
   @State extensionProviderEnabled: boolean = false;
   @State extensionProviderValue: string = '';
-
-  // @State extensionProviderAutogen: boolean = false;
-  // @State extensionProviderReturnUndefined: boolean = false;
 
   aboutToAppear() {
     this.loadLastLoginAccount()
@@ -86,10 +82,6 @@ export struct LoginComponent {
         }
       }) {
         Column() {
-          // Column() {
-          //   Text(this.connectStatus).fontColor(Color.Gray).width('100%').backgroundColor(Color.Yellow)
-          //   Text(this.loginStatus).fontColor(Color.Gray).width('100%').backgroundColor(Color.Yellow)
-          // }.width('100%')
 
           TextInput({ text: this.userName, placeholder: $r('app.string.username') })
             .width(CommonConstants.TEXT_INPUT_WIDTH_PERCENT)
@@ -408,6 +400,10 @@ export struct LoginComponent {
 
   async login(context: common.Context) {
     try {
+      if (!this.getUserModel().getNimSdk()) {
+        this.getUserModel().nimRepository.createDefaultNim(context)
+      }
+
       let loginOption = {
         retryCount: this.retryCount,
         forceMode: this.forceMode,

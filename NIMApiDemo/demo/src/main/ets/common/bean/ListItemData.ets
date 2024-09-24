@@ -12,7 +12,7 @@ export class ListItemData {
    */
   summary: Resource;
 
-  constructor(title: Resource, summary: Resource) {
+  public constructor(title: Resource, summary: Resource) {
     this.title = title
     this.summary = summary
   }

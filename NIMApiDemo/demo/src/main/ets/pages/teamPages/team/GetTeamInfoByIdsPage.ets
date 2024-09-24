@@ -1,14 +1,5 @@
 import {
-  V2NIMCreateTeamParams,
-  V2NIMCreateTeamResult,
-  V2NIMError,
-  V2NIMTeamAgreeMode,
-  V2NIMTeamChatBannedMode,
-  V2NIMTeamInviteMode,
-  V2NIMTeamJoinMode,
-  V2NIMTeamType,
-  V2NIMTeamUpdateExtensionMode,
-  V2NIMTeamUpdateInfoMode
+    V2NIMError, V2NIMTeamType
 } from '@nimsdk/base';
 import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
 import CustomDialogWidget from '../../../dialog/CustomDialogWidget';
@@ -44,8 +35,6 @@ function blueTextStyle() {
 struct GetTeamInfoByIdsPage {
   @State teamIds: string = ''
   @State teamType: V2NIMTeamType = V2NIMTeamType.V2NIM_TEAM_TYPE_NORMAL
-
-  private userModel: UserModel | undefined;
   customDialogController: CustomDialogController = new CustomDialogController({
     builder: CustomDialogWidget({
       hobbies: $hobbies
@@ -57,6 +46,7 @@ struct GetTeamInfoByIdsPage {
       dy: -20
     }
   });
+  private userModel: UserModel | undefined;
 
   @Builder
   imageButton(src: Resource) {
@@ -159,7 +149,8 @@ struct GetTeamInfoByIdsPage {
 
 function processV2ErrorForPrint(err: V2NIMError): string {
   if (err instanceof Error) {
-    let desc = `\n${err.name}\n code: ${err.code}\n message: "${err.message}"\n detail: ${err.detail ? JSON.stringify(err.detail) : ''}`
+    let desc = `\n${err.name}\n code: ${err.code}\n message: "${err.message}"\n detail: ${err.detail ?
+    JSON.stringify(err.detail) : ''}`
     if (err?.detail?.rawError) {
       desc += `\n rawError: ${err.detail.rawError.message}`
     }

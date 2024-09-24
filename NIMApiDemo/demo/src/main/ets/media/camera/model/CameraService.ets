@@ -59,7 +59,7 @@ class CameraService {
   };
   private curSceneMode: camera.SceneMode = camera.SceneMode.NORMAL_PHOTO;
 
-  constructor() {
+  public constructor() {
   }
 
   setSavePictureCallback(callback: (photoAsset: photoAccessHelper.PhotoAsset) => void): void {

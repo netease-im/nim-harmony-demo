@@ -212,6 +212,7 @@ const LINK_TEAM_DATA: LinkDataModel[] = [
   new LinkDataModel(1, 'Team', 9, 'team', 'transferTeamOwner'),
   new LinkDataModel(1, 'Team', 10, 'team', 'setTeamChatBannedMode'),
   new LinkDataModel(1, 'Team', 11, 'team', 'getTeamJoinActionInfoList'),
+  new LinkDataModel(1, 'Team', 12, 'team', 'searchTeamByKeyword'),
   new LinkDataModel(2, 'TeamMember', 1, 'teamMember', 'inviteMember'),
   new LinkDataModel(2, 'TeamMember', 2, 'teamMember', 'acceptInvitation'),
   new LinkDataModel(2, 'TeamMember', 3, 'teamMember', 'rejectInvitation'),
@@ -226,6 +227,7 @@ const LINK_TEAM_DATA: LinkDataModel[] = [
   new LinkDataModel(2, 'TeamMember', 12, 'teamMember', 'getTeamMemberList'),
   new LinkDataModel(2, 'TeamMember', 13, 'teamMember', 'getTeamMemberListByIds'),
   new LinkDataModel(2, 'TeamMember', 14, 'teamMember', 'getTeamMemberInvitor'),
+  new LinkDataModel(2, 'TeamMember', 15, 'teamMember', 'searchTeamMembers')
 ]
 
 const LINK_MINE_DATA: LinkDataModel[] = [
@@ -259,6 +261,17 @@ const LINK_MINE_DATA: LinkDataModel[] = [
   new LinkDataModel(5, 'Login', 4, 'login', 'getConnectStatus'),
   new LinkDataModel(5, 'Login', 5, 'login', 'getDataSync'),
   new LinkDataModel(5, 'Login', 6, 'login', 'getLoginClients'),
+  new LinkDataModel(6, 'storage', 1, 'storage', 'sdkLogDirPath'),
+  new LinkDataModel(6, 'storage', 2, 'storage', 'sdkLogPath'),
+  new LinkDataModel(6, 'storage', 3, 'storage', 'uploadSDKLogs'),
+  new LinkDataModel(6, 'storage', 4, 'storage', 'addCustomStorageScene'),
+  new LinkDataModel(6, 'storage', 5, 'storage', 'getStorageSceneList'),
+  new LinkDataModel(6, 'storage', 6, 'storage', 'createUploadFileTask'),
+  new LinkDataModel(6, 'storage', 7, 'storage', 'uploadFile'),
+  new LinkDataModel(6, 'storage', 8, 'storage', 'cancelUploadFile'),
+  new LinkDataModel(6, 'storage', 9, 'storage', 'downloadFile'),
+  new LinkDataModel(6, 'storage', 10, 'storage', 'cancelDownloadFile'),
+  new LinkDataModel(6, 'storage', 11, 'storage', 'shortUrlToLong')
 ]
 
 const LINK_Signalling_DATA: LinkDataModel[] = [

@@ -17,7 +17,7 @@ export default class ClassifyModel {
    */
   courseList: Array<FunctionalModel>;
 
-  constructor(classifyId: number, classifyName: string, courseList: Array<FunctionalModel>) {
+  public constructor(classifyId: number, classifyName: string, courseList: Array<FunctionalModel>) {
     this.classifyId = classifyId;
     this.classifyName = classifyName;
     this.courseList = courseList;

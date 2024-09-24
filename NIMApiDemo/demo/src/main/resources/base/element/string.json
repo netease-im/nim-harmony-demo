@@ -13,6 +13,10 @@
       "value": "permission_get_network_info_reason"
     },
     {
+      "name": "permission_get_wifi_info_reason",
+      "value": "permission_get_wifi_info_reason"
+    },
+    {
       "name": "reason",
       "value": "permission_get_camera_info_reason"
     },
@@ -443,6 +447,14 @@
     {
       "name": "index_title",
       "value": "网络性能分析"
+    },
+    {
+      "name": "system_feature",
+      "value": "系统功能"
+    },
+    {
+      "name": "wifi_manager",
+      "value": "WIFI Manager"
     },
     {
       "name": "test_url",

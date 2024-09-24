@@ -4,7 +4,7 @@ import { geoLocationManager } from '@kit.LocationKit';
 export class LocationManger {
   //request: geoLocationManager.SingleLocationRequest
 
-  constructor() {
+  public constructor() {
     //this.request = {
     //  'locatingPriority': geoLocationManager.LocatingPriority.PRIORITY_LOCATING_SPEED,
     //  'locatingTimeoutMs': 10000

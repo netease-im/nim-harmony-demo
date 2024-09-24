@@ -63,7 +63,7 @@ struct GetConversationListPage {
       const res = await conversationService.getConversationList(offset, limit)
       console.info(`-----------查询会话列表成功----------- ${res}`)
       const ret = JSON.stringify(res, null, 2)
-      shownDialog(true, JSON.stringify(res, null, 2))
+      shownDialog(true, JSON.stringify(res, null, 2), res.conversationList.length.toString())
       this.offsetParam = res.offset
     }
     catch (err) {

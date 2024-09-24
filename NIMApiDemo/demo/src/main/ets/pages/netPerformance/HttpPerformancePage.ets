@@ -4,7 +4,7 @@ import { http } from '@kit.NetworkKit';
 import { hilog } from '@kit.PerformanceAnalysisKit';
 import { Constants } from '../../common/Constants';
 
-const TAG = 'HttpPerformancePage';
+const TAG = '[HttpPerformancePage]';
 
 const STRING_DNS = 'dns';
 const STRING_TCP = 'tcp';

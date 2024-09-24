@@ -18,8 +18,8 @@ import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 import { router } from '@kit.ArkUI';
 import { AudioRecorder } from './system/AudioRecorder';
-import { AudioCapturer } from './system/AudioCapturer';
 import { LoggerServiceImpl } from '@nimsdk/nim';
+import { AudioRecordManager } from './system/AudioCapturer';
 
 @Extend(TextInput)
 function inputStyle() {
@@ -56,8 +56,6 @@ struct SendAudioMessagePage {
   @State audioFilePath: string = ''
   @State pushPayload: string = ''
   private userModel: UserModel | undefined;
-  //private audioRecorder: AudioRecorder = new AudioRecorder(getContext(this).getApplicationContext())
-  private audioCapturer: AudioCapturer = new AudioCapturer(getContext(this).getApplicationContext())
   private file?: fs.File
   @Builder
   imageButton(src: Resource) {
@@ -98,23 +96,11 @@ struct SendAudioMessagePage {
       let conversationId: string = this.getConversationId()
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
-      //const catchDir = getContext(this).getApplicationContext().cacheDir
-      //let fileDir = catchDir + '/nim';
-      //if (!fs.accessSync(fileDir)) {
-      //  fs.mkdirSync(fileDir);
-      //}
-      //const filePath = fileDir + '/audio.aac'
-      //let file = await fileIo.open(filePath, fileIo.OpenMode
-      //  .READ_WRITE | fileIo.OpenMode.CREATE);
-      //let buffer = getContext(this).resourceManager.getMediaContentSync($r
-      //('app.media.audio').id);
-      //// Write the read ArrayBuffer to the new media file.
-      //let writeLen = await fileIo.write(file.fd, buffer.buffer);
       //TODO 录音功能还有问题，代码仅供参考
-      console.info('read bufffer size =' + this.file?.path);
+      console.info('read bufffer size =' + this.audioFilePath);
 
       let message: V2NIMMessage = await messageCreator.createAudioMessage(this.audioFilePath,
-        'nim')
+        'nim', 'nim_default_im', 3000)
       let messageResult: V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
       shownDialog(true, JSON.stringify(messageResult, null, 2))
       const attachment: V2NIMMessageFileAttachment = messageResult.message.attachment as V2NIMMessageFileAttachment
@@ -124,7 +110,7 @@ struct SendAudioMessagePage {
     }
   }
 
-  async initRecorder(): Promise<void> {
+  async startRecorder(): Promise<void> {
     try {
       const catchDir = getContext(this).getApplicationContext().cacheDir
       let fileDir = catchDir + '/nim';
@@ -132,36 +118,10 @@ struct SendAudioMessagePage {
         fs.mkdirSync(fileDir);
       }
 
-      this.audioFilePath = fileDir + `/${Date.now()}.wav`
-      this.file = fs.openSync(this.audioFilePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
-      let bufferSize = 0
-      //this.audioRecorder.startRecordingProcess(this.audioFilePath)
-      this.audioCapturer.init((buffer) => {
-        let options = {
-          length: buffer.byteLength
-        } as Options
+      this.audioFilePath = fileDir + `/${Date.now()}.m4a`
+      //this.file = fs.openSync(this.audioFilePath, fs.OpenMode.READ_WRITE | fs.OpenMode.CREATE);
+      AudioRecordManager.instance.startRecordingProcess(this.audioFilePath)
 
-        fs.writeSync(this.file?.fd, buffer, options);
-        bufferSize += buffer.byteLength;
-        console.info(`read bufffer size`, bufferSize)
-      })
-      shownDialog(true, JSON.stringify('start audio recorder', null, 2))
-    } catch (error) {
-      shownDialog(false, processV2ErrorForPrint(error))
-    }
-  }
-
-  async startRecorder(): Promise<void> {
-    try {
-      //const catchDir = getContext(this).getApplicationContext().cacheDir
-      //let fileDir = catchDir + '/nim';
-      //if (!fs.accessSync(fileDir)) {
-      //  fs.mkdirSync(fileDir);
-      //}
-      //
-      //this.audioFilePath = fileDir + `/${Date.now()}.aac`
-      //this.audioRecorder.startRecordingProcess(this.audioFilePath)
-      this.audioCapturer.start()
       shownDialog(true, JSON.stringify('start audio recorder', null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
@@ -170,11 +130,10 @@ struct SendAudioMessagePage {
 
   async stopRecorder(): Promise<void> {
     try {
-     //await this.audioRecorder.stopRecordingProcess(this.audioFilePath)
-      this.audioCapturer.stop(() => {
-        fs.close(this.file)
-        this.audioCapturer.release()
+      AudioRecordManager.instance.stopRecordingProcess().then(() => {
+
       })
+
       shownDialog(true, JSON.stringify('stop audio recorder', null, 2))
 
     } catch (error) {
@@ -281,21 +240,8 @@ struct SendAudioMessagePage {
               })
 
             Line().lineStyle()
-            Button(('init'), { type: ButtonType.Capsule })
-              .width(CommonConstants.BUTTON_WIDTH)
-              .height($r('app.float.login_button_height'))
-              .fontSize($r('app.float.normal_text_size'))
-              .fontWeight(FontWeight.Medium)
-              .backgroundColor($r('app.color.login_button_color'))
-              .margin({
-                top: $r('app.float.button_margin_top'),
-                bottom: $r('app.float.login_button_margin_bottom')
-              })
-              .onClick(() => {
-                this.initRecorder()
-              })
 
-            Button(('start'), { type: ButtonType.Capsule })
+            Button(('startRecord'), { type: ButtonType.Capsule })
               .width(CommonConstants.BUTTON_WIDTH)
               .height($r('app.float.login_button_height'))
               .fontSize($r('app.float.normal_text_size'))

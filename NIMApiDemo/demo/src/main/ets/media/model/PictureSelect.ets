@@ -5,7 +5,7 @@ import { BusinessError } from '@kit.BasicServicesKit';
 let uris: Array<string> = [];
 
 export async function photoPickerGetUri(): Promise<string> {
-  try{
+  try {
     let PhotoSelectOptions = new picker.PhotoSelectOptions()
     PhotoSelectOptions.MIMEType = picker.PhotoViewMIMETypes.IMAGE_TYPE
     PhotoSelectOptions.maxSelectNumber = 1

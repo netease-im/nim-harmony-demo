@@ -13,7 +13,7 @@ export class AudioRecorder {
   };
   //avConfig: media.AVRecorderConfig
 
-  constructor(context: Context) {
+  public constructor(context: Context) {
 
 
   }

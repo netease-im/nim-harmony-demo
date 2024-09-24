@@ -12,7 +12,7 @@ class NotificationManager {
   countsByType: Array<number> = new Array(NOTIFICATION_TYPE_SIZE + 1);
   badgeNum: number = 0;
 
-  constructor() {
+  public constructor() {
     this.countsByType.fill(0);
     for (let i = 0; i < NOTIFICATION_TYPE_SIZE + 1; i++) {
       this.typeNotifications[i] = new Array();

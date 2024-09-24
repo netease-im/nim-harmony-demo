@@ -27,7 +27,7 @@ export class CameraManager {
     height: 1080
   }]
 
-  constructor() {
+  public constructor() {
   }
 
   async initCamera(context: Context, cameraIndex: number, surfaceId: string, isLocal: boolean) {

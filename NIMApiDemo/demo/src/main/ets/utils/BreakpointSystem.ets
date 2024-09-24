@@ -14,7 +14,7 @@ declare interface BreakPointTypeOption<T> {
 export class BreakpointType<T> {
   options: BreakPointTypeOption<T>;
 
-  constructor(option: BreakPointTypeOption<T>) {
+  public constructor(option: BreakPointTypeOption<T>) {
     this.options = option;
   }
 

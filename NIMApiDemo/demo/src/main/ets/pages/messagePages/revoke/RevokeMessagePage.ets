@@ -35,7 +35,7 @@ function blueTextStyle() {
 @Component
 struct RevokeMessagePage {
   @State conversationId: string = '';
-  @State conversationType: V2NIMConversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_UNKNOWN;
+  @State conversationType: V2NIMConversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P;
   @State text: string = '';
   @State isShowProgress: boolean = false;
   @State message: V2NIMMessage = {} as V2NIMMessage

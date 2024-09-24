@@ -208,7 +208,7 @@ export class CommonConstants {
   static readonly PUSH_SERVICE_URL: string = 'pages/PushServicePage';
   static readonly CONVERSATION_SERVICE_URL: string = 'pages/ConversationServicePage';
   static readonly NOS_SERVICE_URL: string = 'pages/NosServicePage';
-  static readonly INITIALIZE_PAGE_URL: string = 'pages/Initialize1Page';
+  static readonly INITIALIZE_PAGE_URL: string = 'pages/InitializePage';
 
   /**
    * Mine page url.
@@ -574,9 +574,9 @@ function truncateText(message: string) {
     return ""
   }
 
-  if (message.length > 1000) {
+  if (message.length > 100000) {
     console.warn("shownDialog:" + message);
-    message = message.slice(0, 1000) +
+    message = message.slice(0, 100000) +
       "\n...........................\n\n\n---------\nPlease check the console log for the full content.";
   }
   return message;
@@ -584,10 +584,11 @@ function truncateText(message: string) {
 
 export async function shownDialog(result: boolean, message: string, title?: string): Promise<void> {
   message = truncateText(message);
+  console.log(`API CALL: ${title}`, JSON.stringify(message, null, 0))
 
   AlertDialog.show(
     {
-      title: result? 'Success' + `${title}` : 'Failed'+ `${title}`,
+      title: result? 'Success ' + `${title?? ''}` : 'Failed'+ `${title?? ''}`,
       message: message,
       autoCancel: true,
       alignment: DialogAlignment.Bottom,

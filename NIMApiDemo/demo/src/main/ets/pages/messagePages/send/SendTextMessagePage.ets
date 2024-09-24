@@ -51,6 +51,7 @@ struct SendTextMessagePage {
   @State isShowProgress: boolean = false;
   @State pictureUri: string = ''
   @State pushPayload: string = ''
+  @State configUnreadEnable: boolean = true
   private userModel: UserModel | undefined;
 
   @Builder
@@ -79,7 +80,17 @@ struct SendTextMessagePage {
       if (!message.pushConfig) {
         message.pushConfig = {} as V2NIMMessagePushConfig
       }
+
+      message.pushConfig.pushEnabled = true
+      message.pushConfig.pushNickEnabled =  true
+      message.pushConfig.pushContent = 'y'
       message.pushConfig.pushPayload = this.pushPayload
+      //
+      message.pushConfig.forcePush = false
+      message.pushConfig.forcePushAccountIds = []
+      message.pushConfig.forcePushContent = 'y'
+
+      //message.pushConfig.forcePushAccountIds = []
       // {
       //   "harmonyField": {
       //     "pushOptions": {
@@ -94,7 +105,19 @@ struct SendTextMessagePage {
       //     }
       //   }
       // }`
-      const jsonObject: NIMEStrAnyObj = JSON.parse(message.pushConfig.pushPayload);
+      //const jsonObject: NIMEStrAnyObj = JSON.parse(message.pushConfig.pushPayload);
+
+      // messageConfig
+      if (message.messageConfig) {
+        // set messageConfig.unreadEnabled
+        message.messageConfig.unreadEnabled = this.configUnreadEnable
+      } else {
+        message.messageConfig = {
+          // ...
+          unreadEnabled: this.configUnreadEnable
+          // ...
+        }
+      }
 
       let messageResult: V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId)
       shownDialog(true, JSON.stringify(messageResult, null, 2))
@@ -158,7 +181,7 @@ struct SendTextMessagePage {
               .fontColor($r('app.color.login_more_text_color'))
               .margin({ bottom: $r('app.float.login_more_margin_bottom'), top: $r('app.float.login_more_margin_top') })
 
-            TextInput({ text: this.conversationId, placeholder: $r('app.string.conversation_id') })
+            TextInput({ text: this.conversationId, placeholder: this.conversationId })
               .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
               .type(InputType.Normal)
               .inputStyle()
@@ -203,6 +226,37 @@ struct SendTextMessagePage {
                   }
                 })
               Text('superTeam')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+
+            Line().lineStyle()
+
+
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'unread enable', group: 'messageConfigUnreadEnableGroup' }).checked(true)
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.configUnreadEnable = true
+                  }
+                })
+              Text('unread enable')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'unread disable', group: 'messageConfigUnreadEnableGroup' })
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.configUnreadEnable = false
+                  }
+                })
+              Text('unread disable')
                 .fontSize($r('app.float.normal_text_size'))
                 .fontColor($r('app.color.login_more_text_color'))
                 .lineHeight(20)

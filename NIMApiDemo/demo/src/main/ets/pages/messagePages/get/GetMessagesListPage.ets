@@ -38,6 +38,8 @@ struct GetMessagesListPage {
   @State isOnlyRemoveLocal: boolean = false;
   @State limit: number = 10;
   @State queryDirection: V2NIMQueryDirection = V2NIMQueryDirection.V2NIM_QUERY_DIRECTION_DESC;
+  @State reverse: boolean = false;
+  @State onlyQueryLocal: boolean = false
 
   private timeOutId: number = -1;
   private userModel: UserModel | undefined;
@@ -83,7 +85,8 @@ struct GetMessagesListPage {
       const option: V2NIMMessageListOption = {
         conversationId: this.getConversationId,
         limit: this.limit,
-        direction: this.queryDirection
+        direction: this.queryDirection,
+        onlyQueryLocal: this.onlyQueryLocal
       }
       const messageList: V2NIMMessage[] = await messageService.getMessageList(option)
       shownDialog(true, JSON.stringify(messageList, null, 2))
@@ -195,6 +198,75 @@ struct GetMessagesListPage {
           }
           Line().lineStyle()
 
+
+          Text('Reverse')
+            .fontSize($r('app.float.normal_text_size'))
+            .fontColor($r('app.color.login_more_text_color'))
+            .textAlign(TextAlign.Start)
+            .width('100%')
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'true', group: 'reverseGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.reverse = true
+                }
+              })
+            Text('true')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'false', group: 'reverseGroup' }).checked(true)
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.reverse = false
+                }
+              })
+            Text('false')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Line().lineStyle()
+          Text('onlyQueryLocal')
+            .fontSize($r('app.float.normal_text_size'))
+            .fontColor($r('app.color.login_more_text_color'))
+            .textAlign(TextAlign.Start)
+            .width('100%')
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'true', group: 'reverseGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.onlyQueryLocal = true
+                }
+              })
+            Text('true')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'false', group: 'reverseGroup' }).checked(true)
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.onlyQueryLocal = false
+                }
+              })
+            Text('false')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Line().lineStyle()
           Button(('send'), { type: ButtonType.Capsule })
             .width(CommonConstants.BUTTON_WIDTH)
             .height($r('app.float.login_button_height'))

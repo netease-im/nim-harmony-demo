@@ -1,4 +1,4 @@
-import {CommonConstants} from '../../common/CommonConstants'
+import {CommonConstants} from '../common/CommonConstants'
 @Component
 export default struct ClassifyItem {
   classifyName?: string;
