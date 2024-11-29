@@ -124,6 +124,8 @@ export default struct SignallingPage {
   }
 
   addListener() {
+    this.getUserModel().getNimSdk().signallingService!.removeAllListeners()
+
     this.getUserModel().getNimSdk().signallingService!.on("onOnlineEvent", (event: V2NIMSignallingEvent ) => {
       shownListenerDialog('onOnlineEvent', JSON.stringify(event, null, 2))
     })

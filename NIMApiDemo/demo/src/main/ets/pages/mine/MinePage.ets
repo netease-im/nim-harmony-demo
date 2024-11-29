@@ -6,9 +6,15 @@ import ClassifyItem from '../../view/ClassityItem';
 import ClassifyViewModel from '../../viewmodel/ClassifyViewModel';
 import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
-import { V2NIMFriend, V2NIMFriendAddApplication,
+import {
+  V2NIMConversation,
+  V2NIMCustomNotification,
+  V2NIMFriend, V2NIMFriendAddApplication,
   V2NIMFriendAddRejection,
-  V2NIMFriendDeletionType, V2NIMUser } from '@nimsdk/base';
+  V2NIMFriendDeletionType,
+  V2NIMMessage,
+  V2NIMProxyNotify,
+  V2NIMUser } from '@nimsdk/base';
 
 @Entry
 @Component
@@ -126,6 +132,8 @@ export default struct MinePage {
 
   addListener() {
     // Demo启用user模块，userService不为空
+    this.getUserModel().getNimSdk().userService!.removeAllListeners()
+
     this.getUserModel().getNimSdk().userService!.on("onUserProfileChanged", (users: V2NIMUser[]) => {
       shownListenerDialog('onUserProfileChanged', JSON.stringify(users, null, 2))
     })
@@ -139,12 +147,24 @@ export default struct MinePage {
     })
 
     // Demo启用friend模块，friendService不为空
+    this.getUserModel().getNimSdk().friendService!.removeAllListeners()
+
     this.getUserModel().getNimSdk().friendService!.on("onFriendAdded", (friend: V2NIMFriend) => {
       shownListenerDialog('onFriendAdded', JSON.stringify(friend, null, 2))
+      const conversationId: string = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(friend.accountId)
+      this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
+        .then((conversation: V2NIMConversation) => {
+          // 获取新好友的会话，以刷新 UI 层 Model
+        })
     })
 
     this.getUserModel().getNimSdk().friendService!.on("onFriendDeleted", (accountId: string, deletionType: V2NIMFriendDeletionType) => {
       shownListenerDialog('onFriendDeleted', JSON.stringify(`${accountId} + ${deletionType}`, null, 2))
+      const conversationId: string = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(accountId)
+      this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
+        .then((conversation: V2NIMConversation) => {
+          // 获取被删好友的会话，以刷新 UI 层 Model
+        })
     })
 
     this.getUserModel().getNimSdk().friendService!.on("onFriendAddApplication", (application: V2NIMFriendAddApplication) => {
@@ -157,6 +177,30 @@ export default struct MinePage {
 
     this.getUserModel().getNimSdk().friendService!.on("onFriendInfoChanged", (friend: V2NIMFriend) => {
       shownListenerDialog('onFriendInfoChanged', JSON.stringify(friend, null, 2))
+      const conversationId: string = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(friend.accountId)
+      this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
+        .then((conversation: V2NIMConversation) => {
+          // 获取好友信息变更的情况，以刷新 UI 层 Model
+        })
+    })
+
+    // Demo 启动 ysf 模块，ysfService 不为空
+    this.getUserModel().getNimSdk().ysfService!.removeAllListeners()
+
+    this.getUserModel().getNimSdk().ysfService!.on("onSendMessage", (message: V2NIMMessage) => {
+      shownListenerDialog('onSendMessage', JSON.stringify(message, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().ysfService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
+      shownListenerDialog('onReceiveMessages', JSON.stringify(messages, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().ysfService!.on("onReceiveCustomNotifications", (notifications: V2NIMCustomNotification[]) => {
+      shownListenerDialog('onReceiveCustomNotifications', JSON.stringify(notifications, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().passthroughService!.on("onProxyNotify", (proxyNotify: V2NIMProxyNotify) => {
+      shownListenerDialog('onProxyNotify', JSON.stringify(proxyNotify, null, 2))
     })
   }
 }

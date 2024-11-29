@@ -68,6 +68,7 @@ struct CreateUploadFileTaskPage {
   getRandomNumber(min: number, max: number): number {
     return Math.random() * (max - min) + min;
   }
+
   async createUploadFileTask() {
     try {
       const catchDir = getContext(this).getApplicationContext().cacheDir
@@ -85,6 +86,14 @@ struct CreateUploadFileTaskPage {
       // Write the read ArrayBuffer to the new media file.
       let writeLen = await fileIo.write(file.fd, buffer.buffer);
       console.info('write success,len=' + writeLen);
+      const randomNum1 = this.getRandomNumber(1, 4);
+      const filePath1 = fileDir + '/fig' + `${randomNum1}` + '.png'
+      let file1 = await fileIo.open(filePath1, fileIo.OpenMode
+      .READ_WRITE | fileIo.OpenMode.CREATE);
+      let buffer1 = getContext(this).resourceManager.getMediaContentSync($r('app.media.love').id);
+      // Write the read ArrayBuffer to the new media file.
+      let writeLen1 = await fileIo.write(file1.fd, buffer1.buffer);
+      console.info('write success,len=' + writeLen1);
       const storageService = this.getUserModel().getNimSdk().storageService!
 
       const taskParams = {
@@ -92,9 +101,32 @@ struct CreateUploadFileTaskPage {
         sceneName: this.sceneName
       } as V2NIMUploadFileParams
 
+      const taskParams1 = {
+        filePath: filePath1,
+        sceneName: this.sceneName
+      } as V2NIMUploadFileParams
+
       const fileTask = storageService.createUploadFileTask(taskParams)
 
-      shownDialog(true, JSON.stringify(fileTask, null, 2))
+    storageService.uploadFile(fileTask, (progress: number)=> {
+      //console.info(`uploadFile progress ${fileTask?.taskId}`, progress)
+    }).then(url => {
+      console.info(`uploadFile progress 0 ${fileTask?.taskId}`, url)
+    }).catch((err: Error) => {
+      console.info(`uploadFile progress ${fileTask?.taskId}`, err)
+    })
+
+      const fileTask1 = storageService.createUploadFileTask(taskParams1)
+
+      storageService.uploadFile(fileTask1, (progress: number)=> {
+        //console.info(`uploadFile progress ${fileTask1?.taskId}`, progress)
+      }).then(url => {
+        console.info(`uploadFile progress 0 ${fileTask1?.taskId}`, url)
+      }).catch((err: Error) => {
+        console.info(`uploadFile progress ${fileTask?.taskId}`, err)
+      })
+
+      shownDialog(true, JSON.stringify(fileTask1, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }

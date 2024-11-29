@@ -112,7 +112,7 @@ struct DeleteFriendPage {
               .type(InputType.Number)
               .inputStyle()
               .onChange((value: string) => {
-                this.deleteAlias = parseInt(value) > 1 ? true : false;
+                this.deleteAlias = parseInt(value) >= 1 ? true : false;
               })
             Line().lineStyle()
 

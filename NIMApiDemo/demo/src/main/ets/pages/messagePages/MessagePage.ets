@@ -9,6 +9,8 @@ import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
 import {
   V2NIMClearHistoryNotification,
+  V2NIMDownloadAttachmentType,
+  V2NIMDownloadMessageAttachmentParams,
   V2NIMMessage,
   V2NIMMessageDeletedNotification,
   V2NIMMessagePinNotification,
@@ -35,7 +37,7 @@ export default struct MessagePage {
       this.classifyList = ClassifyViewModel.getLinkData();
       this.requestSuccess = true;
     }, Constants.LOADING_DURATION);
-    //this.addListener()
+    this.addListener()
   }
 
 
@@ -134,21 +136,44 @@ export default struct MessagePage {
     return UserModel.getInstance(getContext(this).getApplicationContext());
   }
 
-  //addListener() {
+  addListener() {
   //  // Demo启用message模块，messageService不为空
+
+    this.getUserModel().getNimSdk().messageService!.removeAllListeners()
+
   //  this.getUserModel().getNimSdk().messageService!.on("onSendMessage", (message: V2NIMMessage) => {
   //    shownListenerDialog('onSendMessage', JSON.stringify(message, null, 2))
   //  })
   //
-  //  this.getUserModel().getNimSdk().messageService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
-  //    messages.map(message => {
-  //      const title = message.senderId;
-  //      const text = message.text ?? '无内容';
-  //      this.notificationOperations.publishBasicNotification(title, text);
-  //    })
-  //
-  //    console.info('onReceiveMessages', JSON.stringify(messages, null, 2))
-  //  })
+    this.getUserModel().getNimSdk().messageService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
+      messages.map(async message => {
+        const title = message.senderId;
+        const text = message.text ?? '无内容';
+        this.notificationOperations.publishBasicNotification(title, text);
+        const catchDir = getContext(this).getApplicationContext().cacheDir
+        let fileDir = catchDir + '/nim';
+        //if (!fs.accessSync(fileDir)) {
+        //  fs.mkdirSync(fileDir);
+        //}
+
+        //const randomNum = getRandomNumber(0, 100);
+
+        //const filePath = fileDir + `/${randomNum}.${mediaType}`
+        let storageService = this.getUserModel().getNimSdk().storageService! // Demo启用message模块，messageService不为空
+        const downloadParams: V2NIMDownloadMessageAttachmentParams = {
+          attachment: message.attachment,
+          type: V2NIMDownloadAttachmentType.V2NIM_DOWNLOAD_ATTACHMENT_TYPE_THUMBNAIL
+        } as V2NIMDownloadMessageAttachmentParams
+        const path = await storageService.downloadAttachment(downloadParams, (percent) => {
+          console.log(`downloadFile percent: ${percent}`)
+        })
+        console.log('messageUrl', path)
+        shownDialog(true, JSON.stringify(path, null, 2))
+      })
+
+      console.info('onReceiveMessages', JSON.stringify(messages, null, 2))
+      shownDialog(true, JSON.stringify(JSON.stringify(messages, null, 2)))
+    })
   //
   //  this.getUserModel().getNimSdk().messageService!.on("onReceiveP2PMessageReadReceipts", (readReceipts: V2NIMP2PMessageReadReceipt[]) => {
   //    shownListenerDialog('onReceiveP2PMessageReadReceipts', JSON.stringify(readReceipts, null, 2))
@@ -178,5 +203,5 @@ export default struct MessagePage {
   //    shownListenerDialog('onMessageQuickCommentNotification', JSON.stringify(notification, null, 2))
   //  })
   //
-  //}
+  }
 }

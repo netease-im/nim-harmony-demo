@@ -1,4 +1,6 @@
-import { V2NIMError,
+import {
+  V2NIMConversationType,
+  V2NIMError,
   V2NIMMessage,
   V2NIMMessageListOption, V2NIMQueryDirection } from '@nimsdk/base';
 import { CommonConstants,
@@ -34,6 +36,7 @@ function blueTextStyle() {
 @Component
 struct GetMessagesListPage {
   @State conversationId: string = '';
+  @State conversationType: V2NIMConversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P
   @State text: string = '';
   @State isOnlyRemoveLocal: boolean = false;
   @State limit: number = 10;
@@ -44,7 +47,7 @@ struct GetMessagesListPage {
   private timeOutId: number = -1;
   private userModel: UserModel | undefined;
   private messages: V2NIMMessage[] = []
-  private getConversationId = ''
+  private achorMessage?: V2NIMMessage
   @Builder
   imageButton(src: Resource) {
     Button({ type: ButtonType.Circle, stateEffect: true }) {
@@ -64,11 +67,7 @@ struct GetMessagesListPage {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
       let message: V2NIMMessage = messageCreator.createCustomMessage(`${this.text}`, `{"1":"1"}`)
-      const conversationId = this.getUserModel().getNimSdk().loginService
-      .getLoginUser() + '|1|' + this.conversationId
-      this.getConversationId = conversationId
-      const result = await messageService.sendMessage(message,
-        conversationId)
+      const result = await messageService.sendMessage(message, this.getConversationId())
       this.messages.push(result.message)
       shownDialog(true, JSON.stringify(result.message, null, 2))
     } catch (error) {
@@ -79,16 +78,16 @@ struct GetMessagesListPage {
   async getMessage(): Promise<void> {
     try {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
-      const conversationId = this.getUserModel().getNimSdk().loginService
-        .getLoginUser() + '|1|' + this.conversationId
-      this.getConversationId = conversationId
       const option: V2NIMMessageListOption = {
-        conversationId: this.getConversationId,
+        conversationId: this.getConversationId(),
         limit: this.limit,
         direction: this.queryDirection,
-        onlyQueryLocal: this.onlyQueryLocal
+        onlyQueryLocal: true,
+        anchorMessage: this.achorMessage == undefined ? this.messages[0] : this.achorMessage
       }
+
       const messageList: V2NIMMessage[] = await messageService.getMessageList(option)
+      this.achorMessage = messageList[messageList.length - 1];
       shownDialog(true, JSON.stringify(messageList, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
@@ -100,8 +99,7 @@ struct GetMessagesListPage {
         console.info(`-----------deleteMessage----------- \n`)
         // let conversationId: string = 'cjl64|1|cjl1'
         let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
-        await messageService.deleteMessages(this.messages, '123', this
-          .isOnlyRemoveLocal)
+        await messageService.deleteMessages(this.messages, '123', this.isOnlyRemoveLocal)
         shownDialog(true, JSON.stringify('this.message'))
       } catch (error) {
         console.log('----------- deleteMessage -----------', error)
@@ -115,6 +113,23 @@ struct GetMessagesListPage {
   aboutToDisappear() {
     clearTimeout(this.timeOutId);
     this.timeOutId = -1;
+  }
+
+  getConversationId(): string {
+    let conversationId = ''
+    switch (this.conversationType) {
+      case V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P:
+        conversationId = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(this.conversationId)
+        break
+      case V2NIMConversationType.V2NIM_CONVERSATION_TYPE_TEAM:
+        conversationId = this.getUserModel().getNimSdk().conversationIdUtil.teamConversationId(this.conversationId)
+        break
+      case V2NIMConversationType.V2NIM_CONVERSATION_TYPE_SUPER_TEAM:
+        conversationId = this.getUserModel().getNimSdk().conversationIdUtil.superTeamConversationId(this.conversationId)
+        break
+    }
+
+    return conversationId
   }
 
   build() {
@@ -138,6 +153,52 @@ struct GetMessagesListPage {
               this.conversationId = value;
             })
           Line().lineStyle()
+
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'p2p', group: 'conversationTypeGroup' }).checked(true)
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P
+                }
+              })
+            Text('p2p')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'team', group: 'conversationTypeGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_TEAM
+                }
+              })
+            Text('team')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+            Radio({ value: 'superTeam', group: 'conversationTypeGroup' })
+              .onChange((isChecked: boolean) => {
+                if (isChecked) {
+                  this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_SUPER_TEAM
+                }
+              })
+            Text('superTeam')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .lineHeight(20)
+              .fontWeight(500)
+          }
+
+          Line().lineStyle()
+
           TextInput({ placeholder: `send message text ` })
             .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
             .type(InputType.Normal)

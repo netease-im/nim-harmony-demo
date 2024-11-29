@@ -49,6 +49,7 @@ export struct LoginComponent {
   @State tokenProviderAutogen: boolean = false;
   @State reconnectDelayProviderEnabled: boolean = false;
   @State reconnectDelayProviderTimeout: number = 3000;
+  @State openMessageFilter: boolean = false;
   @State extensionProviderEnabled: boolean = false;
   @State extensionProviderValue: string = '';
 
@@ -360,6 +361,15 @@ export struct LoginComponent {
                 this.reconnectDelayProviderTimeout = timeout
               })
           }
+
+          Row() {
+            Text('messageServiceConfig.messageFilter').fontWeight(FontWeight.Bold)
+            Checkbox()
+              .select(this.openMessageFilter)
+              .onChange((on: boolean) => {
+                this.openMessageFilter = on
+              })
+          }
         }
         .justifyContent(FlexAlign.Start)
       }
@@ -401,7 +411,7 @@ export struct LoginComponent {
   async login(context: common.Context) {
     try {
       if (!this.getUserModel().getNimSdk()) {
-        this.getUserModel().nimRepository.createDefaultNim(context)
+        this.getUserModel().nimRepository.createDefaultNim(context, this.openMessageFilter)
       }
 
       let loginOption = {
@@ -433,6 +443,13 @@ export struct LoginComponent {
       try {
         let token = await this.md5(this.password)
         //this.addLoginListener()
+
+        // ysf account
+        if (this.getUserModel().getAppKey() === '42f144f67fdbbb187d72be11528a512b') {
+          this.userName = '017838b3b3d998faa7a41e858fcb3e4d'
+          token = '0897da60bfe1404e9e8f0a3e812a1f2d'
+        }
+
         await this.getUserModel().getNimSdk().loginService.login(this.userName, token, loginOption)
         const accid = this.getUserModel().getNimSdk().loginService.getLoginUser()
 

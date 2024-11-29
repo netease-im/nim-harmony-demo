@@ -152,8 +152,29 @@ const LINK_DATA: LinkDataModel[] = [
   new LinkDataModel(10, 'send message', 7, 'send', 'sendLocationMessage'),
   new LinkDataModel(10, 'send message', 8, 'send', 'sendCustomMessage'),
   new LinkDataModel(10, 'send message', 9, 'send', 'sendCallMessage'),
+  new LinkDataModel(10, 'send message', 10, 'send', 'sendTeamTargetMessage'),
+  new LinkDataModel(10, 'send message', 11, 'send', 'sendAIMessage'),
   new LinkDataModel(11, '本地存储', 1, 'persist', 'persistMessage'),
   new LinkDataModel(12, '自定义通知', 1, 'notification', 'CustomNotificationService'),
+  new LinkDataModel(13, '消息更新', 1, 'modify', 'modifyTextMessage'),
+  new LinkDataModel(13, '消息更新', 2, 'modify', 'modifyTipsMessage'),
+  new LinkDataModel(13, '消息更新', 3, 'modify', 'modifyImageMessage'),
+  new LinkDataModel(13, '消息更新', 4, 'modify', 'modifyAudioMessage'),
+  new LinkDataModel(13, '消息更新', 5, 'modify', 'modifyVideoMessage'),
+  new LinkDataModel(13, '消息更新', 6, 'modify', 'modifyFileMessage'),
+  new LinkDataModel(13, '消息更新', 7, 'modify', 'modifyCustomMessage'),
+  new LinkDataModel(13, '消息更新', 8, 'modify', 'modifyCallMessage'),
+  new LinkDataModel(13, '消息更新', 9, 'modify', 'modifyLocationMessage'),
+  new LinkDataModel(14, '消息序列化', 1, 'converter', 'converterTextMessage'),
+  new LinkDataModel(14, '消息序列化', 2, 'converter', 'converterTipsMessage'),
+  new LinkDataModel(14, '消息序列化', 3, 'converter', 'converterImageMessage'),
+  new LinkDataModel(14, '消息序列化', 4, 'converter', 'converterAudioMessage'),
+  new LinkDataModel(14, '消息序列化', 5, 'converter', 'converterVideoMessage'),
+  new LinkDataModel(14, '消息序列化', 6, 'converter', 'converterFileMessage'),
+  new LinkDataModel(14, '消息序列化', 7, 'converter', 'converterCustomMessage'),
+  new LinkDataModel(14, '消息序列化', 8, 'converter', 'converterCallMessage'),
+  new LinkDataModel(14, '消息序列化', 9, 'converter', 'converterLocationMessage'),
+  // new LinkDataModel(15, 'others', 9, 'others', 'registerMessageFilter'),
 ]
 
 const CONVERSATION_LINK_DATA: LinkDataModel[] = [
@@ -232,10 +253,11 @@ const LINK_TEAM_DATA: LinkDataModel[] = [
 
 const LINK_MINE_DATA: LinkDataModel[] = [
   new LinkDataModel(1, 'User', 1, 'user', 'getUserList'),
-  new LinkDataModel(1, 'User', 2, 'user', 'addUserToBlockList'),
-  new LinkDataModel(1, 'User', 3, 'user', 'getBlockList'),
-  new LinkDataModel(1, 'User', 4, 'user', 'removeUserFromBlockList'),
-  new LinkDataModel(1, 'User', 5, 'user', 'updateSelfUserProfile'),
+  new LinkDataModel(1, 'User', 2, 'user', 'getUserListFromCloud'),
+  new LinkDataModel(1, 'User', 3, 'user', 'addUserToBlockList'),
+  new LinkDataModel(1, 'User', 4, 'user', 'getBlockList'),
+  new LinkDataModel(1, 'User', 5, 'user', 'removeUserFromBlockList'),
+  new LinkDataModel(1, 'User', 6, 'user', 'updateSelfUserProfile'),
   new LinkDataModel(2, 'Friend', 1, 'friend', 'addFriend'),
   new LinkDataModel(2, 'Friend', 2, 'friend', 'checkFriend'),
   new LinkDataModel(2, 'Friend', 3, 'friend', 'deleteFriend'),
@@ -245,6 +267,8 @@ const LINK_MINE_DATA: LinkDataModel[] = [
   new LinkDataModel(2, 'Friend', 7, 'friend', 'rejectAddApplication'),
   new LinkDataModel(2, 'Friend', 8, 'friend', 'setFriendInfo'),
   new LinkDataModel(2, 'Friend', 9, 'friend', 'getAddApplicationList'),
+  new LinkDataModel(2, 'Friend', 10, 'friend', 'clearAddApplication'),
+  new LinkDataModel(2, 'Friend', 11, 'friend', 'deleteAddApplication'),
   new LinkDataModel(3, 'Push', 1, 'push', 'pushService'),
   new LinkDataModel(4, 'Setting', 1, 'setting', 'getConversationMuteStatus'),
   new LinkDataModel(4, 'Setting', 2, 'setting', 'setTeamMessageMuteMode'),
@@ -261,6 +285,7 @@ const LINK_MINE_DATA: LinkDataModel[] = [
   new LinkDataModel(5, 'Login', 4, 'login', 'getConnectStatus'),
   new LinkDataModel(5, 'Login', 5, 'login', 'getDataSync'),
   new LinkDataModel(5, 'Login', 6, 'login', 'getLoginClients'),
+  new LinkDataModel(5, 'Login', 7, 'login', 'getCurrentLoginClient'),
   new LinkDataModel(6, 'storage', 1, 'storage', 'sdkLogDirPath'),
   new LinkDataModel(6, 'storage', 2, 'storage', 'sdkLogPath'),
   new LinkDataModel(6, 'storage', 3, 'storage', 'uploadSDKLogs'),
@@ -271,7 +296,26 @@ const LINK_MINE_DATA: LinkDataModel[] = [
   new LinkDataModel(6, 'storage', 8, 'storage', 'cancelUploadFile'),
   new LinkDataModel(6, 'storage', 9, 'storage', 'downloadFile'),
   new LinkDataModel(6, 'storage', 10, 'storage', 'cancelDownloadFile'),
-  new LinkDataModel(6, 'storage', 11, 'storage', 'shortUrlToLong')
+  new LinkDataModel(6, 'storage', 11, 'storage', 'shortUrlToLong'),
+  // ysf
+  new LinkDataModel(7, 'ysf', 1, 'ysf', 'sendCustomNotification'),
+  new LinkDataModel(7, 'ysf', 2, 'ysf', 'sendTextMessage'),
+  new LinkDataModel(7, 'ysf', 3, 'ysf', 'sendTipsMessage'),
+  new LinkDataModel(7, 'ysf', 4, 'ysf', 'sendFileMessage'),
+  new LinkDataModel(7, 'ysf', 5, 'ysf', 'sendImageMessage'),
+  new LinkDataModel(7, 'ysf', 6, 'ysf', 'sendAudioMessage'),
+  new LinkDataModel(7, 'ysf', 7, 'ysf', 'sendVideoMessage'),
+  new LinkDataModel(7, 'ysf', 8, 'ysf', 'sendLocationMessage'),
+  new LinkDataModel(7, 'ysf', 9, 'ysf', 'sendCustomMessage'),
+  new LinkDataModel(7, 'ysf', 10, 'ysf', 'sendCallMessage'),
+  // passthrough
+  new LinkDataModel(8, 'passthrough', 1, 'passthrough', 'httpProxy'),
+  // fts
+  new LinkDataModel(9, 'fts', 1, 'fts', 'search'),
+new LinkDataModel(10, 'subscribe', 1, 'subscribe', 'unsubscribeUserStatus'),
+new LinkDataModel(10, 'subscribe', 2, 'subscribe', 'subscribeUserStatus'),
+new LinkDataModel(10, 'subscribe', 3, 'subscribe', 'queryUserStatusSubscriptions'),
+new LinkDataModel(10, 'subscribe', 4, 'subscribe', 'publishCustomUserStatus'),
 ]
 
 const LINK_Signalling_DATA: LinkDataModel[] = [
@@ -289,8 +333,4 @@ const LINK_Signalling_DATA: LinkDataModel[] = [
   new LinkDataModel(4, '邀请', 2, 'signalling', 'acceptInvite'),
   new LinkDataModel(4, '邀请', 3, 'signalling', 'cancelInvite'),
   new LinkDataModel(4, '邀请', 4, 'signalling', 'rejectInvite'),
-
-
-
-
 ]

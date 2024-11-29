@@ -24,8 +24,9 @@
     "@nimsdk/user": "file:../../libs/user.har",
     "@nimsdk/team": "file:../../libs/team.har",
     "@nimsdk/conversation": "file:../../libs/conversation.har",
-    "@nimsdk/conversationgroup": "file:../../libs/conversationgroup.har",
     "@nimsdk/signalling": "file:../../libs/signalling.har",
     "@nimsdk/localconversation": "file:../../libs/localconversation.har",
+    "@nimsdk/search": "file:../../libs/search.har",
+    "@nimsdk/ysf": "file:../../libs/ysf.har"
   }
 }

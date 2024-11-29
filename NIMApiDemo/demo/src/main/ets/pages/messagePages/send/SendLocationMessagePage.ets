@@ -1,18 +1,11 @@
-import { fileIo } from '@kit.CoreFileKit';
 
 import {
-  NIMEStrAnyObj,
-  V2NIMConversationType,
-  V2NIMError,
-  V2NIMMessage,
-  V2NIMMessageAttachment,
-  V2NIMMessageFileAttachment,
-  V2NIMMessagePushConfig,
-  V2NIMSendMessageParams,
-  V2NIMSendMessageResult
+    NIMEStrAnyObj,
+    V2NIMConversationType,
+    V2NIMError,
+    V2NIMMessage, V2NIMMessagePushConfig, V2NIMSendMessageResult
 } from '@nimsdk/base';
 
-import fs from '@ohos.file.fs';
 import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
 import { LocationManger } from './system/LocationManger';
@@ -72,7 +65,6 @@ struct SendLocationMessagePage {
   getUserModel(): UserModel {
     return UserModel.getInstance(getContext(this).getApplicationContext());
   }
-
 
   async getLocation(): Promise<void> {
     try {

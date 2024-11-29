@@ -18,6 +18,7 @@
   "repository": "https://github.com/netease-im/nim-harmony-demo",
   "dynamicDependencies": {},
   "dependencies": {
+    "@nimsdk/base": "10.1.0",
     "@nimsdk/vendor": "0.7.0",
   }
 }

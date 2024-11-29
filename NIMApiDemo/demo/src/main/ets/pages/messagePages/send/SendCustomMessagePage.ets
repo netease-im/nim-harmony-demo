@@ -1,20 +1,12 @@
-import { fileIo } from '@kit.CoreFileKit';
 
 import {
-  NIMEStrAnyObj,
-  V2NIMConversationType,
-  V2NIMError,
-  V2NIMMessage,
-  V2NIMMessageAttachment,
-  V2NIMMessageFileAttachment,
-  V2NIMMessagePushConfig,
-  V2NIMSendMessageParams,
-  V2NIMSendMessageResult
+    V2NIMConversationType,
+    V2NIMError,
+    V2NIMMessage,
+    V2NIMMessageAttachment, V2NIMSendMessageResult
 } from '@nimsdk/base';
 
-import fs from '@ohos.file.fs';
 import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
-// import { PictureFiles } from '../../../message/view/PictureFiles';
 import { UserModel } from '../../../viewmodel/UserModel';
 
 @Extend(TextInput)

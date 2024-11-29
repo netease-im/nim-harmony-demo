@@ -30,9 +30,11 @@ export class UserModel {
 
   public  nimRepository: NimRepository
   private loginCachePreferences: preferences.Preferences
+  private appKey: string
 
   public constructor(context: common.Context, mode?: USER_MODEL_LIST) {
     this.nimRepository = new NimRepository(context, mode)
+    this.appKey = ''
     //this.nimRepository.nim.loginService.on('onKickedOffline', detail => {
     //  console.log("onKickedOffline:" + JSON.stringify(detail))
     //  this.saveLastLoginAccount("")
@@ -64,10 +66,15 @@ export class UserModel {
 
   public initNim(initializeOptions: NIMInitializeOptions, serviceOptions?: NIMServiceOptions) {
     this.nimRepository.initNim(initializeOptions, serviceOptions);
+    this.appKey = initializeOptions.appkey
   }
 
   public getNimSdk(): NIMInterface {
     return this.nimRepository.nim;
+  }
+
+  public getAppKey(): string {
+    return this.appKey
   }
 
   public async loadLastLoginAccount() {

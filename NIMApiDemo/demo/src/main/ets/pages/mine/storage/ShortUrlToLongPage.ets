@@ -67,7 +67,7 @@ struct ShortUrlToLongPage {
   getSDKLogPath() {
     try {
       const storageService = this.getUserModel().getNimSdk().storageService!
-      const path = storageService.getSdkLogPath()
+      const path = storageService.shortUrlToLong('')
       shownDialog(true, JSON.stringify(path, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))

@@ -138,6 +138,8 @@ export default struct LocalConversationPage {
 
   addListener() {
     // Demo启用message模块，messageService不为空
+    this.getUserModel().getNimSdk().localConversationService!.removeAllListeners()
+
     this.getUserModel().getNimSdk().localConversationService!.on("onSyncStarted", () => {
       shownListenerDialog('onSyncStarted', JSON.stringify("", null, 2))
     })

@@ -1,4 +1,4 @@
-import { LogLevel, NIMInitializeOptions, NIMServiceOptions, V2NIMError } from '@nimsdk/base';
+import { LogLevel, NIMInitializeOptions, NIMServiceOptions, V2NIMProtocolFamily, V2NIMError } from '@nimsdk/base';
 import prompt from '@ohos.promptAction';
 import { CommonConstants, shownDialog } from '../common/CommonConstants';
 import CustomDialogWidget from '../dialog/CustomDialogWidget';
@@ -50,6 +50,7 @@ struct InitializePage {
   @State customClientType?: number = 0
   @State customTag?: string = ''
   @State isHttps: boolean = true
+  @State supportProtocolFamily: V2NIMProtocolFamily = V2NIMProtocolFamily.IPV4
   //pushServiceConfig
   @State harmonyCertificateName?: string = 'DEMO_HMOS_PUSH'
   //NIMHttpServiceConfig
@@ -115,15 +116,17 @@ struct InitializePage {
           linkUrl: this.linkUrl,
           customClientType: this.customClientType,
           customTag: this.customTag,
-          isHttps: this.isHttps
+          isHttps: this.isHttps,
+          supportProtocolFamily: this.supportProtocolFamily,
         },
         pushServiceConfig: {
           harmonyCertificateName: this.harmonyCertificateName
         },
-        httpServiceConfig: {
+        // 填了才有 httpServiceConfig
+        httpServiceConfig: (this.uploadReplaceFormat!.length > 0 && this.uploadReplaceFormat!.length > 0) ? {
           uploadReplaceFormat: this.uploadReplaceFormat,
           chunkUploadHost: this.chunkUploadHost
-        },
+        } : undefined,
         storageServiceConfig: {
           downloadHost: this.downloadHost,
           downloadReplaceFormat: this.downloadReplaceFormat
@@ -341,14 +344,50 @@ struct InitializePage {
                 .fontWeight(500)
             }
 
+            Line().lineStyle()
+
+            Text('supportProtocolFamily')
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .textAlign(TextAlign.Start)
+              .width('100%')
+            // IPv4
             Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
-              Radio({ value: 'false', group: 'isHttpsGroup' })
+              Radio({ value: 'IPv4', group: 'supportProtocolFamilyGroup' }).checked(true)
                 .onChange((isChecked: boolean) => {
                   if (isChecked) {
-                    this.isHttps = false
+                    this.supportProtocolFamily = V2NIMProtocolFamily.IPV4
                   }
                 })
-              Text('false')
+              Text('IPv4')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+            // IPv6
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'IPv6', group: 'supportProtocolFamilyGroup' })
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.supportProtocolFamily = V2NIMProtocolFamily.IPV6
+                  }
+                })
+              Text('IPv6')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+            // Dual Stack
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'Dual Stack', group: 'supportProtocolFamilyGroup' })
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.supportProtocolFamily = V2NIMProtocolFamily.DUAL_STACK
+                  }
+                })
+              Text('Dual Stack')
                 .fontSize($r('app.float.normal_text_size'))
                 .fontColor($r('app.color.login_more_text_color'))
                 .lineHeight(20)
@@ -419,8 +458,8 @@ struct InitializePage {
                 this.securityLevel = parseInt(value)
               })
             Line().lineStyle()
-            // REL
 
+            // REL
             Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
               Radio({ value: 'REL', group: 'initGroup' }).checked(true)
                 .onChange((isChecked: boolean) => {
@@ -459,6 +498,22 @@ struct InitializePage {
                   }
                 })
               Text('CUSTOM')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+
+            // YSF
+            // see https://docs.popo.netease.com/lingxi/f5adc516f6ed40419d1ee0896afadaac?canary=1&xyz=1724899896729&appVersion=4.11.0&deviceType=4&popo_hidenativebar=1&popo_noindicator=1&disposable_login_token=1&xyz=1724900434360#edit
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'YSF', group: 'initGroup' })
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.changeModel(3)
+                  }
+                })
+              Text('YSF')
                 .fontSize($r('app.float.normal_text_size'))
                 .fontColor($r('app.color.login_more_text_color'))
                 .lineHeight(20)
@@ -543,8 +598,8 @@ struct InitializePage {
       //pushServiceConfig
       this.harmonyCertificateName = 'DEMO_HMOS_PUSH'
       //NIMHttpServiceConfig
-      this.chunkUploadHost = ''
-      this.uploadReplaceFormat = ''
+      this.chunkUploadHost = 'https://wanproxy-web.127.net'
+      this.uploadReplaceFormat = 'https://{host}/{object}'
     } else if (this.model === 1) {
       // 正式服
       initializeOptions = {
@@ -579,8 +634,8 @@ struct InitializePage {
       //pushServiceConfig
       this.harmonyCertificateName = 'DEMO_HMOS_PUSH'
       //NIMHttpServiceConfig
-      this.chunkUploadHost = 'https://yunxinent-demo.netease.im'
-      this.uploadReplaceFormat = 'https://yunxinent-demo.netease.im/yunxin/{object}'
+      this.chunkUploadHost = 'https://wanproxy-web.127.net'
+      this.uploadReplaceFormat = 'https://{host}/{object}'
       this.downloadHost = ''
       this.downloadReplaceFormat = ''
       this.encrypt = false
@@ -603,8 +658,8 @@ struct InitializePage {
           harmonyCertificateName: "DEMO_HMOS_PUSH"
         },
         httpServiceConfig: {
-          chunkUploadHost: 'https://yunxinent-demo.netease.im',
-          uploadReplaceFormat: 'https://yunxinent-demo.netease.im/yunxin/{object}'
+          chunkUploadHost: 'https://wanproxy-web.127.net',
+          uploadReplaceFormat: 'https://{host}/{object}'
         },
         databaseServiceConfig: {
           encrypt: false,
@@ -623,9 +678,49 @@ struct InitializePage {
       //pushServiceConfig
       this.harmonyCertificateName = 'DEMO_HMOS_PUSH'
       //NIMHttpServiceConfig
-      this.chunkUploadHost = 'https://yunxinent-demo.netease.im'
-      this.uploadReplaceFormat = 'https://yunxinent-demo.netease.im/yunxin/{object}'
+      this.chunkUploadHost = 'https://wanproxy-web.127.net'
+      this.uploadReplaceFormat = 'https://{host}/{object}'
       this.encrypt = false
+    } else if (this.model === 3) {
+      // 云商服
+      initializeOptions = {
+        appkey: "42f144f67fdbbb187d72be11528a512b",
+        logLevel: LogLevel.Debug,
+        isOpenConsoleLog: true
+        // ...其他属性
+      };
+
+      serviceOptions = {
+        loginServiceConfig: {
+          lbsUrls: ['https://imtest-gy.netease.im/lbs/webconf.jsp?devflag=qytest'],
+          linkUrl: 'weblink-dev-gy.netease.im:443'
+        },
+        pushServiceConfig: {
+          harmonyCertificateName: "DEMO_HMOS_PUSH"
+        },
+        databaseServiceConfig: {
+          encrypt: false,
+          appKey: "42f144f67fdbbb187d72be11528a512b",
+        }
+      }
+
+      this.appkey = '42f144f67fdbbb187d72be11528a512b'
+      this.logLevel = LogLevel.Debug
+      this.xhrConnectTimeout = 30000
+      this.socketConnectTimeout = 30000
+      this.lbsUrls = ['https://imtest-gy.netease.im/lbs/webconf.jsp?devflag=qytest']
+      this.linkUrl = 'weblink-dev-gy.netease.im:443'
+      this.customClientType = 0
+      this.customTag = ''
+      //pushServiceConfig
+      this.harmonyCertificateName = 'DEMO_HMOS_PUSH'
+      //NIMHttpServiceConfig
+      this.chunkUploadHost = 'https://wanproxy-web.127.net'
+      this.uploadReplaceFormat = 'https://{host}/{object}'
+      this.downloadHost = ''
+      this.downloadReplaceFormat = ''
+      this.encrypt = false
+      this.securityLevel = 1
     } else {
       console.error('unknown config')
     }

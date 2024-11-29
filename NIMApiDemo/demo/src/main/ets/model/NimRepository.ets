@@ -1,14 +1,16 @@
 import { LogLevel, NIMInitializeOptions, NIMInterface, NIMServiceOptions, V2NIMProvidedServiceType } from '@nimsdk/base'
 import { V2NIMConversationServiceImpl } from '@nimsdk/conversation'
-import { V2NIMConversationGroupServiceImpl } from '@nimsdk/conversationgroup'
 import { V2NIMFriendServiceImpl } from '@nimsdk/friend'
 import { V2NIMLocalConversationServiceImpl } from '@nimsdk/localconversation'
-import { V2NIMClientAntispamUtil, V2NIMMessageServiceImpl } from '@nimsdk/message'
+import { V2NIMMessageServiceImpl, V2NIMClientAntispamUtil } from '@nimsdk/message'
 import { NIMSdk } from '@nimsdk/nim'
+import { V2NIMSearchServiceImpl } from '@nimsdk/search'
 import { V2NIMSignallingServiceImpl } from '@nimsdk/signalling'
 import { V2NIMTeamServiceImpl } from '@nimsdk/team'
 import { V2NIMUserServiceImpl } from '@nimsdk/user'
+import { YSFServiceImpl } from '@nimsdk/ysf'
 import common from '@ohos.app.ability.common'
+import { MessageFilterNotification } from '../utils/MessageFilterNotification'
 import { USER_MODEL_LIST } from '../viewmodel/UserModel'
 
 export class NimRepository {
@@ -30,7 +32,7 @@ export class NimRepository {
     return this._nim!
   }
 
-  createDefaultNim(context: common.Context) {
+  createDefaultNim(context: common.Context, onMessageFilter: boolean) {
     console.warn('------------- 创建NIM实例 --------------')
     // 正式服
     const initializeOptions: NIMInitializeOptions = {
@@ -50,8 +52,16 @@ export class NimRepository {
       },
       databaseServiceConfig: {
         encrypt: false,
-        appKey: "45c6af3c98409b18a84451215d0bdd6e",
+        appKey: "45c6af3c98409b18a84451215d0bdd6e"
       }
+    }
+
+    // open messageFilter if true
+    if (onMessageFilter) {
+      if (serviceOptions.messageServiceConfig === undefined) {
+        serviceOptions.messageServiceConfig = {}
+      }
+      serviceOptions.messageServiceConfig.messageFilter = new MessageFilterNotification()
     }
 
     this.initNim(initializeOptions, serviceOptions)
@@ -61,14 +71,10 @@ export class NimRepository {
   initNim(initializeOptions: NIMInitializeOptions, serviceOptions?: NIMServiceOptions) {
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_TEAM,
       (core, serviceName, serviceConfig) => new V2NIMTeamServiceImpl(core, serviceName, serviceConfig))
-    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CLIENT_ANTISPAM_UTIL,
-      (core, serviceName, serviceConfig) => new V2NIMClientAntispamUtil(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION,
       (core, serviceName, serviceConfig) => new V2NIMConversationServiceImpl(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_LOCAL_CONVERSATION,
       (core, serviceName, serviceConfig) => new V2NIMLocalConversationServiceImpl(core, serviceName, serviceConfig))
-    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION_GROUP,
-      (core, serviceName, serviceConfig) => new V2NIMConversationGroupServiceImpl(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_MESSAGE,
       (core, serviceName, serviceConfig) => new V2NIMMessageServiceImpl(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_USER,
@@ -76,7 +82,11 @@ export class NimRepository {
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_FRIEND,
       (core, serviceName, serviceConfig) => new V2NIMFriendServiceImpl(core, serviceName, serviceConfig));
     NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_SIGNALLING,
-      (core, serviceName, serviceConfig) => new V2NIMSignallingServiceImpl(core, serviceName, serviceConfig))
+      (core, serviceName, serviceConfig) => new V2NIMSignallingServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_YSF,
+      (core, serviceName, serviceConfig) => new YSFServiceImpl(core, serviceName, serviceConfig));
+    NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_SEARCH,
+      (core, serviceName, serviceConfig) => new V2NIMSearchServiceImpl(core, serviceName, serviceConfig));
     this._nim = NIMSdk.newInstance(this._context, initializeOptions, serviceOptions)
     console.log("nim from initNim: " + this._nim)
   }

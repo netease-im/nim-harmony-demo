@@ -1,15 +1,9 @@
 import { fileIo, picker } from '@kit.CoreFileKit';
 
 import {
-  NIMEStrAnyObj,
-  V2NIMConversationType,
-  V2NIMError,
-  V2NIMMessage,
-  V2NIMMessageAttachment,
-  V2NIMMessageFileAttachment,
-  V2NIMMessagePushConfig,
-  V2NIMSendMessageParams,
-  V2NIMSendMessageResult
+    V2NIMConversationType,
+    V2NIMError,
+    V2NIMMessage, V2NIMMessageFileAttachment, V2NIMSendMessageResult
 } from '@nimsdk/base';
 
 import fs from '@ohos.file.fs';
@@ -87,7 +81,6 @@ struct SendVideoMessagePage {
     shownDialog(true, JSON.stringify(path, null, 2))
   }
 
-
   async sendVideoMessage(): Promise<void> {
     try {
       console.info(`-----------sendVideoMessage----------- \n`)
@@ -103,7 +96,7 @@ struct SendVideoMessagePage {
 
       // 2.读取系统相册 => buffer
       let uriFile = fs.openSync(this.selectVideoUri, fs.OpenMode.READ_ONLY);
-      let buffer = new ArrayBuffer(4096*512);
+      let buffer = new ArrayBuffer(4096 * 512);
       let readLen = fs.readSync(uriFile.fd, buffer);
       console.info('readSync data to file succeed and buffer size is:' + readLen);
       fs.closeSync(uriFile);

@@ -1,17 +1,11 @@
 import { fileIo } from '@kit.CoreFileKit';
 
 import {
-  NIMEStrAnyObj,
-  V2NIMConversationType,
-  V2NIMError,
-  V2NIMMessage,
-  V2NIMMessageAttachment,
-  V2NIMMessageFileAttachment,
-  V2NIMMessagePushConfig,
-  V2NIMSendMessageParams,
-  V2NIMSendMessageResult
+    V2NIMConversationType,
+    V2NIMError,
+    V2NIMMessage, V2NIMMessageFileAttachment, V2NIMSendMessageParams,
+    V2NIMSendMessageResult
 } from '@nimsdk/base';
-import { V2NIMStorageUtilImpl } from '@nimsdk/nim';
 
 import fs from '@ohos.file.fs';
 import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
@@ -124,11 +118,13 @@ struct SendFileMessagePage {
         onUploadProgress)
       const attachment: V2NIMMessageFileAttachment = messageResult.message.attachment as V2NIMMessageFileAttachment
       this.downloadFile(attachment.url as string, 'png')
+
       shownDialog(true, JSON.stringify(messageResult, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }
   }
+
   getConversationId(): string {
     let conversationId = ''
     switch (this.conversationType) {

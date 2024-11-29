@@ -13,13 +13,15 @@
  * limitations under the License.
  */
 
-import {CommonConstants as Constants} from '../../common/CommonConstants';
+import { CommonConstants as Constants, shownListenerDialog } from '../../common/CommonConstants';
 import ClassifyModel from '../../viewmodel/ClassifyModel';
 import FunctionalModel from '../../viewmodel/CourseModel';
 import CourseItem from '../../view/CourseItem';
 import ClassifyItem from '../../view/ClassityItem';
 import ClassifyViewModel from '../../viewmodel/ClassifyViewModel';
 import router from '@ohos.router';
+import { UserModel } from '../../viewmodel/UserModel';
+import { V2NIMConversation, V2NIMConversationUnreadCountChangedFilter, V2NIMError } from '@nimsdk/base';
 
 @Entry
 @Component
@@ -36,6 +38,7 @@ export default struct ConversationPage {
       this.classifyList = ClassifyViewModel.getConversationLinkData();
       this.requestSuccess = true;
     }, Constants.LOADING_DURATION);
+    this.addListener()
   }
 
   @Builder ClassifyHeader(classifyName: string) {
@@ -126,5 +129,50 @@ export default struct ConversationPage {
     let pageName: string = courseItem.methodName.charAt(0).toUpperCase() + courseItem.methodName.slice(1) + 'Page'
     const url =  'pages/conversationPages/' + courseItem.module + '/' + pageName
     router.pushUrl({url: url})
+  }
+
+  getUserModel(): UserModel {
+    return UserModel.getInstance(getContext(this).getApplicationContext());
+  }
+  
+  addListener() {
+    // Demo启用message模块，messageService不为空
+    this.getUserModel().getNimSdk().conversationService!.removeAllListeners()
+
+    this.getUserModel().getNimSdk().conversationService!.on("onSyncStarted", () => {
+      shownListenerDialog('onSyncStarted', JSON.stringify("", null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onSyncFinished", () => {
+      shownListenerDialog('onSyncFinished', JSON.stringify("", null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onSyncFailed", (error: V2NIMError) => {
+      shownListenerDialog('onSyncFailed', JSON.stringify(error, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onConversationCreated", (conversation: V2NIMConversation) => {
+      shownListenerDialog('onConversationCreated', JSON.stringify(conversation, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onConversationDeleted", (conversationIds: string[]) => {
+      shownListenerDialog('onConversationDeleted', JSON.stringify(conversationIds, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onConversationChanged", (conversationList: V2NIMConversation[]) => {
+      shownListenerDialog('onConversationChanged', JSON.stringify(conversationList, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onTotalUnreadCountChanged", (unreadCount: number) => {
+      shownListenerDialog('onTotalUnreadCountChanged', JSON.stringify(unreadCount, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onUnreadCountChangedByFilter", (filter: V2NIMConversationUnreadCountChangedFilter, unreadCount: number) => {
+      shownListenerDialog('onUnreadCountChangedByFilter', JSON.stringify({ filter, unreadCount }, null, 2))
+    })
+
+    this.getUserModel().getNimSdk().conversationService!.on("onConversationReadTimeUpdated", (conversationId: string, readTime: number) => {
+      shownListenerDialog('onConversationReadTimeUpdated', JSON.stringify({conversationId, readTime}, null, 2))
+    })
   }
 }

@@ -125,6 +125,8 @@ export default struct TeamPage {
 
   addListener() {
     // Demo启用team模块，teamService不为空
+    this.getUserModel().getNimSdk().teamService!.removeAllListeners()
+
     this.getUserModel().getNimSdk().teamService!.on("onSyncStarted", () => {
       shownListenerDialog('onSyncStarted', JSON.stringify('start sync', null, 2))
     })
