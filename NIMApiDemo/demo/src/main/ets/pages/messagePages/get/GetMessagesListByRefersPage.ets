@@ -1,4 +1,4 @@
-import { V2NIMError, V2NIMMessage } from '@nimsdk/base';
+import { V2NIMConversationType, V2NIMError, V2NIMMessage } from '@nimsdk/base';
 import { CommonConstants,
   shownDialog } from '../../../common/CommonConstants';
 import { UserModel } from '../../../viewmodel/UserModel';
@@ -33,10 +33,14 @@ function blueTextStyle() {
 struct GetMessagesListByRefersPage {
   @State conversationId: string = '';
   @State text: string = '';
-  @State isOnlyRemoveLocal: boolean = false;
+  @State senderId: string = '';
+  @State receiverId: string = '';
+  @State messageClientId: string = '';
+  @State messageServerId: string = '';
+  @State createTime: number = 0;
+  @State conversationType: V2NIMConversationType = 1;
 
   private timeOutId: number = -1;
-  private userModel: UserModel | undefined;
   private messages: V2NIMMessage[] = []
 
   @Builder
@@ -58,10 +62,17 @@ struct GetMessagesListByRefersPage {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
       let message: V2NIMMessage = messageCreator.createTextMessage(`${this.text}`)
-      const conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + '|1|' + this.conversationId
+      const conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + `|${this.conversationType}|` + this.conversationId
       const result = await messageService.sendMessage(message,
         conversationId)
       this.messages.push(result.message)
+      this.messageClientId = result.message.messageClientId;
+      this.messageServerId = result.message.messageServerId;
+      this.senderId = result.message.senderId;
+      this.receiverId = result.message.receiverId;
+      this.createTime = result.message.createTime;
+      this.conversationType = result.message.conversationType;
+
       shownDialog(true, JSON.stringify(result.message, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
@@ -72,24 +83,13 @@ struct GetMessagesListByRefersPage {
     try {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const result = await messageService.getMessageListByRefers(this.messages)
-      shownDialog(true, JSON.stringify(result.length, null, 2))
+      shownDialog(true, JSON.stringify(result, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }
   }
 
-  async deleteMessage(): Promise<void> {
-      try {
-        console.info(`-----------deleteMessage----------- \n`)
-        let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
-        await messageService.deleteMessages(this.messages, '123', this
-          .isOnlyRemoveLocal)
-        shownDialog(true, JSON.stringify('this.message'))
-      } catch (error) {
-        console.log('-----------deleteMessage-----------', error)
-        shownDialog(false, JSON.stringify(processV2ErrorForPrint(error)))
-      }
-  }
+
   aboutToAppear(): void {
     this.conversationId = ''
   }
@@ -102,56 +102,144 @@ struct GetMessagesListByRefersPage {
   build() {
     Row() {
       Navigation() {
-        Column() {
-          Text('GetMessageList')
-            .fontSize($r('app.float.page_title_text_size'))
-            .fontWeight(FontWeight.Medium)
-            .fontColor($r('app.color.title_text_color'))
-          Text('get message by refer')
-            .fontSize($r('app.float.normal_text_size'))
-            .fontColor($r('app.color.login_more_text_color'))
-            .margin({ bottom: $r('app.float.login_more_margin_bottom'), top: $r('app.float.login_more_margin_top') })
+        Scroll() {
+          Column() {
+            Text('GetMessageByRefer')
+              .fontSize($r('app.float.page_title_text_size'))
+              .fontWeight(FontWeight.Medium)
+              .fontColor($r('app.color.title_text_color'))
 
-          TextInput({ text: this.conversationId, placeholder: $r('app.string.conversation_id') })
-            .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
-            .type(InputType.Normal)
-            .inputStyle()
-            .onChange((value: string) => {
-              this.conversationId = value;
-            })
-          Line().lineStyle()
-          TextInput({ placeholder: `send message text ` })
-            .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
-            .type(InputType.Normal)
-            .inputStyle()
-            .onChange((value: string) => {
-              this.text = value;
-            })
-          Line().lineStyle()
+            TextInput({ text: this.conversationId, placeholder: $r('app.string.conversation_id') })
+              .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
+              .type(InputType.Normal)
+              .inputStyle()
+              .onChange((value: string) => {
+                this.conversationId = value;
+              })
+            Line().lineStyle()
 
-          Button(('send'), { type: ButtonType.Capsule })
-            .width(CommonConstants.BUTTON_WIDTH)
-            .height($r('app.float.login_button_height'))
-            .fontSize($r('app.float.normal_text_size'))
-            .fontWeight(FontWeight.Medium)
-            .backgroundColor($r('app.color.login_button_color'))
-            .margin({ top: $r('app.float.button_margin_top'), bottom: $r('app.float.login_button_margin_bottom') })
-            .onClick(() => {
-              this.sendMessage();
-            })
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'p2p', group: 'conversationTypeGroup' }).checked(true)
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P
+                  }
+                })
+              Text('p2p')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
 
-          Button(('get message '), { type: ButtonType.Capsule })
-            .width(CommonConstants.BUTTON_WIDTH)
-            .height($r('app.float.login_button_height'))
-            .fontSize($r('app.float.normal_text_size'))
-            .fontWeight(FontWeight.Medium)
-            .backgroundColor($r('app.color.login_button_color'))
-            .margin({ top: $r('app.float.button_margin_top'), bottom: $r('app.float.login_button_margin_bottom') })
-            .onClick(() => {
-              this.getMessage();
-            })
-          Blank()
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'team', group: 'conversationTypeGroup' })
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_TEAM
+                  }
+                })
+              Text('team')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'superTeam', group: 'conversationTypeGroup' })
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.conversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_SUPER_TEAM
+                  }
+                })
+              Text('superTeam')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+
+            Line().lineStyle()
+
+            TextInput({ placeholder: `send message text ` })
+              .maxLength(CommonConstants.INPUT_ACCOUNT_LENGTH)
+              .type(InputType.Normal)
+              .inputStyle()
+              .onChange((value: string) => {
+                this.text = value;
+              })
+            Line().lineStyle()
+
+            TextInput({ placeholder: `sendId `, text: this.senderId })
+              .type(InputType.Normal)
+              .inputStyle()
+              .onChange((value: string) => {
+                this.senderId = value;
+              })
+            Line().lineStyle()
+            TextInput({ placeholder: `receiverId `, text: this.receiverId })
+              .type(InputType.Normal)
+              .inputStyle()
+              .onChange((value: string) => {
+                this.receiverId = value;
+              })
+            Line().lineStyle()
+            TextInput({ placeholder: `messageClientId `, text: this.messageClientId })
+              .type(InputType.Normal)
+              .inputStyle()
+              .onChange((value: string) => {
+                this.messageClientId = value;
+              })
+            Line().lineStyle()
+            TextInput({ placeholder: `messageServerId `, text: this.messageServerId })
+              .type(InputType.Normal)
+              .inputStyle()
+              .onChange((value: string) => {
+                this.messageServerId = value;
+              })
+            Line().lineStyle()
+
+            Text(`createTime`)
+              .fontSize($r('app.float.normal_text_size'))
+              .fontColor($r('app.color.login_more_text_color'))
+              .textAlign(TextAlign.Start)
+              .width('100%')
+            TextInput({ text: this.createTime.toString() })
+              .type(InputType.Number)
+              .inputStyle()
+              .onChange((value: string) => {
+                this.createTime = parseInt(value)
+              })
+              .width('100%')
+            Line().lineStyle()
+
+            Button(('send'), { type: ButtonType.Capsule })
+              .width(CommonConstants.BUTTON_WIDTH)
+              .height($r('app.float.login_button_height'))
+              .fontSize($r('app.float.normal_text_size'))
+              .fontWeight(FontWeight.Medium)
+              .backgroundColor($r('app.color.login_button_color'))
+              .margin({ top: $r('app.float.button_margin_top'), bottom: $r('app.float.login_button_margin_bottom') })
+              .onClick(() => {
+                this.sendMessage();
+              })
+
+            Button(('getMessageByRefer '), { type: ButtonType.Capsule })
+              .width(CommonConstants.BUTTON_WIDTH)
+              .height($r('app.float.login_button_height'))
+              .fontSize($r('app.float.normal_text_size'))
+              .fontWeight(FontWeight.Medium)
+              .backgroundColor($r('app.color.login_button_color'))
+              .margin({ top: $r('app.float.button_margin_top'), bottom: $r('app.float.login_button_margin_bottom') })
+              .onClick(() => {
+                this.getMessage();
+              })
+            Blank()
+          }
         }
+
+
         .backgroundColor($r('app.color.background'))
         .height(CommonConstants.FULL_PARENT)
         .width(CommonConstants.FULL_PARENT)

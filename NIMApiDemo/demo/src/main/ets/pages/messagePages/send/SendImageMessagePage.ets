@@ -17,6 +17,13 @@ import { CommonConstants, shownDialog } from '../../../common/CommonConstants';
 import { UIUtils } from '../../../utils/UIUtils';
 // import { PictureFiles } from '../../../message/view/PictureFiles';
 import { UserModel } from '../../../viewmodel/UserModel';
+import { CameraSelectView } from './system/CameraSelectView';
+import { MediaUtils } from './system/MediaUtils';
+import { common } from '@kit.AbilityKit';
+import { cameraPicker } from '@kit.CameraKit';
+import { photoAccessHelper } from '@kit.MediaLibraryKit';
+import { DeviceUtils } from './system/DeviceUtils';
+import { image } from '@kit.ImageKit';
 
 @Extend(TextInput)
 function inputStyle() {
@@ -63,7 +70,39 @@ struct SendImageMessagePage {
   @State photoUriArr: string[] = [];
   @State selectPhotoUri: string = '';
   private userModel: UserModel | undefined;
-
+  selectVideoView: CustomDialogController = new CustomDialogController({
+    builder: CameraSelectView({
+      onTakePhotoFromCamera: () => {
+        const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+        MediaUtils.showCameraPicker(context, cameraPicker.PickerMediaType.PHOTO).then((result) => {
+          if (result.uri) {
+            if (result.type === photoAccessHelper.PhotoType.IMAGE) {
+              this.sendImageMessage(result.uri)
+            } else if (result.type === photoAccessHelper.PhotoType.VIDEO) {
+              this.sendVideoMessage(result.uri, result.duration, result.width, result.height)
+            }
+          }
+        });
+      },
+      onTakeVideoFromCamera: () => {
+        const context: common.UIAbilityContext = getContext(this) as common.UIAbilityContext;
+        MediaUtils.showCameraPicker(context, cameraPicker.PickerMediaType.VIDEO).then((result) => {
+          if (result.uri) {
+            if (result.type === photoAccessHelper.PhotoType.IMAGE) {
+              this.sendImageMessage(result.uri)
+            } else if (result.type === photoAccessHelper.PhotoType.VIDEO) {
+              this.sendVideoMessage(result.uri, result.duration, result.width, result.height)
+            }
+          }
+        });
+      }
+    }),
+    cornerRadius: 0,
+    alignment: DialogAlignment.Bottom,
+    backgroundColor: Color.Transparent,
+    backgroundBlurStyle: BlurStyle.NONE,
+    height: 140,
+  })
   @Builder
   imageButton(src: Resource) {
     Button({ type: ButtonType.Circle, stateEffect: true }) {
@@ -101,55 +140,72 @@ struct SendImageMessagePage {
     shownDialog(true, JSON.stringify(path, null, 2))
   }
 
-  async sendImageMessage(): Promise<void> {
+  async sendImageMessage(uri: string): Promise<void> {
     try {
-      console.info(`-----------sendImageMessage----------- \n`)
-      let conversationId: string = this.getConversationId()
-      let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
-      const messageCreator = this.getUserModel().getNimSdk().messageCreator
-      // 1.创建文件缓存目录
-      const catchDir = getContext(this).getApplicationContext().cacheDir
-      let fileDir = catchDir + '/nim';
-      if (!fs.accessSync(fileDir)) {
-        fs.mkdirSync(fileDir);
-      }
-
-      // 2.读取系统相册 => buffer
-      let uriFile = fs.openSync(this.selectPhotoUri, fs.OpenMode.READ_ONLY);
-      let buffer = new ArrayBuffer(4096 * 4096);
-
-      let readLen = fs.readSync(uriFile.fd, buffer);
-      console.info('readSync data to file succeed and buffer size is:' + readLen);
-      fs.closeSync(uriFile);
-      // 3. 创建发送文件，将buffer 写入
-      const filePath = fileDir + `/${Date.now()}.png`
-      let file = await fileIo.open(filePath, fileIo.OpenMode
-        .READ_WRITE | fileIo.OpenMode.CREATE);
-      let writeLen = await fileIo.write(file.fd, buffer);
-      console.info('write success,len=' + writeLen);
-      // 发送消息
-      let message: V2NIMMessage = await messageCreator.createImageMessage(filePath,
-        'nim')
-      const onUploadProgress = (percentage: number) => {
-        console.info(`onUploadProgress: ${JSON.stringify(percentage)}`)
-        if (percentage >= 1) {
-          this.isShowProgress = false
+      if (uri.length > 0) {
+        let fileType = ""
+        const subStrings = uri.split(".");
+        if (subStrings.length > 0) {
+          fileType = subStrings[subStrings.length - 1];
         }
-      }
+        // 将文件 拷贝到 临时目录
+        const file = await fs.open(uri, fs.OpenMode.READ_ONLY)
+        // （以时间戳）生成一个新的文件名
+        const fileName = Date.now() + '.' + fileType
+        // 通过缓存路径+文件名 拼接出完整的路径
+        let fileDir = DeviceUtils.rootDirPath + '/temp/'
+        const copyFilePath = fileDir + fileName
+        if (!fs.accessSync(fileDir)) {
+          await fs.mkdir(fileDir)
+        }
+        await fs.copyFile(file.fd, copyFilePath)
+        const imageSource = image.createImageSource(file.fd);
+        let imageInfo = imageSource.getImageInfoSync()
+        let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
+        const messageCreator = this.getUserModel().getNimSdk().messageCreator
 
-      const params: V2NIMSendMessageParams = {
-        //   配置参数
+        const message = await messageCreator.createImageMessage(copyFilePath, file.name, undefined, imageInfo?.size.width,
+          imageInfo?.size.height);
+        await messageService.sendMessage(message, this.getConversationId())
+        await fs.close(file)
+        shownDialog(true, JSON.stringify(message, null, 2))
       }
-
-      let messageResult: V2NIMSendMessageResult = await messageService.sendMessage(message, conversationId, params,
-        onUploadProgress)
-      const attachment: V2NIMMessageFileAttachment = messageResult.message.attachment as V2NIMMessageFileAttachment
-      this.downloadFile(messageResult.message, 'png')
-      //shownDialog(true, JSON.stringify(attachment, null, 2))
-    } catch (error) {
-      shownDialog(false, processV2ErrorForPrint(error))
+    } catch (err) {
+      console.log("net ease send image error", err);
     }
   }
+
+  async sendVideoMessage(uri: string, duration?: number, width?: number, height?: number, thumbnail?: PixelMap) {
+    try {
+      let fileType = ""
+      const subStrings = uri.split(".");
+      if (subStrings.length > 0) {
+        fileType = subStrings[subStrings.length - 1];
+      }
+      // 将文件 拷贝到 临时目录
+      const file = await fs.open(uri, fs.OpenMode.READ_ONLY)
+      // （以时间戳）生成一个新的文件名
+      const fileName = Date.now() + '.' + fileType
+      // 通过缓存路径+文件名 拼接出完整的路径
+      let fileDir = DeviceUtils.rootDirPath + '/temp/'
+      const copyFilePath = fileDir + fileName
+      if (!fs.accessSync(fileDir)) {
+        await fs.mkdir(fileDir)
+      }
+      await fs.copyFile(file.fd, copyFilePath)
+      let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
+      const messageCreator = this.getUserModel().getNimSdk().messageCreator
+
+      const message = await messageCreator.createVideoMessage(copyFilePath, file.name, undefined, duration, width, height);
+
+      await messageService.sendMessage(message, this.getConversationId())
+      await fs.close(file)
+      shownDialog(true, JSON.stringify(message, null, 2))
+    } catch (err) {
+      console.log("net ease send video error", err);
+    }
+  }
+
 
   getConversationId(): string {
     let conversationId = ''
@@ -169,6 +225,7 @@ struct SendImageMessagePage {
   }
 
   aboutToAppear() {
+    DeviceUtils.rootDirPath = getContext(this).filesDir
     this.getUserModel().getNimSdk().messageService?.on('onSendMessage', (message: V2NIMMessage) => {
       if (message.attachmentUploadState ===
       V2NIMMessageAttachmentUploadState.V2NIM_MESSAGE_ATTACHMENT_UPLOAD_STATE_SUCCESS) {
@@ -286,13 +343,13 @@ struct SendImageMessagePage {
                     if (uri === undefined) {
                       continue
                     }
-                    pickerUriArr.unshift(uri)
+                    this.sendImageMessage(uri)
                   }
                   this.selectPhotoUri = pickerUriArr[0]
                 }, picker.PhotoViewMIMETypes.IMAGE_TYPE, 1);
               })
 
-            Button(('send Image'), { type: ButtonType.Capsule })
+            Button(('camera'), { type: ButtonType.Capsule })
               .width(CommonConstants.BUTTON_WIDTH)
               .height($r('app.float.login_button_height'))
               .fontSize($r('app.float.normal_text_size'))
@@ -304,11 +361,10 @@ struct SendImageMessagePage {
               })
               .onClick(() => {
                 this.isShowProgress = true;
-                this.sendImageMessage();
+                this.selectVideoView.open();
               })
           }
           .backgroundColor($r('app.color.background'))
-          // .height(CommonConstants.FULL_PARENT)
           .width(CommonConstants.FULL_PARENT)
           .padding({
             left: $r('app.float.page_padding_hor'),

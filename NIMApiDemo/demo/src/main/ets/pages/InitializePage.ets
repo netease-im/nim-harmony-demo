@@ -520,6 +520,21 @@ struct InitializePage {
                 .fontWeight(500)
             }
 
+            // PAB
+            Flex({ justifyContent: FlexAlign.Start, alignItems: ItemAlign.Center }) {
+              Radio({ value: 'PAB', group: 'initGroup' })
+                .onChange((isChecked: boolean) => {
+                  if (isChecked) {
+                    this.changeModel(4)
+                  }
+                })
+              Text('PAB')
+                .fontSize($r('app.float.normal_text_size'))
+                .fontColor($r('app.color.login_more_text_color'))
+                .lineHeight(20)
+                .fontWeight(500)
+            }
+
             Button(('InitSDK'), { type: ButtonType.Capsule })
               .width(CommonConstants.BUTTON_WIDTH)
               .height($r('app.float.login_button_height'))
@@ -719,6 +734,46 @@ struct InitializePage {
       this.uploadReplaceFormat = 'https://{host}/{object}'
       this.downloadHost = ''
       this.downloadReplaceFormat = ''
+      this.encrypt = false
+      this.securityLevel = 1
+    } else if (this.model === 4) {
+      // 云商服
+      initializeOptions = {
+        appkey: "1819b5a4cbd2098fc61b7728b33ec82d",
+        logLevel: LogLevel.Debug,
+        isOpenConsoleLog: true
+        // ...其他属性
+      };
+
+      serviceOptions = {
+        loginServiceConfig: {
+          lbsUrls: ['https://videocenter-dual.pingan.com.cn:443/lbs/webconf.jsp'],
+          linkUrl: 'https://videocenter-dual.pingan.com.cn:443'
+        },
+        pushServiceConfig: {
+          harmonyCertificateName: "DEMO_HMOS_PUSH"
+        },
+        databaseServiceConfig: {
+          encrypt: false,
+          appKey: "1819b5a4cbd2098fc61b7728b33ec82d",
+        }
+      }
+
+      this.appkey = '1819b5a4cbd2098fc61b7728b33ec82d'
+      this.logLevel = LogLevel.Debug
+      this.xhrConnectTimeout = 30000
+      this.socketConnectTimeout = 30000
+      this.lbsUrls = ['https://videocenter-dual.pingan.com.cn:443/lbs/webconf.jsp']
+      this.linkUrl = 'https://videocenter-dual.pingan.com.cn:443'
+      this.customClientType = 0
+      this.customTag = ''
+      //pushServiceConfig
+      this.harmonyCertificateName = 'DEMO_HMOS_PUSH'
+      //NIMHttpServiceConfig
+      this.chunkUploadHost = 'https://videocenter-dual.pingan.com.cn:443'
+      this.uploadReplaceFormat = 'https://videocenter-dual.pingan.com.cn:443/yunxin/{object}'
+      this.downloadHost = 'videocenter-dual.pingan.com.cn'
+      this.downloadReplaceFormat = '' // 无用
       this.encrypt = false
       this.securityLevel = 1
     } else {

@@ -16,17 +16,17 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "@nimsdk/nim": "10.6.0",
-    "@nimsdk/base": "10.6.0",
-    "@nimsdk/chatroom": "10.6.0",
-    "@nimsdk/friend": "10.6.0",
-    "@nimsdk/message": "10.6.0",
-    "@nimsdk/user": "10.6.0",
-    "@nimsdk/team": "10.6.0",
-    "@nimsdk/conversation": "10.6.0",
-    "@nimsdk/signalling": "10.6.0",
-    "@nimsdk/localconversation": "10.6.0",
-    "@nimsdk/search": "10.6.0",
-    "@nimsdk/ysf": "10.6.0"
+    "@nimsdk/nim": "file:../../libs/nim.har",
+    "@nimsdk/base": "file:../../libs/base.har",
+    "@nimsdk/chatroom": "file:../../libs/chatroom.har",
+    "@nimsdk/friend": "file:../../libs/friend.har",
+    "@nimsdk/message": "file:../../libs/message.har",
+    "@nimsdk/user": "file:../../libs/user.har",
+    "@nimsdk/team": "file:../../libs/team.har",
+    "@nimsdk/conversation": "file:../../libs/conversation.har",
+    "@nimsdk/signalling": "file:../../libs/signalling.har",
+    "@nimsdk/localconversation": "file:../../libs/localconversation.har",
+    "@nimsdk/search": "file:../../libs/search.har",
+    "@nimsdk/ysf": "file:../../libs/ysf.har"
   }
 }

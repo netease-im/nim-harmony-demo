@@ -58,7 +58,7 @@ struct GetMessagesListByIdsPage {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageCreator = this.getUserModel().getNimSdk().messageCreator
       let message: V2NIMMessage = messageCreator.createTextMessage(`${this.text}`)
-      const conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + '|1|' + this.conversationId
+      const conversationId = this.conversationId
       const result = await messageService.sendMessage(message,
         conversationId)
       this.messages.push(result.message)
@@ -73,7 +73,7 @@ struct GetMessagesListByIdsPage {
       let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
       const messageIds: string[] = this.messages.map( item => {return item.messageClientId })
       const result = await messageService.getMessageListByIds(messageIds)
-      shownDialog(true, JSON.stringify(result.length, null, 2))
+      shownDialog(true, JSON.stringify(result, null, 2))
     } catch (error) {
       shownDialog(false, processV2ErrorForPrint(error))
     }

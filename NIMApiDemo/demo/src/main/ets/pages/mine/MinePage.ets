@@ -12,6 +12,7 @@ import {
   V2NIMFriend, V2NIMFriendAddApplication,
   V2NIMFriendAddRejection,
   V2NIMFriendDeletionType,
+  V2NIMLocalConversation,
   V2NIMMessage,
   V2NIMProxyNotify,
   V2NIMUser } from '@nimsdk/base';
@@ -152,19 +153,58 @@ export default struct MinePage {
     this.getUserModel().getNimSdk().friendService!.on("onFriendAdded", (friend: V2NIMFriend) => {
       shownListenerDialog('onFriendAdded', JSON.stringify(friend, null, 2))
       const conversationId: string = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(friend.accountId)
-      this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
-        .then((conversation: V2NIMConversation) => {
-          // 获取新好友的会话，以刷新 UI 层 Model
-        })
+
+      // 使用云端会话
+      try {
+        this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
+          .then((conversation: V2NIMConversation) => {
+            // 获取新好友的会话，以刷新 UI 层 Model
+            console.log(`Adding friend triggers getting conversation: ${JSON.stringify(conversation)}`)
+          })
+      } catch (e) {
+        // 如果你未集成云端会话，则会抛错
+        console.log(`Adding friend triggers getting conversation catch error: ${JSON.stringify(e)}`)
+      }
+
+      // 使用本地会话
+      try {
+        this.getUserModel().getNimSdk().localConversationService?.getConversation(conversationId)
+          .then((localConversation: V2NIMLocalConversation) => {
+            // 获取新好友的会话，以刷新 UI 层 Model
+            console.log(`Adding friend triggers getting local conversation: ${JSON.stringify(localConversation)}`)
+          })
+      } catch (e) {
+        // 如果你未集成本地会话，则会抛错
+        console.log(`Adding friend triggers getting local conversation catch error: ${JSON.stringify(e)}`)
+      }
     })
 
     this.getUserModel().getNimSdk().friendService!.on("onFriendDeleted", (accountId: string, deletionType: V2NIMFriendDeletionType) => {
       shownListenerDialog('onFriendDeleted', JSON.stringify(`${accountId} + ${deletionType}`, null, 2))
       const conversationId: string = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(accountId)
-      this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
-        .then((conversation: V2NIMConversation) => {
-          // 获取被删好友的会话，以刷新 UI 层 Model
-        })
+      // 使用云端会话
+      try {
+        this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
+          .then((conversation: V2NIMConversation) => {
+            // 获取新好友的会话，以刷新 UI 层 Model
+            console.log(`Deleting friend triggers getting conversation: ${JSON.stringify(conversation)}`)
+          })
+      } catch (e) {
+        // 如果你未集成云端会话，则会抛错
+        console.log(`Deleting friend triggers getting conversation catch error: ${JSON.stringify(e)}`)
+      }
+
+      // 使用本地会话
+      try {
+        this.getUserModel().getNimSdk().localConversationService?.getConversation(conversationId)
+          .then((localConversation: V2NIMLocalConversation) => {
+            // 获取新好友的会话，以刷新 UI 层 Model
+            console.log(`Deleting friend triggers getting local conversation: ${JSON.stringify(localConversation)}`)
+          })
+      } catch (e) {
+        // 如果你未集成本地会话，则会抛错
+        console.log(`Deleting friend triggers getting local conversation catch error: ${JSON.stringify(e)}`)
+      }
     })
 
     this.getUserModel().getNimSdk().friendService!.on("onFriendAddApplication", (application: V2NIMFriendAddApplication) => {
@@ -178,10 +218,30 @@ export default struct MinePage {
     this.getUserModel().getNimSdk().friendService!.on("onFriendInfoChanged", (friend: V2NIMFriend) => {
       shownListenerDialog('onFriendInfoChanged', JSON.stringify(friend, null, 2))
       const conversationId: string = this.getUserModel().getNimSdk().conversationIdUtil.p2pConversationId(friend.accountId)
-      this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
-        .then((conversation: V2NIMConversation) => {
-          // 获取好友信息变更的情况，以刷新 UI 层 Model
-        })
+
+      // 使用云端会话
+      try {
+        this.getUserModel().getNimSdk().conversationService?.getConversation(conversationId)
+          .then((conversation: V2NIMConversation) => {
+            // 获取新好友的会话，以刷新 UI 层 Model
+            console.log(`Changing friend triggers getting conversation: ${JSON.stringify(conversation)}`)
+          })
+      } catch (e) {
+        // 如果你未集成云端会话，则会抛错
+        console.log(`Changing friend triggers getting conversation catch error: ${JSON.stringify(e)}`)
+      }
+
+      // 使用本地会话
+      try {
+        this.getUserModel().getNimSdk().localConversationService?.getConversation(conversationId)
+          .then((localConversation: V2NIMLocalConversation) => {
+            // 获取新好友的会话，以刷新 UI 层 Model
+            console.log(`Changing friend triggers getting local conversation: ${JSON.stringify(localConversation)}`)
+          })
+      } catch (e) {
+        // 如果你未集成本地会话，则会抛错
+        console.log(`Changing friend triggers getting local conversation catch error: ${JSON.stringify(e)}`)
+      }
     })
 
     // Demo 启动 ysf 模块，ysfService 不为空

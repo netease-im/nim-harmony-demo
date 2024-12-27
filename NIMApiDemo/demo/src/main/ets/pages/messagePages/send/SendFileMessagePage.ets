@@ -102,7 +102,7 @@ struct SendFileMessagePage {
       // Write the read ArrayBuffer to the new media file.
       let writeLen = await fileIo.write(file.fd, buffer.buffer);
       console.info('write success,len=' + writeLen);
-      let message: V2NIMMessage = await messageCreator.createImageMessage(filePath,
+      let message: V2NIMMessage = await messageCreator.createFileMessage(filePath,
         'nim')
       const onUploadProgress = (percentage: number) => {
         console.info(`onUploadProgress: ${JSON.stringify(percentage)}`)

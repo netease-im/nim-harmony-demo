@@ -16,7 +16,7 @@ struct CustomNotificationServicePage {
   @State conversationType: V2NIMConversationType = V2NIMConversationType.V2NIM_CONVERSATION_TYPE_P2P
   @State content: string = '';
   // TextInput多行显示存在Bug，暂时使用单行字符串
-  @State sendParams: string = '{"notificationConfig":{"offlineEnabled":false,"unreadEnabled":false},"pushConfig":{"pushEnabled":false,"pushNickEnabled":false,"pushContent":"","pushPayload":"","forcePush":false,"forcePushContent":"","forcePushAccounts":[]},"antispamConfig":{"antispamEnabled":false,"antispamCustomNotification":""},"routeConfig":{"routeEnabled":false,"routeEnvironment":""}}';
+  @State sendParams: string = '{"notificationConfig":{"offlineEnabled":false,"unreadEnabled":false, "clientNotificationId":"1111"},"pushConfig":{"pushEnabled":false,"pushNickEnabled":false,"pushContent":"","pushPayload":"","forcePush":false,"forcePushContent":"","forcePushAccounts":[]},"antispamConfig":{"antispamEnabled":false,"antispamCustomNotification":""},"routeConfig":{"routeEnabled":false,"routeEnvironment":""}}';
   // @State sendParams: string = "{\n" +
   // "  \"notificationConfig\": {\n" +
   // "    \"offlineEnabled\": false,\n" +

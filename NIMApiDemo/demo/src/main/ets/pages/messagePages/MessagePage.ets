@@ -9,6 +9,7 @@ import router from '@ohos.router';
 import { UserModel } from '../../viewmodel/UserModel';
 import {
   V2NIMClearHistoryNotification,
+  V2NIMCustomNotification,
   V2NIMDownloadAttachmentType,
   V2NIMDownloadMessageAttachmentParams,
   V2NIMMessage,
@@ -147,8 +148,8 @@ export default struct MessagePage {
   //
     this.getUserModel().getNimSdk().messageService!.on("onReceiveMessages", (messages: V2NIMMessage[]) => {
       messages.map(async message => {
-        const title = message.senderId;
-        const text = message.text ?? '无内容';
+        const title: string = message.senderId;
+        const text: string = message.text ?? '无内容';
         this.notificationOperations.publishBasicNotification(title, text);
         const catchDir = getContext(this).getApplicationContext().cacheDir
         let fileDir = catchDir + '/nim';
@@ -174,6 +175,10 @@ export default struct MessagePage {
       console.info('onReceiveMessages', JSON.stringify(messages, null, 2))
       shownDialog(true, JSON.stringify(JSON.stringify(messages, null, 2)))
     })
+
+      this.getUserModel().getNimSdk().messageService!.on("onReceiveCustomNotifications", (customNotifications: V2NIMCustomNotification[]) => {
+        shownListenerDialog('onReceiveCustomNotifications', JSON.stringify(customNotifications, null, 2))
+      })
   //
   //  this.getUserModel().getNimSdk().messageService!.on("onReceiveP2PMessageReadReceipts", (readReceipts: V2NIMP2PMessageReadReceipt[]) => {
   //    shownListenerDialog('onReceiveP2PMessageReadReceipts', JSON.stringify(readReceipts, null, 2))

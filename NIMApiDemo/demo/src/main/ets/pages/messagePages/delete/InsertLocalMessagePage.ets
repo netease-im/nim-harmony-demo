@@ -37,7 +37,7 @@ struct InsertLocalMessagePage {
   @State isShowProgress: boolean = false;
 
   private timeOutId: number = -1;
-  private userModel: UserModel | undefined;
+  private msg: V2NIMMessage = {} as V2NIMMessage;
   @Builder
   imageButton(src: Resource) {
     Button({ type: ButtonType.Circle, stateEffect: true }) {
@@ -65,8 +65,27 @@ struct InsertLocalMessagePage {
         const messageCreator = this.getUserModel().getNimSdk().messageCreator
         const conversationId = this.getUserModel().getNimSdk().loginService.getLoginUser() + '|1|' + this.conversationId
         let message: V2NIMMessage = messageCreator.createTextMessage(`${this.text}`)
-        let messageResult:V2NIMMessage = await messageService.insertMessageToLocal(message, conversationId)
-        shownDialog(true, JSON.stringify(messageResult))
+        this.msg = await messageService.insertMessageToLocal(message, conversationId)
+        shownDialog(true, JSON.stringify(this.msg))
+      } catch (error) {
+        console.log('----------- 插入失败 -----------', error)
+        shownDialog(false, JSON.stringify(processV2ErrorForPrint(error)))
+      }
+    }
+  }
+
+  async queryMessageToLocal(): Promise<void> {
+    if (this.conversationId === '' || this.text === '') {
+      prompt.showToast({
+        message: $r('app.string.input_empty_tips')
+      })
+    } else {
+      try {
+        console.info(`-----------插入消息----------- \n`)
+        // let conversationId: string = 'cjl64|1|cjl1'
+        let messageService = this.getUserModel().getNimSdk().messageService! // Demo启用message模块，messageService不为空
+        let result = await messageService.getMessageListByIds([this.msg.messageClientId])
+        shownDialog(true, JSON.stringify(result))
       } catch (error) {
         console.log('----------- 插入失败 -----------', error)
         shownDialog(false, JSON.stringify(processV2ErrorForPrint(error)))
@@ -123,7 +142,16 @@ struct InsertLocalMessagePage {
             .onClick(() => {
               this.insertMessageToLocal();
             })
-
+          Button(('query'), { type: ButtonType.Capsule })
+          .width(CommonConstants.BUTTON_WIDTH)
+          .height($r('app.float.login_button_height'))
+          .fontSize($r('app.float.normal_text_size'))
+          .fontWeight(FontWeight.Medium)
+          .backgroundColor($r('app.color.login_button_color'))
+          .margin({ top: $r('app.float.login_button_margin_top'), bottom: $r('app.float.login_button_margin_bottom') })
+          .onClick(() => {
+            this.queryMessageToLocal();
+          })
           if (this.isShowProgress) {
             LoadingProgress()
               .color($r('app.color.loading_color'))

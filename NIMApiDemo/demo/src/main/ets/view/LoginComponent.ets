@@ -16,8 +16,13 @@ import {
   V2NIMMessageQuickCommentNotification,
   V2NIMMessageRevokeNotification,
   V2NIMP2PMessageReadReceipt,
+  V2NIMProvidedServiceType,
   V2NIMTeamMessageReadReceipt
 } from '@nimsdk/base';
+import { V2NIMConversationServiceImpl } from '@nimsdk/conversation';
+import { NIMSdk } from '@nimsdk/nim';
+import { V2NIMConversationServiceStub } from '@nimsdk/nim/src/main/ets/nim/stubs/V2NIMConversationServiceStub';
+import { set } from '@nimsdk/vendor';
 import common from '@ohos.app.ability.common';
 import router from '@ohos.router';
 import cryptoFramework from '@ohos.security.cryptoFramework';
@@ -368,6 +373,20 @@ export struct LoginComponent {
               .select(this.openMessageFilter)
               .onChange((on: boolean) => {
                 this.openMessageFilter = on
+              })
+          }
+
+          Row() {
+            Text('forceEnableConversationPlugin').fontWeight(FontWeight.Bold)
+            Checkbox()
+              .select(this.openMessageFilter)
+              .onChange((on: boolean) => {
+                if (on) {
+                  NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION, (core, serviceName, serviceConfig) => new V2NIMConversationServiceImpl(core, serviceName, serviceConfig));
+                  set(NIMSdk, "checkRegisteredCustomServices", () => {})
+                } else {
+                  NIMSdk.registerCustomServices(V2NIMProvidedServiceType.V2NIM_PROVIDED_SERVICE_CONVERSATION, (core, serviceName, serviceConfig) => new V2NIMConversationServiceStub(core, serviceName, serviceConfig));
+                }
               })
           }
         }
