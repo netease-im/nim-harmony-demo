@@ -2,6 +2,7 @@ import {
   V2NIMError,
   V2NIMSignallingChannelType,
   V2NIMSignallingJoinParams,
+  V2NIMSignallingJoinResult,
   V2NIMSignallingRoomInfo,
   V2NIMSignallingRtcConfig,
 } from '@nimsdk/base';
@@ -128,7 +129,7 @@ struct LeaveRoomPage {
         rtcConfig: rtcConfig
       }
 
-      const result:V2NIMSignallingRoomInfo = await signalingService.joinRoom(params)
+      const result:V2NIMSignallingJoinResult = await signalingService.joinRoom(params)
       console.log(`----------- join room----------- ${JSON.stringify(result, null, 2)}`)
       shownDialog(true, JSON.stringify(result, null, 2))
     } catch (error) {
