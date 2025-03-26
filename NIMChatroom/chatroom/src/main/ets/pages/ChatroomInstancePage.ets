@@ -68,7 +68,7 @@ export struct ChatroomInstancePage {
   build() {
     Column() {
       Row() {
-        Text("聊天室实例号")
+        Text('聊天室实例号')
           .fontSize($r('app.float.header_font_size'))
           .fontColor($r('app.color.base_font_color'))
           .fontFamily($r('app.string.hei_ti_medium'))
@@ -92,7 +92,7 @@ export struct ChatroomInstancePage {
       }
 
       Row() {
-        Text("Listener")
+        Text('Listener')
           .fontSize($r('app.float.header_font_size'))
           .fontColor($r('app.color.base_font_color'))
           .fontFamily($r('app.string.hei_ti_medium'))
@@ -267,86 +267,86 @@ export struct ChatroomInstancePage {
     this.shownListenerDialogAddInstanceId('onChatroomKicked', JSON.stringify(kickedInfo, null, 2))
   }
 
-  private onChatroomQueueOfferedListener = (keyValues: Map<string, string>[]) => {
-  this.shownListenerDialogAddInstanceId('onChatroomQueueOffered', JSON.stringify(keyValues, null, 2))
-  }
-  private onChatroomQueuePolledListener = (keyValues: Map<string, string>[]) => {
-  this.shownListenerDialogAddInstanceId('onChatroomQueuePolled', JSON.stringify(keyValues, null, 2))
-  }
-  private onChatroomQueueDropedListener = (keyValues: Map<string, string>[]) => {
-  this.shownListenerDialogAddInstanceId('onChatroomQueueDroped', JSON.stringify(keyValues, null, 2))
-  }
-  private onChatroomQueuePartClearedListener = (keyValues: Map<string, string>[]) => {
-  this.shownListenerDialogAddInstanceId('onChatroomQueuePartCleared', JSON.stringify(keyValues, null, 2))
-  }
-  private onChatroomQueueBatchUpdatedListener = (keyValues: Map<string, string>[]) => {
-  this.shownListenerDialogAddInstanceId('onChatroomQueueBatchUpdated', JSON.stringify(keyValues, null, 2))
-  }
-  private onChatroomQueueBatchOfferedListener = (keyValues: Map<string, string>[]) => {
-  this.shownListenerDialogAddInstanceId('onChatroomQueueBatchOffered', JSON.stringify(keyValues, null, 2))
-  }
+  //private onChatroomQueueOfferedListener = (element: V2NIMChatroomQueueElement) => {
+  //this.shownListenerDialogAddInstanceId('onChatroomQueueOffered', JSON.stringify(element, null, 2))
+  //}
+  //private onChatroomQueuePolledListener = (element: V2NIMChatroomQueueElement) => {
+  //this.shownListenerDialogAddInstanceId('onChatroomQueuePolled', JSON.stringify(element, null, 2))
+  //}
+  //private onChatroomQueueDropedListener = () => {
+  //this.shownListenerDialogAddInstanceId('onChatroomQueueDroped', JSON.stringify('keyValues', null, 2))
+  //}
+  //private onChatroomQueuePartClearedListener = (elements: V2NIMChatroomQueueElement[]) => {
+  //this.shownListenerDialogAddInstanceId('onChatroomQueuePartCleared', JSON.stringify(elements, null, 2))
+  //}
+  //private onChatroomQueueBatchUpdatedListener = (elements: V2NIMChatroomQueueElement[]) => {
+  //this.shownListenerDialogAddInstanceId('onChatroomQueueBatchUpdated', JSON.stringify(elements, null, 2))
+  //}
+  //private onChatroomQueueBatchOfferedListener = (elements: V2NIMChatroomQueueElement[]) => {
+  //this.shownListenerDialogAddInstanceId('onChatroomQueueBatchOffered', JSON.stringify(elements, null, 2))
+  //}
 
 
   addMyListener() {
     // chatroom client
-    this.getCRInstance().on("onChatroomStatus", this.onChatroomStatusListener)
-    this.getCRInstance().on("onChatroomEntered", this.onChatroomEnteredListener)
-    this.getCRInstance().on("onChatroomExited", this.onChatroomExitedListener)
-    this.getCRInstance().on("onChatroomKicked", this.onChatroomKickedListener)
+    this.getCRInstance().on('onChatroomStatus', this.onChatroomStatusListener)
+    this.getCRInstance().on('onChatroomEntered', this.onChatroomEnteredListener)
+    this.getCRInstance().on('onChatroomExited', this.onChatroomExitedListener)
+    this.getCRInstance().on('onChatroomKicked', this.onChatroomKickedListener)
 
     // chatroom service
-    this.getCRInstance().chatroomService.on("onSendMessage", this.onSendMessageListener)
-    this.getCRInstance().chatroomService.on("onReceiveMessages", this.onReceiveMessagesListener)
-    this.getCRInstance().chatroomService.on("onMessageRevokedNotification", this.onMessageRevokedNotificationListener)
-    this.getCRInstance().chatroomService.on("onChatroomMemberEnter", this.onChatroomMemberEnterListener)
-    this.getCRInstance().chatroomService.on("onChatroomMemberExit", this.onChatroomMemberExitListener)
-    this.getCRInstance().chatroomService.on("onChatroomMemberRoleUpdated", this.onChatroomMemberRoleUpdatedListener)
-    this.getCRInstance().chatroomService.on("onChatroomMemberInfoUpdated", this.onChatroomMemberInfoUpdatedListener)
-    this.getCRInstance().chatroomService.on("onSelfChatBannedUpdated", this.onSelfChatBannedUpdatedListener)
-    this.getCRInstance().chatroomService.on("onSelfTempChatBannedUpdated", this.onSelfTempChatBannedUpdatedListener)
-    this.getCRInstance().chatroomService.on("onChatroomInfoUpdated", this.onChatroomInfoUpdatedListener)
-    this.getCRInstance().chatroomService.on("onChatroomChatBannedUpdated", this.onChatroomChatBannedUpdatedListener)
-    this.getCRInstance().chatroomService.on("onChatroomTagsUpdated", this.onChatroomTagsUpdatedListener)
+    this.getCRInstance().chatroomService.on('onSendMessage', this.onSendMessageListener)
+    this.getCRInstance().chatroomService.on('onReceiveMessages', this.onReceiveMessagesListener)
+    this.getCRInstance().chatroomService.on('onMessageRevokedNotification', this.onMessageRevokedNotificationListener)
+    this.getCRInstance().chatroomService.on('onChatroomMemberEnter', this.onChatroomMemberEnterListener)
+    this.getCRInstance().chatroomService.on('onChatroomMemberExit', this.onChatroomMemberExitListener)
+    this.getCRInstance().chatroomService.on('onChatroomMemberRoleUpdated', this.onChatroomMemberRoleUpdatedListener)
+    this.getCRInstance().chatroomService.on('onChatroomMemberInfoUpdated', this.onChatroomMemberInfoUpdatedListener)
+    this.getCRInstance().chatroomService.on('onSelfChatBannedUpdated', this.onSelfChatBannedUpdatedListener)
+    this.getCRInstance().chatroomService.on('onSelfTempChatBannedUpdated', this.onSelfTempChatBannedUpdatedListener)
+    this.getCRInstance().chatroomService.on('onChatroomInfoUpdated', this.onChatroomInfoUpdatedListener)
+    this.getCRInstance().chatroomService.on('onChatroomChatBannedUpdated', this.onChatroomChatBannedUpdatedListener)
+    this.getCRInstance().chatroomService.on('onChatroomTagsUpdated', this.onChatroomTagsUpdatedListener)
 
     // chatroom queue
-    this.getCRInstance().queueService.on("onChatroomQueueOffered", this.onChatroomQueueOfferedListener)
-    this.getCRInstance().queueService.on("onChatroomQueuePolled", this.onChatroomQueuePolledListener)
-    this.getCRInstance().queueService.on("onChatroomQueueDroped", this.onChatroomQueueDropedListener)
-    this.getCRInstance().queueService.on("onChatroomQueuePartCleared", this.onChatroomQueuePartClearedListener)
-    this.getCRInstance().queueService.on("onChatroomQueueBatchUpdated", this.onChatroomQueueBatchUpdatedListener)
-    this.getCRInstance().queueService.on("onChatroomQueueBatchOffered", this.onChatroomQueueBatchOfferedListener)
+    //this.getCRInstance().queueService.on('onChatroomQueueOffered', this.onChatroomQueueOfferedListener)
+    //this.getCRInstance().queueService.on('onChatroomQueuePolled', this.onChatroomQueuePolledListener)
+    //this.getCRInstance().queueService.on('onChatroomQueueDroped', this.onChatroomQueueDropedListener)
+    //this.getCRInstance().queueService.on('onChatroomQueuePartCleared', this.onChatroomQueuePartClearedListener)
+    //this.getCRInstance().queueService.on('onChatroomQueueBatchUpdated', this.onChatroomQueueBatchUpdatedListener)
+    //this.getCRInstance().queueService.on('onChatroomQueueBatchOffered', this.onChatroomQueueBatchOfferedListener)
   }
 
   removeMyListener() {
     // chatroom client
-    this.getCRInstance().off("onChatroomStatus", this.onChatroomStatusListener)
-    this.getCRInstance().off("onChatroomEntered", this.onChatroomEnteredListener)
-    this.getCRInstance().off("onChatroomExited", this.onChatroomExitedListener)
-    this.getCRInstance().off("onChatroomKicked", this.onChatroomKickedListener)
+    this.getCRInstance().off('onChatroomStatus', this.onChatroomStatusListener)
+    this.getCRInstance().off('onChatroomEntered', this.onChatroomEnteredListener)
+    this.getCRInstance().off('onChatroomExited', this.onChatroomExitedListener)
+    this.getCRInstance().off('onChatroomKicked', this.onChatroomKickedListener)
     this.getCRInstance().removeAllListeners()
 
     // chatroom service
-    this.getCRInstance().chatroomService.off("onSendMessage", this.onSendMessageListener)
-    this.getCRInstance().chatroomService.off("onReceiveMessages", this.onReceiveMessagesListener)
-    this.getCRInstance().chatroomService.off("onMessageRevokedNotification", this.onMessageRevokedNotificationListener)
-    this.getCRInstance().chatroomService.off("onChatroomMemberEnter", this.onChatroomMemberEnterListener)
-    this.getCRInstance().chatroomService.off("onChatroomMemberExit", this.onChatroomMemberExitListener)
-    this.getCRInstance().chatroomService.off("onChatroomMemberRoleUpdated", this.onChatroomMemberRoleUpdatedListener)
-    this.getCRInstance().chatroomService.off("onChatroomMemberInfoUpdated", this.onChatroomMemberInfoUpdatedListener)
-    this.getCRInstance().chatroomService.off("onSelfChatBannedUpdated", this.onSelfChatBannedUpdatedListener)
-    this.getCRInstance().chatroomService.off("onSelfTempChatBannedUpdated", this.onSelfTempChatBannedUpdatedListener)
-    this.getCRInstance().chatroomService.off("onChatroomInfoUpdated", this.onChatroomInfoUpdatedListener)
-    this.getCRInstance().chatroomService.off("onChatroomChatBannedUpdated", this.onChatroomChatBannedUpdatedListener)
-    this.getCRInstance().chatroomService.off("onChatroomTagsUpdated", this.onChatroomTagsUpdatedListener)
+    this.getCRInstance().chatroomService.off('onSendMessage', this.onSendMessageListener)
+    this.getCRInstance().chatroomService.off('onReceiveMessages', this.onReceiveMessagesListener)
+    this.getCRInstance().chatroomService.off('onMessageRevokedNotification', this.onMessageRevokedNotificationListener)
+    this.getCRInstance().chatroomService.off('onChatroomMemberEnter', this.onChatroomMemberEnterListener)
+    this.getCRInstance().chatroomService.off('onChatroomMemberExit', this.onChatroomMemberExitListener)
+    this.getCRInstance().chatroomService.off('onChatroomMemberRoleUpdated', this.onChatroomMemberRoleUpdatedListener)
+    this.getCRInstance().chatroomService.off('onChatroomMemberInfoUpdated', this.onChatroomMemberInfoUpdatedListener)
+    this.getCRInstance().chatroomService.off('onSelfChatBannedUpdated', this.onSelfChatBannedUpdatedListener)
+    this.getCRInstance().chatroomService.off('onSelfTempChatBannedUpdated', this.onSelfTempChatBannedUpdatedListener)
+    this.getCRInstance().chatroomService.off('onChatroomInfoUpdated', this.onChatroomInfoUpdatedListener)
+    this.getCRInstance().chatroomService.off('onChatroomChatBannedUpdated', this.onChatroomChatBannedUpdatedListener)
+    this.getCRInstance().chatroomService.off('onChatroomTagsUpdated', this.onChatroomTagsUpdatedListener)
     this.getCRInstance().chatroomService.removeAllListeners()
 
     // chatroom queue
-    this.getCRInstance().queueService.off("onChatroomQueueOffered", this.onChatroomQueueOfferedListener)
-    this.getCRInstance().queueService.off("onChatroomQueuePolled", this.onChatroomQueuePolledListener)
-    this.getCRInstance().queueService.off("onChatroomQueueDroped", this.onChatroomQueueDropedListener)
-    this.getCRInstance().queueService.off("onChatroomQueuePartCleared", this.onChatroomQueuePartClearedListener)
-    this.getCRInstance().queueService.off("onChatroomQueueBatchUpdated", this.onChatroomQueueBatchUpdatedListener)
-    this.getCRInstance().queueService.off("onChatroomQueueBatchOffered", this.onChatroomQueueBatchOfferedListener)
+    //this.getCRInstance().queueService.off('onChatroomQueueOffered', this.onChatroomQueueOfferedListener)
+    //this.getCRInstance().queueService.off('onChatroomQueuePolled', this.onChatroomQueuePolledListener)
+    //this.getCRInstance().queueService.off('onChatroomQueueDroped', this.onChatroomQueueDropedListener)
+    //this.getCRInstance().queueService.off('onChatroomQueuePartCleared', this.onChatroomQueuePartClearedListener)
+    //this.getCRInstance().queueService.off('onChatroomQueueBatchUpdated', this.onChatroomQueueBatchUpdatedListener)
+    //this.getCRInstance().queueService.off('onChatroomQueueBatchOffered', this.onChatroomQueueBatchOfferedListener)
     this.getCRInstance().queueService.removeAllListeners()
   }
 
