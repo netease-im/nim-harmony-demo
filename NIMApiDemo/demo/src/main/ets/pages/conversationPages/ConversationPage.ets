@@ -167,9 +167,9 @@ export default struct ConversationPage {
       shownListenerDialog('onTotalUnreadCountChanged', JSON.stringify(unreadCount, null, 2))
     })
 
-    this.getUserModel().getNimSdk().conversationService!.on("onUnreadCountChangedByFilter", (filter: V2NIMConversationUnreadCountChangedFilter, unreadCount: number) => {
-      shownListenerDialog('onUnreadCountChangedByFilter', JSON.stringify({ filter, unreadCount }, null, 2))
-    })
+    //this.getUserModel().getNimSdk().conversationService!.on("onUnreadCountChangedByFilter", (filter: V2NIMConversationUnreadCountChangedFilter, unreadCount: number) => {
+    //  shownListenerDialog('onUnreadCountChangedByFilter', JSON.stringify({ filter, unreadCount }, null, 2))
+    //})
 
     this.getUserModel().getNimSdk().conversationService!.on("onConversationReadTimeUpdated", (conversationId: string, readTime: number) => {
       shownListenerDialog('onConversationReadTimeUpdated', JSON.stringify({conversationId, readTime}, null, 2))

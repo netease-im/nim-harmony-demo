@@ -168,9 +168,9 @@ export default struct LocalConversationPage {
       shownListenerDialog('onTotalUnreadCountChanged', JSON.stringify(unreadCount, null, 2))
     })
 
-    this.getUserModel().getNimSdk().localConversationService!.on("onUnreadCountChangedByFilter", (filter: V2NIMLocalConversationUnreadCountChangedFilter, unreadCount: number) => {
-      shownListenerDialog('onUnreadCountChangedByFilter', JSON.stringify({ filter, unreadCount }, null, 2))
-    })
+    //this.getUserModel().getNimSdk().localConversationService!.on("onUnreadCountChangedByFilter", (filter: V2NIMLocalConversationUnreadCountChangedFilter, unreadCount: number) => {
+    //  shownListenerDialog('onUnreadCountChangedByFilter', JSON.stringify({ filter, unreadCount }, null, 2))
+    //})
 
     this.getUserModel().getNimSdk().localConversationService!.on("onConversationReadTimeUpdated", (conversationId: string, readTime: number) => {
       shownListenerDialog('onConversationReadTimeUpdated', JSON.stringify({conversationId, readTime}, null, 2))

@@ -22,7 +22,12 @@
         //指定HarmonyOS应用/服务编译时的版本
         "compatibleSdkVersion": "5.0.0(12)",
         //指定HarmonyOS应用/服务目标版本。若没有设置，默认为compatibleSdkVersion
-        "runtimeOS": "HarmonyOS"
+        "runtimeOS": "HarmonyOS",
+        "buildOption": {
+          "strictMode": {
+            "useNormalizedOHMUrl": true
+          }
+        }
       }
     ]
   },

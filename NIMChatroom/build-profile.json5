@@ -1,6 +1,20 @@
 {
   "app": {
-    "signingConfigs": [],
+    "signingConfigs": [
+      {
+        "name": "default",
+        "type": "HarmonyOS",
+        "material": {
+          "certpath": "/Users/qihongru/.ohos/config/default_NIMChatroom_Ga_OhkzpSjpaDF1tfqIEL0krziOBUhUkv237XRBKIFY=.cer",
+          "keyAlias": "debugKey",
+          "keyPassword": "0000001A6DFFB541F189B199B5E4D8E3E0BC93727F7B04E8711E5AD56C6C7E346F3340F576057E6370D4",
+          "profile": "/Users/qihongru/.ohos/config/default_NIMChatroom_Ga_OhkzpSjpaDF1tfqIEL0krziOBUhUkv237XRBKIFY=.p7b",
+          "signAlg": "SHA256withECDSA",
+          "storeFile": "/Users/qihongru/.ohos/config/default_NIMChatroom_Ga_OhkzpSjpaDF1tfqIEL0krziOBUhUkv237XRBKIFY=.p12",
+          "storePassword": "0000001A68BFCA84F09E406CD7A540A18C856638EB0C5B4E765ABAE329AB4ED1221CB6D1DE3520412983"
+        }
+      }
+    ],
     "products": [
       {
         "name": "default",
